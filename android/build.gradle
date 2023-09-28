@@ -17,7 +17,7 @@ android {
         minSdkVersion appAndroidMinSDK
         targetSdkVersion appAndroidTargetSDK
 
-        resConfigs "en_US", "ko", "ja", "vi", "fi"
+        resConfigs "en_US", "ko", "ja"
     }
 
     buildTypes {
@@ -45,7 +45,7 @@ android {
             }
         }
     }
-    namespace 'com.touhoupixel.touhoupixeldungeonreloaded.android'
+    namespace 'com.touhoupixel.touhoupixeldungeongaiden.android'
 
     sourceSets {
         main {

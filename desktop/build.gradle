@@ -5,7 +5,7 @@ plugins {
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceCompatibility = targetCompatibility = appJavaCompatibility
 
-ext.appMainClass = "com.touhoupixel.touhoupixeldungeonreloaded.desktop.DesktopLauncher"
+ext.appMainClass = "com.touhoupixel.touhoupixeldungeongaiden.desktop.DesktopLauncher"
 processResources {
     from new File(project(':core').projectDir, "/src/main/assets")
     from new File(project(':desktop').projectDir,"/src/main/assets")
