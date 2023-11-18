@@ -29,7 +29,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.InversionTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
@@ -81,7 +80,7 @@ public class Dewdrop extends Item {
 			if (heroine.buff(Inversion.class) != null) {
 				heroine.damage(heroine.HT / 2, heroine);
 				if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-					Dungeon.fail(InversionTrap.class);
+					Dungeon.fail(Inversion.class);
 					GLog.n( Messages.get(Inversion.class, "ondeath") );
 				}
 			} else heroine.HP += effect;

@@ -22,9 +22,11 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
+import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Light;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.FlameParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -50,7 +52,9 @@ public class Torch extends Item {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add( AC_LIGHT );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_LIGHT);
+		}
 		return actions;
 	}
 	
@@ -70,11 +74,7 @@ public class Torch extends Item {
 
 			Statistics.torch_use = true;
 
-			if (Statistics.difficulty == 6) {
-				Buff.affect(heroine, Light.class, Light.DURATION/2f);
-			} else {
-				Buff.affect(heroine, Light.class, Light.DURATION);
-			}
+			Buff.affect(heroine, Light.class, Light.DURATION);
 			Sample.INSTANCE.play(Assets.Sounds.BURNING);
 			
 			Emitter emitter = heroine.sprite.centerEmitter();

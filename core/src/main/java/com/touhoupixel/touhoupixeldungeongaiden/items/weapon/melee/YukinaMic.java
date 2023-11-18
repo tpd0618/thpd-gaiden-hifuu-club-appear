@@ -22,10 +22,13 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
+import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
+import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bless;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfNamelessStory;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
@@ -46,9 +49,11 @@ public class YukinaMic extends MeleeWeapon {
 
     @Override
     public int proc(Char attacker, Char defender, int damage) {
-        if (Random.Int(12) == 0) {
-            Buff.prolong(attacker, Bless.class, Bless.DURATION);
-            Buff.prolong(attacker, SuperHard.class, SuperHard.DURATION/2f);
+        if (Statistics.nameless == 199) {
+            Dungeon.level.drop(new ScrollOfNamelessStory(), curUser.pos).sprite.drop();
+            Statistics.nameless = 0;
+        } else {
+            Statistics.nameless += 1;
         }
         return super.proc(attacker, defender, damage);
     }

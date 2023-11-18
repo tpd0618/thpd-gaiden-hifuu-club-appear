@@ -30,6 +30,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DistortedAvarice;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeHunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WellFed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
@@ -63,7 +64,9 @@ public class Food extends Item {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add( AC_EAT );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_EAT);
+		}
 		return actions;
 	}
 
@@ -83,10 +86,6 @@ public class Food extends Item {
 			heroine.busy();
 			SpellSprite.show(heroine, SpellSprite.FOOD );
 			Sample.INSTANCE.play( Assets.Sounds.EAT );
-
-			if (Dungeon.isChallenged(Challenges.CALL_THE_SHOTS)) {
-				Statistics.mood += 1;
-			}
 
 			Buff.detach(curUser, ExtremeHunger.class);
 			Buff.detach(curUser, DistortedAvarice.class);

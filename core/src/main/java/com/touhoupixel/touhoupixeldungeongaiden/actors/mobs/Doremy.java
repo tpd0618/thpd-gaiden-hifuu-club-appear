@@ -46,6 +46,7 @@ public class Doremy extends Mob {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(3) == 0) {
             new FlockTrap().set(target).activate();
+            new CorrosionTrap().set(target).activate();
         }
         return damage;
     }

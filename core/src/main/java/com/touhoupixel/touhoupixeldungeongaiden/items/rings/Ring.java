@@ -26,6 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.EnhancedRings;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
@@ -320,17 +321,21 @@ public class Ring extends KindofMisc {
 		}
 		return bonus;
 	}
-	
-	public int soloBonus(){
-		if (cursed){
-			return Math.min( 0, Ring.this.level()-2 );
+
+	public int soloBonus() {
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
+		} else if (cursed) {
+			return Math.min(0, Ring.this.level() - 2);
 		} else {
-			return Ring.this.level()+1;
+			return Ring.this.level() + 1;
 		}
 	}
 
 	public int soloBuffedBonus(){
-		if (cursed){
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
+		} else if (cursed){
 			return Math.min( 0, Ring.this.buffedLvl()-2 );
 		} else {
 			return Ring.this.buffedLvl()+1;

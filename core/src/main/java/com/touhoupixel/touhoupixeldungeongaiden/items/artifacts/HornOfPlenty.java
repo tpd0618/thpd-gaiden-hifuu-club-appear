@@ -26,6 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Belongings;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
@@ -68,12 +69,14 @@ public class HornOfPlenty extends Artifact {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (isEquipped(heroine) && charge > 0) {
-			actions.add(AC_SNACK);
-			actions.add(AC_EAT);
-		}
-		if (isEquipped(heroine) && level() < levelCap && !cursed) {
-			actions.add(AC_STORE);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (isEquipped(heroine) && charge > 0) {
+				actions.add(AC_SNACK);
+				actions.add(AC_EAT);
+			}
+			if (isEquipped(heroine) && level() < levelCap && !cursed) {
+				actions.add(AC_STORE);
+			}
 		}
 		return actions;
 	}

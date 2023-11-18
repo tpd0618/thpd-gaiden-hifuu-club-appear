@@ -29,7 +29,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.IronKey;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Notes;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.InversionTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
@@ -51,7 +50,7 @@ public class PotionOfLightHealing extends Potion {
 		if (heroine.buff(Inversion.class) != null) {
 			heroine.damage(heroine.HT / 2, heroine);
 			if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-				Dungeon.fail(InversionTrap.class);
+				Dungeon.fail(Inversion.class);
 				GLog.n( Messages.get(Inversion.class, "ondeath") );
 			}
 		} else {

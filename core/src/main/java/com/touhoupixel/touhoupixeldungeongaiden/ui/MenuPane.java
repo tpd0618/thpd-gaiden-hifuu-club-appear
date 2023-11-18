@@ -105,7 +105,7 @@ public class MenuPane extends Component {
 		};
 		add(floorButton);
 
-		if (Dungeon.isChallenged(Challenges.TOWER_OF_FORTUNE)) {
+		if (Dungeon.isChallenged(Challenges.HARD_MODE)) {
 			sp_icon = Icons.get(Icons.SP_CHALLENGE);
 			add(sp_icon);
 		}

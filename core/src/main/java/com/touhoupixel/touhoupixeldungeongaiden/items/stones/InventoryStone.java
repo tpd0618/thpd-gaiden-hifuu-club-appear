@@ -22,7 +22,9 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.stones;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
+import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Invisibility;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
@@ -44,7 +46,9 @@ public abstract class InventoryStone extends Runestone {
 	@Override
 	public ArrayList<String> actions(Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add( AC_USE );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_USE);
+		}
 		return actions;
 	}
 	

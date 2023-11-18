@@ -28,6 +28,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.Food;
@@ -93,8 +94,8 @@ public class Minoriko extends Mob {
         damage = super.attackProc(enemy, damage);
         if (alignment == Alignment.ENEMY && item == null && enemy instanceof Hero && steal((Hero) enemy)) {
             state = WANDERING;
-            Food food = new Food();
-            food.collect();
+            Dungeon.level.drop(new Food(), enemy.pos).sprite.drop();
+            Buff.prolong(enemy, Onigiri.class, Onigiri.DURATION);
         }
         return damage;
     }

@@ -26,7 +26,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Drowsy;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.InversionTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
@@ -44,7 +43,7 @@ public class PotionOfYingYang extends Potion {
 			if (heroine.buff(Inversion.class) != null && heroine.HP % 2 == 1) {
 				heroine.damage(heroine.HT / 2, heroine);
 				if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-					Dungeon.fail(InversionTrap.class);
+					Dungeon.fail(Inversion.class);
 					GLog.n( Messages.get(Inversion.class, "ondeath") );
 				}
 			} else {

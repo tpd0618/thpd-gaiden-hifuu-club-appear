@@ -40,7 +40,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Weakness;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.InversionTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -59,6 +58,11 @@ public class PotionOfHealing extends Potion {
 		identify();
 		cure(heroine);
 		heal(heroine);
+		if (curUser.HP == curUser.HT){
+			curUser.HP += 10;
+			curUser.HT += 10;
+			Statistics.maxHP_down += 10;
+		}
 		if (Statistics.card62){
 			GameScene.flash(0x80FFFFFF);
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
@@ -75,7 +79,7 @@ public class PotionOfHealing extends Potion {
 		if (ch.buff(Inversion.class) != null) {
 			ch.damage(ch.HT / 2, ch);
 			if (ch == Dungeon.heroine && !ch.isAlive()) {
-				Dungeon.fail(InversionTrap.class);
+				Dungeon.fail(Inversion.class);
 				GLog.n( Messages.get(Inversion.class, "ondeath") );
 			}
 		} else {

@@ -26,9 +26,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Barrier;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.InversionTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
@@ -75,8 +75,10 @@ public class GlassBottle extends Item {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (volume > 0) {
-			actions.add( AC_DRINK );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (volume > 0) {
+				actions.add(AC_DRINK);
+			}
 		}
 		return actions;
 	}
@@ -91,7 +93,7 @@ public class GlassBottle extends Item {
 			if (heroine.buff(Inversion.class) != null) {
 				heroine.damage(heroine.HT / 2, heroine);
 				if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-					Dungeon.fail(InversionTrap.class);
+					Dungeon.fail(Inversion.class);
 					GLog.n( Messages.get(Inversion.class, "ondeath") );
 				}
 			} else if (volume > 0) {

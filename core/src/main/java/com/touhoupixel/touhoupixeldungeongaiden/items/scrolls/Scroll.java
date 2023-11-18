@@ -22,21 +22,16 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.scrolls;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Blindness;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CheatBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Invisibility;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Silence;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.ItemStatusHandler;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Recipe;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.UnstableSpellbook;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ExoticScroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
@@ -156,7 +151,9 @@ public abstract class Scroll extends Item {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add( AC_READ );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_READ);
+		}
 		return actions;
 	}
 	
@@ -179,16 +176,6 @@ public abstract class Scroll extends Item {
 				curUser = heroine;
 				curItem = detach( heroine.belongings.backpack );
 				doRead();
-
-				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-					if (mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[mob.pos]) {
-						if (mob instanceof BossSeija) {
-							Buff.prolong(mob, CheatBreak.class, CheatBreak.DURATION);
-							Buff.detach(mob, SuperHard.class);
-							GLog.p( Messages.get(Potion.class, "cheat_break") );
-						}
-					}
-				} //for boss seija
 			}
 		}
 	}

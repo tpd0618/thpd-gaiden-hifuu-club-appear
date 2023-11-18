@@ -22,35 +22,29 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
 import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfWarding;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Notes;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.BambooForestLevel;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.DeadEndLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.ForestofMagicBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.ForestofMagicLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.GardenoftheSunBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.GardenoftheSunLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HakugyokurouLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HakureiShrineLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HeavenBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HeavenLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HellBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HellLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HumanVillageBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.HumanVillageLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.LastLevel;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.LunarCapitalLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.MistyLakeLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.MoriyaShrineLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.MyourenTempleLevel;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level10;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level11;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level12;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level13;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level14;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level15;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level16;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level17;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level18;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level19;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level1HakureiShrine;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level2;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level20;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level3;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level4;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level5;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level6;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level7;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level8;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level9;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.RegularLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.SanzuRiverBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.SanzuRiverLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.ScarletDevilMansionBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.ScarletDevilMansionLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.ShiningNeedleCastleBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.ShiningNeedleCastleLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.TrueLastBossLevel;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.YokaiMountainLevel;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.features.LevelTransition;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.secret.SecretRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.SpecialRoom;
@@ -238,158 +232,143 @@ public class Dungeon {
 		switch (floor) {
 			case 1:
 			case 2:
-			case 42:
-			case 43:
-				level = new HakureiShrineLevel();
-				break;
 			case 3:
 			case 4:
-			case 44:
-			case 45:
-			case 46:
-				level = new HumanVillageLevel();
-				break;
 			case 5:
-				level = new HumanVillageBossLevel();
+				level = new Level1HakureiShrine();
 				break;
 			case 6:
 			case 7:
-			case 47:
-			case 48:
-			case 49:
-				level = new MistyLakeLevel();
-				break;
 			case 8:
 			case 9:
-			case 50:
-			case 51:
-			case 52:
-				level = new ForestofMagicLevel();
-				break;
 			case 10:
-				level = new ForestofMagicBossLevel();
+				level = new Level2();
 				break;
 			case 11:
 			case 12:
-			case 53:
-			case 54:
-			case 55:
-				level = new BambooForestLevel();
-				break;
 			case 13:
 			case 14:
-			case 56:
-			case 57:
-			case 58:
-				level = new ScarletDevilMansionLevel();
-				break;
 			case 15:
-				level = new ScarletDevilMansionBossLevel();
+				level = new Level3();
 				break;
 			case 16:
 			case 17:
-			case 59:
-			case 60:
-			case 61:
-				level = new YokaiMountainLevel();
-				break;
 			case 18:
 			case 19:
+			case 20:
+				level = new Level4();
+				break;
+			case 21:
+			case 22:
+			case 23:
+			case 24:
+			case 25:
+				level = new Level5();
+				break;
+			case 26:
+			case 27:
+			case 28:
+			case 29:
+			case 30:
+				level = new Level6();
+				break;
+			case 31:
+			case 32:
+			case 33:
+			case 34:
+			case 35:
+				level = new Level7();
+				break;
+			case 36:
+			case 37:
+			case 38:
+			case 39:
+			case 40:
+				level = new Level8();
+				break;
+			case 41:
+			case 42:
+			case 43:
+			case 44:
+			case 45:
+				level = new Level9();
+				break;
+			case 46:
+			case 47:
+			case 48:
+			case 49:
+			case 50:
+				level = new Level10();
+				break;
+			case 51:
+			case 52:
+			case 53:
+			case 54:
+			case 55:
+				level = new Level11();
+				break;
+			case 56:
+			case 57:
+			case 58:
+			case 59:
+			case 60:
+				level = new Level12();
+				break;
+			case 61:
 			case 62:
 			case 63:
 			case 64:
 			case 65:
-				level = new GardenoftheSunLevel();
+				level = new Level13();
 				break;
-			case 20:
-				level = new GardenoftheSunBossLevel();
-				break;
-			case 21:
-			case 22:
 			case 66:
 			case 67:
 			case 68:
 			case 69:
-				level = new MyourenTempleLevel();
-				break;
-			case 23:
-			case 24:
 			case 70:
+				level = new Level14();
+				break;
 			case 71:
 			case 72:
 			case 73:
-				level = new SanzuRiverLevel();
-				break;
-			case 25:
-				level = new SanzuRiverBossLevel();
-				break;
-			case 26:
-			case 27:
 			case 74:
 			case 75:
+				level = new Level15();
+				break;
 			case 76:
 			case 77:
-				level = new MoriyaShrineLevel();
-				break;
-			case 28:
-			case 29:
 			case 78:
 			case 79:
 			case 80:
+				level = new Level16();
+				break;
 			case 81:
-				level = new ShiningNeedleCastleLevel();
-				break;
-			case 30:
-				level = new ShiningNeedleCastleBossLevel();
-				break;
-			case 31:
-			case 32:
 			case 82:
 			case 83:
 			case 84:
 			case 85:
-				level = new HakugyokurouLevel();
+				level = new Level17();
 				break;
-			case 33:
-			case 34:
 			case 86:
 			case 87:
 			case 88:
 			case 89:
-				level = new HeavenLevel();
-				break;
-			case 35:
-				level = new HeavenBossLevel();
-				break;
-			case 36:
-			case 37:
 			case 90:
+				level = new Level18();
+				break;
 			case 91:
 			case 92:
 			case 93:
-				level = new LunarCapitalLevel();
-				break;
-			case 38:
-			case 39:
 			case 94:
 			case 95:
+				level = new Level19();
+				break;
 			case 96:
 			case 97:
-				level = new HellLevel();
-				break;
-			case 40:
-				level = new HellBossLevel();
-				break;
-			case 41:
-				//level = Dungeon.isChallenged(Challenges.TOWER_OF_FORTUNE) ? new HakureiShrineLevel() : new LastLevel();
-				level = new LastLevel();
-				break;
 			case 98:
-				level = new TrueLastBossLevel();
+			case 99:
+				level = new Level20();
 				break;
-			//case 99:
-				//level = new LastLevel();
-				//break;
 			default:
 				level = new DeadEndLevel();
 				Statistics.highestFloor--;

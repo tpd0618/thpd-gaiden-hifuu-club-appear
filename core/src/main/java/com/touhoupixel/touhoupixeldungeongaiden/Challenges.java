@@ -26,9 +26,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 public class Challenges {
 
 	//Some of these internal IDs are outdated and don't represent what these challenges do
-	public static final int TOWER_OF_FORTUNE = 1;
+	public static final int HARD_MODE = 1;
 
-	public static final int HARD_MODE        = 1;
+	public static final int MAX_VALUE = 1;
 
 	public static final String[] NAME_IDS = {
 			"hard_mode"

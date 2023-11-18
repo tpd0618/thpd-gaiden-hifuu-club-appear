@@ -146,9 +146,6 @@ public class Swiftthistle extends Plant {
 			super.detach();
 			triggerPresses();
 			target.next();
-			// for Sakuya
-			if (Dungeon.heroine.heroClass == HeroClass.PLAYERSAKUYA && Dungeon.heroine.buff(TimekeepersHourglass.timeFreeze.class) == null){
-				MissileWeapon.castAfterTimeFreeze();}
 		}
 
 		@Override

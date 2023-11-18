@@ -28,6 +28,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DeSlaying;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantlePressure;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.items.StrengthCard;
 import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FiveStarTicket;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -68,14 +69,14 @@ public class Yorihime extends Mob {
 
 	@Override
 	public int drRoll() {
-		return Dungeon.floor == 50 ? Random.NormalIntRange(0, 20) : Random.NormalIntRange(0, 2);
+		return Random.NormalIntRange(0, 2);
 	}
 
 	@Override
 	public int attackProc( Char hero, int damage ) {
 		damage = super.attackProc( enemy, damage );
 		if (enemy == Dungeon.heroine && enemy.alignment != this.alignment) {
-			Buff.prolong(enemy, DismantlePressure.class, DismantlePressure.DURATION);
+			Buff.prolong(enemy, Onigiri.class, Onigiri.DURATION);
 		}
 		return damage;
 	}

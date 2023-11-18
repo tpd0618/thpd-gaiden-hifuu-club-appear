@@ -30,6 +30,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantlePressure;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantleReady;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.KeyHeal;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
@@ -59,8 +60,10 @@ public abstract class EquipableItem extends Item {
 	@Override
 	public ArrayList<String> actions(Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add( isEquipped(heroine) ? AC_UNEQUIP : AC_EQUIP );
-		actions.add( AC_DISMANTLE );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(isEquipped(heroine) ? AC_UNEQUIP : AC_EQUIP);
+			actions.add(AC_DISMANTLE);
+		}
 		return actions;
 	}
 

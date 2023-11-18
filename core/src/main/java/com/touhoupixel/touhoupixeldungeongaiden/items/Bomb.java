@@ -25,6 +25,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Zen;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
@@ -46,7 +47,7 @@ import java.util.ArrayList;
 public class Bomb extends Item {
 
     {
-        image = ItemSpriteSheet.YOKAI_VIAL;
+        image = ItemSpriteSheet.CLEAR_CUBE_FRAGMENT;
 
         defaultAction = AC_LIGHTTHROW;
         usesTargeting = true;
@@ -73,7 +74,9 @@ public class Bomb extends Item {
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions( hero );
-        actions.add ( AC_LIGHTTHROW );
+        if (Dungeon.heroine.buff(Onigiri.class) == null) {
+            actions.add(AC_LIGHTTHROW);
+        }
         return actions;
     }
 
@@ -174,6 +177,10 @@ public class Bomb extends Item {
 
                 if (ch.buff(Zen.class) != null){
                     dmg *= 0;
+                }
+
+                if (ch.buff(Onigiri.class) != null){
+                    dmg += 999;
                 }
 
                 dmg -= ch.drRoll();

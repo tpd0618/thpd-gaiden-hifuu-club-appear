@@ -22,8 +22,12 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.bags;
 
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.BlackCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.BlueCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.ClearCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.RedCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.WhiteCubeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.Herb;
-import com.touhoupixel.touhoupixeldungeongaiden.items.vials.Vial;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
 public class HerbPouch extends Bag {
@@ -34,7 +38,8 @@ public class HerbPouch extends Bag {
 
 	@Override
 	public boolean canHold( Item item ) {
-		if (item instanceof Herb || item instanceof Vial){
+		if (item instanceof Herb || item instanceof BlackCubeFragment || item instanceof BlueCubeFragment ||
+				item instanceof ClearCubeFragment || item instanceof RedCubeFragment || item instanceof WhiteCubeFragment){
 			return super.canHold(item);
 		} else {
 			return false;

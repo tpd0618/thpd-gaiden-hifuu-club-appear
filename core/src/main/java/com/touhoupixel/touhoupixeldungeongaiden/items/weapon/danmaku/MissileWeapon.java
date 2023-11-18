@@ -26,13 +26,10 @@ import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cool;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.PinCushion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.HeroClass;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.abilitycards.sakuyaexclusive.SmeltScale;
-import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.MagicalHolster;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfSharpshooting;
@@ -40,10 +37,8 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Projecting;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
-import com.touhoupixel.touhoupixeldungeongaiden.plants.Swiftthistle;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.MissileSprite;
-import com.touhoupixel.touhoupixeldungeongaiden.ui.QuickSlotButton;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
@@ -231,10 +226,6 @@ abstract public class MissileWeapon extends Weapon {
 	}
 	@Override
 	public int proc(Char attacker, Char defender, int damage) {
-		if (Dungeon.heroine.buff(Cool.class) != null){
-			damage *= 0;
-		}
-
 		if (Statistics.card34) {
 			Statistics.power -= Random.Int(1,3);
 		} else Statistics.power -= 10;

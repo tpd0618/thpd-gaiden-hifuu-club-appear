@@ -26,6 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.QuickSlot;
 import com.touhoupixel.touhoupixeldungeongaiden.SPDAction;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -79,7 +80,7 @@ public class QuickSlotButton extends Button {
 		slot = new ItemSlot() {
 			@Override
 			protected void onClick() {
-				if (!Dungeon.heroine.isAlive() || !Dungeon.heroine.ready){
+				if (!Dungeon.heroine.isAlive() || !Dungeon.heroine.ready || Dungeon.heroine.buff(Onigiri.class) != null){
 					return;
 				}
 				if (targetingSlot == slotNum) {

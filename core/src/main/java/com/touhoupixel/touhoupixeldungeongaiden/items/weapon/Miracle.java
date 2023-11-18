@@ -33,6 +33,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AnkhInvulnerability
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BossKiller;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicBuff;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Poison;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Roots;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Terror;
@@ -80,7 +81,9 @@ public class Miracle extends Item {
 		ArrayList<String> actions = super.actions(heroine);
 		actions.remove(AC_DROP);
 		actions.remove(AC_THROW);
-		actions.add(AC_SHOOT);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_SHOOT);
+		}
 		return actions;
 	}
 
@@ -128,12 +131,6 @@ public class Miracle extends Item {
 						Buff.prolong(curUser, AnkhInvulnerability.class, AnkhInvulnerability.DURATION);
 					} else {
 						Buff.prolong(curUser, AnkhInvulnerability.class, AnkhInvulnerability.DURATION / 2f);
-					}
-					for (Mob mob : Dungeon.level.mobs) {
-						if (Dungeon.floor == 40 && mob instanceof BossHecatia && mob.isAlive()) {
-							Buff.prolong(mob, AnkhInvulnerability.class, AnkhInvulnerability.DURATION / 3f);
-							GLog.w(Messages.get(this, "bomb_barrier"));
-						}
 					}
 					Statistics.spellcard -= 1;
 					Statistics.bomb_count += 1;
@@ -292,9 +289,6 @@ public class Miracle extends Item {
 		if (Statistics.card31) {
 			dmg *= 1.25f;
 		}
-		if (Statistics.card32) {
-			dmg *= 1.5f;
-		} //blank card
 
 		if (Statistics.wand_power_up == 1) {
 			dmg *= 1.06f;

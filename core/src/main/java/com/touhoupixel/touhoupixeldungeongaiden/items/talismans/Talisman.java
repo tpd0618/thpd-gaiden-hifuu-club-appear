@@ -89,9 +89,6 @@ abstract public class Talisman extends Item {
             quantity++;
             if (Random.Int(2) == 0) {
                 quantity++;
-                if (Dungeon.isChallenged(Challenges.BLESSING_CHORD)) {
-                    quantity--;
-                }
             }
         }
         return this;

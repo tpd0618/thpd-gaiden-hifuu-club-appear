@@ -23,6 +23,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.artifacts;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
@@ -53,8 +54,10 @@ public class ChaliceOfBlood extends Artifact {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (isEquipped(heroine) && level() < levelCap && !cursed && Dungeon.heroine.buff(SuperHard.class) == null && !heroine.isInvulnerable(getClass()))
-			actions.add(AC_PRICK);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (isEquipped(heroine) && level() < levelCap && !cursed && Dungeon.heroine.buff(SuperHard.class) == null && !heroine.isInvulnerable(getClass()))
+				actions.add(AC_PRICK);
+		}
 		return actions;
 	}
 

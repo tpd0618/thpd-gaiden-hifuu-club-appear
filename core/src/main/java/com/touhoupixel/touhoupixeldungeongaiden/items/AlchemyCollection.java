@@ -22,6 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -43,7 +44,9 @@ public class AlchemyCollection extends Item {
 	@Override
 	public ArrayList<String> actions(Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add(AC_DRINK);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_DRINK);
+		}
 		return actions;
 	}
 

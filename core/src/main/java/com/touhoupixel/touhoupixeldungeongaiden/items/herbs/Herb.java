@@ -22,22 +22,14 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.herbs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CheatBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HerbDegrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
-import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
-import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 
 import java.util.ArrayList;
@@ -59,7 +51,9 @@ public class Herb extends Item {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		actions.add( AC_EAT );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			actions.add(AC_EAT);
+		}
 		return actions;
 	}
 
@@ -77,23 +71,9 @@ public class Herb extends Item {
 			SpellSprite.show(heroine, SpellSprite.FOOD);
 			Sample.INSTANCE.play(Assets.Sounds.EAT);
 
-			if (Dungeon.isChallenged(Challenges.CALL_THE_SHOTS)) {
-				Statistics.mood += 1;
-			}
-
 			if (heroine.buff(HerbDegrade.class) != null){
 				Buff.prolong(curUser, Degrade.class, Degrade.DURATION);
 			}
-
-			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-				if (mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[mob.pos]) {
-					if (mob instanceof BossSeija) {
-						Buff.prolong(mob, CheatBreak.class, CheatBreak.DURATION);
-						Buff.detach(mob, SuperHard.class);
-						GLog.p( Messages.get(Potion.class, "cheat_break") );
-					}
-				}
-			} //for boss seija
 
 			heroine.spend(eatingTime());
 		}

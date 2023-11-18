@@ -25,6 +25,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaAra;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaKusi;
@@ -215,29 +216,41 @@ public class Armor extends EquipableItem {
 		return heroine.belongings.armor() == this;
 	}
 
-	public final int DRMax(){
-		return DRMax(buffedLvl());
+	public final int DRMax() {
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
+		} else return DRMax(buffedLvl());
 	}
 
-	public int DRMax(int lvl){
+	public int DRMax(int lvl) {
 		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
-		if (lvl > max){
-			return ((lvl - max)+1)/2;
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
 		} else {
-			return max;
+			if (lvl > max) {
+				return ((lvl - max) + 1) / 2;
+			} else {
+				return max;
+			}
 		}
 	}
 
-	public final int DRMin(){
-		return DRMin(buffedLvl());
+	public final int DRMin() {
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
+		} else return DRMin(buffedLvl());
 	}
 
-	public int DRMin(int lvl){
+	public int DRMin(int lvl) {
 		int max = DRMax(lvl);
-		if (lvl >= max){
-			return (lvl - max);
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
 		} else {
-			return lvl;
+			if (lvl >= max) {
+				return (lvl - max);
+			} else {
+				return lvl;
+			}
 		}
 	}
 	
@@ -319,8 +332,8 @@ public class Armor extends EquipableItem {
 	}
 
 	@Override
-	public void onThrow( int cell ) {
-		Heap heap = Dungeon.level.drop( this, cell );
+	public void onThrow(int cell) {
+		Heap heap = Dungeon.level.drop(this, cell);
 		Char ch = (Char) Actor.findChar(cell);
 		if (!heap.isEmpty() && ch != null && ch != Dungeon.heroine) {
 			Armor armor = (Armor) curItem;
@@ -334,15 +347,9 @@ public class Armor extends EquipableItem {
 			}
 			Heap[] equipHeaps = new Heap[1];
 			equipHeaps[0] = Dungeon.level.heaps.get(ch.pos);
-			for (Heap h : equipHeaps) {
-				for (Item i : h.items.toArray(new Item[0])){
-					if (i == curItem){
-						h.remove(i);
-					}
-				}
-			}
+			heap.remove(curItem);
 		} else {
-			heap.sprite.drop( cell );
+			heap.sprite.drop(cell);
 		}
 	}
 

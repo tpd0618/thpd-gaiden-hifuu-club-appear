@@ -42,11 +42,8 @@ public enum Icons {
 
 	//rankings and hero select icons, spacing for 16x16
 	STAIRS,
-	PLAYERREIMU,
-	PLAYERMARISA,
-	PLAYERSANAE,
-	PLAYERYOUMU,
-	PLAYERSAKUYA,
+	PLAYERRENKO,
+	PLAYERHEARN,
 
 	//grey icons, mainly used for buttons, spacing for 16x16
 	EXIT,
@@ -159,11 +156,8 @@ public enum Icons {
 			case STAIRS:
 				icon.frame( icon.texture.uvRectBySize( 0, 16, 13, 16 ) );
 				break;
-			case PLAYERREIMU:
-			case PLAYERMARISA:
-			case PLAYERSANAE:
-			case PLAYERYOUMU:
-			case PLAYERSAKUYA:
+			case PLAYERRENKO:
+			case PLAYERHEARN:
 				icon.frame( icon.texture.uvRectBySize( 16, 16, 9, 15 ) );
 				break;
 
@@ -390,16 +384,10 @@ public enum Icons {
 	
 	public static Image get( HeroClass cl ) {
 		switch (cl) {
-			case PLAYERREIMU:
-				return get(PLAYERREIMU);
-			case PLAYERMARISA:
-				return get(PLAYERMARISA);
-			case PLAYERSANAE:
-				return get(PLAYERSANAE);
-			case PLAYERYOUMU:
-				return get(PLAYERYOUMU);
-			case PLAYERSAKUYA:
-				return get(PLAYERSAKUYA);
+			case PLAYERRENKO:
+				return get(PLAYERRENKO);
+			case PLAYERHEARN:
+				return get(PLAYERHEARN);
 		default:
 			return null;
 		}

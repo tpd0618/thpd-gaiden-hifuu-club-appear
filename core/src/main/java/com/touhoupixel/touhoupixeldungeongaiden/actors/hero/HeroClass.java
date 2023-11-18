@@ -36,7 +36,11 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.bags.HerbPouch;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.VelvetPouch;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.Food;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
+import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfMagicMissile;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Miracle;
+import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.ThrowingKnife;
+import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
+import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.ReimuExorcismRod;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 
 public enum HeroClass {
@@ -50,6 +54,18 @@ public enum HeroClass {
 		//test, put too many stuffs will trigger a certain bug
 
 		//test, put too many stuffs will trigger a certain bug
+		ThrowingKnife throwingKnife = new ThrowingKnife();
+		throwingKnife.quantity(3).collect();
+		Dungeon.quickslot.setSlot(2, throwingKnife);
+
+		ReimuExorcismRod reimuExorcismRod = new ReimuExorcismRod();
+		reimuExorcismRod.identify().collect();
+
+		MarisaStaff staff;
+		staff = new MarisaStaff(new WandOfMagicMissile());
+		(heroine.belongings.weapon = staff).identify();
+		heroine.belongings.weapon.activate(heroine);
+		Dungeon.quickslot.setSlot(0, staff);
 
 		Food food = new Food();
 		food.collect();

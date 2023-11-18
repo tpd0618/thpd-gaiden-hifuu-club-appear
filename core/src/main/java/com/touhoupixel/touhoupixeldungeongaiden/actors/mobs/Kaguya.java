@@ -8,6 +8,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Empathetic;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.LifeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KaguyaSprite;
@@ -55,8 +56,8 @@ public class Kaguya extends Mob {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment) {
             if (Dungeon.heroine.HP % 10 == 0 || Dungeon.heroine.HP % 10 == 1) {
-                damage *= 2;
-                Buff.prolong(enemy, Degrade.class, Degrade.DURATION);
+                damage *= 5;
+                Buff.prolong(enemy, Empathetic.class, Empathetic.DURATION);
                 Sample.INSTANCE.play(Assets.Sounds.CURSED);
                 GLog.w(Messages.get(this, "double_damage"));
             }

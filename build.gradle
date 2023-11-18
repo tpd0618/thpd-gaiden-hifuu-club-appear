@@ -12,7 +12,7 @@ allprojects {
 
     ext {
         appName = 'Touhou Pixel Dungeon Gaiden: Hifuu Club Appear'
-        appPackageName = 'com.touhoupixel.touhoupixeldungeonreloaded'
+        appPackageName = 'com.touhoupixel.touhoupixeldungeongaiden'
 
         appVersionCode = 601
         appVersionName = '1.0.1'

@@ -6,6 +6,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.*;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Identification;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
@@ -33,7 +34,7 @@ public class ScrollOfNamelessStory extends Scroll {
 	public void onThrow( int cell ) {
 		Heap heap = Dungeon.level.drop( this, cell );
 		Char ch = (Char) Actor.findChar(cell);
-		if (!heap.isEmpty() && ch != null && ch != Dungeon.heroine && !ch.properties().contains(Char.Property.MINIBOSS) && !ch.properties().contains(Char.Property.BOSS)) {
+		if (!heap.isEmpty() && ch != null && ch != Dungeon.heroine && !(ch instanceof Shopkeeper) && !ch.properties().contains(Char.Property.MINIBOSS) && !ch.properties().contains(Char.Property.BOSS)) {
 			GLog.i(Messages.get(this, "target_exterminate"));
 			Sample.INSTANCE.play(Assets.Sounds.BLAST);
 

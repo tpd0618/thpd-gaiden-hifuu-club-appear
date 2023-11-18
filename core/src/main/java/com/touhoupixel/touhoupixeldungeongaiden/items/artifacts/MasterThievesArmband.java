@@ -30,6 +30,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Blindness;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CounterBuff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cripple;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
@@ -67,7 +68,9 @@ public class MasterThievesArmband extends Artifact {
 	@Override
 	public ArrayList<String> actions(Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (isEquipped(heroine) && charge > 0 && !cursed) actions.add(AC_STEAL);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (isEquipped(heroine) && charge > 0 && !cursed) actions.add(AC_STEAL);
+		}
 		return actions;
 	}
 

@@ -28,6 +28,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FlavourBuff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.LockedFloor;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CheckedCell;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
@@ -67,7 +68,9 @@ public class TalismanOfForesight extends Artifact {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (isEquipped(heroine) && !cursed) actions.add(AC_SCRY);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (isEquipped(heroine) && !cursed) actions.add(AC_SCRY);
+		}
 		return actions;
 	}
 

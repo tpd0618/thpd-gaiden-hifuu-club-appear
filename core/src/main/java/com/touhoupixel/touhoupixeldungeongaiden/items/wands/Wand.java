@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.wands;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
@@ -30,24 +29,25 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AliceCurse;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantlePressure;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Happy;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Invisibility;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.LockedFloor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Recharging;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RouletteStop;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Slow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.MagicMissile;
-import com.touhoupixel.touhoupixeldungeongaiden.items.EirinJunkoCounterElixir;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.MagicalHolster;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.BlackCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.BlueCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.ClearCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.RedCubeFragment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.cubes.WhiteCubeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.DisarmingTrap;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.SummoningTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.CellSelector;
@@ -96,8 +96,10 @@ public abstract class Wand extends Item {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (curCharges > 0 || !curChargeKnown) {
-			actions.add( AC_ZAP );
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (curCharges > 0 || !curChargeKnown) {
+				actions.add(AC_ZAP);
+			}
 		}
 
 		return actions;
@@ -126,10 +128,236 @@ public abstract class Wand extends Item {
 	public abstract void onHit(MarisaStaff staff, Char attacker, Char defender, int damage);
 
 	public boolean tryToZap(Hero owner, int target ){
+		ClearCubeFragment clearCubeFragment = Dungeon.heroine.belongings.getItem(ClearCubeFragment.class);
+		BlackCubeFragment blackCubeFragment = Dungeon.heroine.belongings.getItem(BlackCubeFragment.class);
+		BlueCubeFragment blueCubeFragment = Dungeon.heroine.belongings.getItem(BlueCubeFragment.class);
+		RedCubeFragment redCubeFragment = Dungeon.heroine.belongings.getItem(RedCubeFragment.class);
+		WhiteCubeFragment whiteCubeFragment = Dungeon.heroine.belongings.getItem(WhiteCubeFragment.class);
+		//Sanae's exorcism rod needs all types of cube fragments.
+		if (curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
 
-		if ( curCharges >= (cursed ? 1 : chargesPerCast()) && !(Dungeon.level.map[Dungeon.heroine.pos] == Terrain.PEDESTAL)){
+				curItem instanceof MarisaStaff && blackCubeFragment != null && blackCubeFragment.quantity() > 1
+				&& blueCubeFragment != null && blueCubeFragment.quantity() > 1
+				&& redCubeFragment != null && redCubeFragment.quantity() > 1
+				&& whiteCubeFragment != null && whiteCubeFragment.quantity() > 1 ||
+
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof SanaeExorcismRod && blackCubeFragment != null && blackCubeFragment.quantity() > 1
+						&& blueCubeFragment != null && blueCubeFragment.quantity() > 1
+						&& redCubeFragment != null && redCubeFragment.quantity() > 1
+						&& whiteCubeFragment != null && whiteCubeFragment.quantity() > 1 ||
+
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfAntiDoor && blackCubeFragment != null && blackCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfBlastWave && blackCubeFragment != null && blackCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfCorrosion && blackCubeFragment != null && blackCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfCorruption && blackCubeFragment != null && blackCubeFragment.quantity() > 1 ||
+
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfDisintegration && blueCubeFragment != null && blueCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfFireblast && blueCubeFragment != null && blueCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfFrost && blueCubeFragment != null && blueCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfHealWounds && blueCubeFragment != null && blueCubeFragment.quantity() > 1 ||
+
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfLightning && redCubeFragment != null && redCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfLivingEarth && redCubeFragment != null && redCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfMagicMissile && redCubeFragment != null && redCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfMindburst && redCubeFragment != null && redCubeFragment.quantity() > 1 ||
+
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfPrismaticLight && whiteCubeFragment != null && whiteCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfRegrowth && whiteCubeFragment != null && whiteCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfSetsunatrip && whiteCubeFragment != null && whiteCubeFragment.quantity() > 1 ||
+				curCharges >= (cursed ? 1 : chargesPerCast()) && clearCubeFragment != null && clearCubeFragment.quantity() > 49 &&
+						curItem instanceof WandOfWarding && whiteCubeFragment != null && whiteCubeFragment.quantity() > 1){
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			clearCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+			if (curItem instanceof MarisaStaff){
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof SanaeExorcismRod){
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+			//all types
+
+			if (curItem instanceof WandOfAntiDoor) {
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfBlastWave) {
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfCorrosion) {
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfCorruption) {
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blackCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+			//black
+
+			if (curItem instanceof WandOfDisintegration) {
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfFireblast) {
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfFrost) {
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfHealWounds) {
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				blueCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+			//blue
+
+			if (curItem instanceof WandOfLightning) {
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfLivingEarth) {
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfMagicMissile) {
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfMindburst) {
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				redCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+			//red
+
+			if (curItem instanceof WandOfPrismaticLight) {
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfRegrowth) {
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfSetsunatrip) {
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+
+			if (curItem instanceof WandOfWarding) {
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+				whiteCubeFragment.detach(Dungeon.heroine.belongings.backpack);
+			}
+			//white
+
 			return true;
-		} else if (Statistics.card43 && Dungeon.gold >= 400 && !(Dungeon.level.map[Dungeon.heroine.pos] == Terrain.PEDESTAL)){
+		} else if (Statistics.card43 && Dungeon.gold >= 400){
 			GLog.w(Messages.get(this, "eiki_money_trigger"));
 			Sample.INSTANCE.play( Assets.Sounds.SHATTER);
 			curCharges += 1;
@@ -137,12 +365,7 @@ public abstract class Wand extends Item {
 			Buff.prolong(Dungeon.heroine, Recharging.class, Recharging.DURATION);
 			return true;
 		} else {
-			if (Dungeon.level.map[Dungeon.heroine.pos] == Terrain.PEDESTAL){
-				GLog.w(Messages.get(this, "no_pedestal"));
-			}
-			else {
-				GLog.w(Messages.get(this, "fizzles"));
-			}
+			GLog.w(Messages.get(this, "fizzles"));
 			return false;
 		}
 	}
@@ -189,28 +412,6 @@ public abstract class Wand extends Item {
 	protected void wandProc(Char target, int chargesUsed){
 		wandProc(target, buffedLvl(), chargesUsed);
 
-		if (target instanceof BossSeija && Dungeon.heroine.buff(RouletteStop.class) == null){
-			Dungeon.heroine.HP /= 2;
-			GameScene.flash(-65536);
-		}
-
-		if (target instanceof BossTenshi){
-			Statistics.tenshiattackstep += 1;
-		}
-
-		if (target instanceof BossHecatia){
-			new SummoningTrap().set(Dungeon.heroine.pos).activate();
-			if (target.HP < target.HT / 2 && !Statistics.elixir_trigger){
-				Dungeon.level.drop(new EirinJunkoCounterElixir(), 57).sprite.drop();
-				Dungeon.level.drop(new EirinJunkoCounterElixir(), 232).sprite.drop();
-				Dungeon.level.drop(new EirinJunkoCounterElixir(), 273).sprite.drop();
-				Dungeon.level.drop(new EirinJunkoCounterElixir(), 448).sprite.drop();
-				Statistics.eirinelixircount = 0;
-				Statistics.elixir_trigger = true;
-				GLog.w(Messages.get(this, "hecatia_barrier"));
-			}
-		}
-
 		if (Dungeon.heroine.buff(DismantlePressure.class) != null){
 			Buff.prolong(Dungeon.heroine, Slow.class, Slow.DURATION);
 		}
@@ -223,14 +424,6 @@ public abstract class Wand extends Item {
 			Dungeon.heroine.HP /= 2;
 			GameScene.flash(-65536);
 			GLog.w(Messages.get(this, "magic_drain"));
-		}
-
-		if (Dungeon.isChallenged(Challenges.INF_TIME_EATER)){
-			Statistics.timetrackbuff += 1;
-		}
-
-		if (Dungeon.heroine.buff(Happy.class) != null){
-			Buff.prolong(curUser, Slow.class, Slow.DURATION);
 		}
 
 		if (Statistics.card34) {

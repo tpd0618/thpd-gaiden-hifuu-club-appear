@@ -41,7 +41,10 @@ public class Statistics {
 	public static int shopkeepersKilled;
 	public static int moon_Count;
 	public static int trap_act_count;
-	public static int maga_count;
+	public static int bamboo;
+	public static int nameless;
+	public static int chimata;
+	public static int floor30;
 
 	//These are used for score calculation
 	//some are built incrementally, most are assigned when full score is calculated
@@ -107,6 +110,8 @@ public class Statistics {
 	public static int spellcardfragmentkill;
 	public static int hitoricount;
 	public static int hitorilefttime;
+
+	public static int difficulty;
 
 	public static int double_speed_upgrade;
 	public static int extermination_number;
@@ -236,7 +241,10 @@ public class Statistics {
 		shopkeepersKilled = 0;
 		moon_Count = 0;
 		trap_act_count = 0;
-		maga_count = 0;
+		bamboo = 0;
+		nameless = 0;
+		chimata = 0;
+		floor30 = 0;
 
 		progressScore   = 0;
 		heldItemValue   = 0;
@@ -300,6 +308,8 @@ public class Statistics {
 
 		hitoricount = 0;
 		hitorilefttime = 0;
+
+		difficulty = 1; //easy
 
 		double_speed_upgrade = 0;
 		extermination_number = 0;
@@ -425,7 +435,10 @@ public class Statistics {
 	private static final String MURASAS = "priranhas";
 	private static final String MOON_COUNT		= "moon_count";
 	private static final String TRAP_ACT_COUNT		= "trap_act_count";
-	private static final String MAGA_COUNT		= "maga_count";
+	private static final String BAMBOO		= "bamboo";
+	private static final String NAMELESS		= "nameless";
+	private static final String CHIMATA		= "chimata";
+	private static final String FLOOR30		= "floor30";
 
 	private static final String PROG_SCORE	    = "prog_score";
 	private static final String ITEM_VAL	    = "item_val";
@@ -489,6 +502,8 @@ public class Statistics {
 
 	private static final String HITORICOUNT	= "hitoricount";
 	private static final String HITORILEFTTIME	= "hitorilefttime";
+
+	private static final String DIFFICULTY	= "difficulty";
 
 	private static final String DOUBLE_SPEED_UPGRADE	= "double_speed_upgrade";
 	private static final String EXTERMINATION_NUMBER	= "extermination_number";
@@ -614,7 +629,10 @@ public class Statistics {
 		bundle.put( KISUMES,	kisumesKilled );
 		bundle.put( MOON_COUNT, moon_Count);
 		bundle.put( TRAP_ACT_COUNT, trap_act_count);
-		bundle.put( MAGA_COUNT, maga_count);
+		bundle.put( BAMBOO, bamboo);
+		bundle.put( NAMELESS, nameless);
+		bundle.put( CHIMATA, chimata);
+		bundle.put( FLOOR30, floor30);
 
 		bundle.put( PROG_SCORE,  progressScore );
 		bundle.put( ITEM_VAL,    heldItemValue );
@@ -682,6 +700,8 @@ public class Statistics {
 
 		bundle.put( HITORICOUNT,	hitoricount );
 		bundle.put( HITORILEFTTIME,	hitorilefttime );
+
+		bundle.put( DIFFICULTY,	difficulty );
 
 		bundle.put( IDENTIFY_USE,	identify_use );
 		bundle.put( FATE_USE,	fate_use );
@@ -808,7 +828,10 @@ public class Statistics {
 		murasasKilled = bundle.getInt(MURASAS);
 		moon_Count = bundle.getInt( MOON_COUNT );
 		trap_act_count = bundle.getInt( TRAP_ACT_COUNT );
-		maga_count = bundle.getInt( MAGA_COUNT );
+		bamboo = bundle.getInt( BAMBOO );
+		nameless = bundle.getInt( NAMELESS );
+		chimata = bundle.getInt( CHIMATA );
+		floor30 = bundle.getInt( FLOOR30 );
 
 		progressScore   = bundle.getInt( PROG_SCORE );
 		heldItemValue   = bundle.getInt( ITEM_VAL );
@@ -877,6 +900,8 @@ public class Statistics {
 
 		hitoricount		= bundle.getInt( HITORICOUNT );
 		hitorilefttime		= bundle.getInt( HITORILEFTTIME );
+
+		difficulty		= bundle.getInt( DIFFICULTY );
 
 		double_speed_upgrade	= bundle.getInt( DOUBLE_SPEED_UPGRADE );
 		extermination_number	= bundle.getInt( EXTERMINATION_NUMBER );

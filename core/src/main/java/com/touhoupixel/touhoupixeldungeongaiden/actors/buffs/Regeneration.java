@@ -22,29 +22,39 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.buffs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
+import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.ChaliceOfBlood;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
 
 public class Regeneration extends Buff {
-	
+
 	{
 		//unlike other buffs, this one acts after the hero and takes priority against other effects
 		//healing is much more useful if you get some of it off before taking damage
 		actPriority = HERO_PRIO - 1;
 	}
-	
+
 	private static final float REGENERATION_DELAY = 10;
-	
+
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
 
+			Hunger hunger = Buff.affect(target, Hunger.class);
+
 			if (target.HP < regencap() && !((Hero)target).isStarving()) {
 				LockedFloor lock = target.buff(LockedFloor.class);
 				if (target.HP > 0 && (lock == null || lock.regenOn())) {
-					if (target.buff(RegenBlock.class) == null) {
-						target.HP += 1;
+					if (Statistics.card32){
+						if (target.buff(RegenBlock.class) == null && target.HT > target.HP + 2) {
+							target.HP += 3;
+							hunger.affectHunger( -10);
+						}
+					} else {
+						if (target.buff(RegenBlock.class) == null) {
+							target.HP += 1;
+						}
 					}
 					if (target.HP == regencap()) {
 						((Hero) target).resting = false;
@@ -64,16 +74,16 @@ public class Regeneration extends Buff {
 				}
 			}
 			spend( delay );
-			
+
 		} else {
-			
+
 			diactivate();
-			
+
 		}
-		
+
 		return true;
 	}
-	
+
 	public int regencap(){
 		return target.HT;
 	}

@@ -24,6 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RemiliaFate;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.HeroClass;
@@ -43,50 +44,50 @@ public class MeleeWeapon extends Weapon {
 
 	@Override
 	public int min(int lvl) {
-		return  tier +  //base
-				lvl;    //level scaling
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
+		} else {
+			return tier +  //base
+					lvl;    //level scaling
+		}
 	}
 
 	@Override
 	public int max(int lvl) {
-		return  5*(tier+1) +    //base
-				lvl*(tier+1);   //level scaling
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return 0;
+		} else {
+			return 5 * (tier + 1) +    //base
+					lvl * (tier + 1);   //level scaling
+		}
 	}
 
 	public int STRReq(int lvl){
 		return STRReq(tier, lvl);
 	}
-	
+
 	@Override
 	public int damageRoll(Char owner) {
-		int damage = augment.damageFactor(super.damageRoll( owner ));
-		if (owner.buff(RemiliaFate.class) != null){
-			damage = min()*2;
-		} else if (owner instanceof Hero) {
-			int exStr = ((Hero)owner).STR() - STRReq();
-			if (exStr > 0) {
-				damage += Random.IntRange( 0, exStr );
+		int damage = augment.damageFactor(super.damageRoll(owner));
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return Random.NormalIntRange(Dungeon.heroine.STR, Dungeon.heroine.STR+9);
+		} else {
+			if (owner.buff(RemiliaFate.class) != null) {
+				damage = min() * 2;
+			} else if (owner instanceof Hero) {
+				int exStr = ((Hero) owner).STR() - STRReq();
+				if (exStr > 0) {
+					damage += Random.IntRange(0, exStr);
+				}
 			}
 		}
-		
-		return damage;
-	}
-	public int critDamageRoll(Char owner) {
-		int damage = augment.damageFactor(Random.IntRange((int) (max()), max()));
-		if (owner.buff(RemiliaFate.class) != null) {
-			damage = min() * 2;
-		} else if (owner instanceof Hero) {
-			int exStr = ((Hero) owner).STR() - STRReq();
-			if (exStr > 0) {
-				damage += Random.IntRange(0, exStr);
-			}
-		}
+
 		return damage;
 	}
 
 	@Override
-	public void onThrow( int cell ) {
-		Heap heap = Dungeon.level.drop( this, cell );
+	public void onThrow(int cell) {
+		Heap heap = Dungeon.level.drop(this, cell);
 		Char ch = (Char) Actor.findChar(cell);
 		if (!heap.isEmpty() && ch != null && ch != Dungeon.heroine) {
 			MeleeWeapon meleeWeapon = (MeleeWeapon) curItem;
@@ -100,15 +101,9 @@ public class MeleeWeapon extends Weapon {
 			}
 			Heap[] equipHeaps = new Heap[1];
 			equipHeaps[0] = Dungeon.level.heaps.get(ch.pos);
-			for (Heap h : equipHeaps) {
-				for (Item i : h.items.toArray(new Item[0])){
-					if (i == curItem){
-						h.remove(i);
-					}
-				}
-			}
+			heap.remove(curItem);
 		} else {
-			heap.sprite.drop( cell );
+			heap.sprite.drop(cell);
 		}
 	}
 	
@@ -122,9 +117,6 @@ public class MeleeWeapon extends Weapon {
 				info += " " + Messages.get(Weapon.class, "too_heavy");
 			} else if (Dungeon.heroine.STR() > STRReq()){
 				info += " " + Messages.get(Weapon.class, "excess_str", Dungeon.heroine.STR() - STRReq());
-			}
-			if (Dungeon.heroine.heroClass == HeroClass.PLAYERYOUMU){
-				info += "\n\n" + Messages.get(MeleeWeapon.class, "crit_chance", (int)(Dungeon.heroine.getCritChance()*100));
 			}
 		} else {
 			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_unknown", tier, min(0), max(0), STRReq(0));

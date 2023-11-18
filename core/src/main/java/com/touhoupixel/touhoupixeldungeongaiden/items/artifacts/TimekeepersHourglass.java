@@ -28,6 +28,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Invisibility;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.LockedFloor;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.HeroClass;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
@@ -75,8 +76,10 @@ public class TimekeepersHourglass extends Artifact {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (isEquipped(heroine) && !cursed && (charge > 0 || activeBuff != null)) {
-			actions.add(AC_ACTIVATE);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (isEquipped(heroine) && !cursed && (charge > 0 || activeBuff != null)) {
+				actions.add(AC_ACTIVATE);
+			}
 		}
 		return actions;
 	}
@@ -379,8 +382,6 @@ public class TimekeepersHourglass extends Artifact {
 			activeBuff = null;
 			triggerPresses();
 			target.next();
-			// for Sakuya
-			if (Dungeon.heroine.heroClass == HeroClass.PLAYERSAKUYA && Dungeon.heroine.buff(Swiftthistle.TimeBubble.class) == null){MissileWeapon.castAfterTimeFreeze();}
 		}
 
 		@Override

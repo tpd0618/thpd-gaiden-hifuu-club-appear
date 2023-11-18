@@ -186,7 +186,6 @@ public class WndRanking extends WndTabbed {
 			pos = statSlot( this, Messages.get(this, "gold"), num.format( Statistics.goldCollected ), pos );
 			pos = statSlot( this, Messages.get(this, "food"), num.format( Statistics.foodEaten ), pos );
 			pos = statSlot( this, Messages.get(this, "alchemy"), num.format( Statistics.itemsCrafted ), pos );
-			pos = statSlot( this, Messages.get(this, "difficulty"), num.format( Statistics.difficulty ), pos );
 
 			int buttontop = HEIGHT - 16;
 

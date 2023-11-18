@@ -26,6 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.LockedFloor;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
@@ -59,8 +60,10 @@ public class CloakOfShadows extends Artifact {
 	@Override
 	public ArrayList<String> actions( Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if ((isEquipped(heroine))) {
-			actions.add(AC_STEALTH);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if ((isEquipped(heroine))) {
+				actions.add(AC_STEALTH);
+			}
 		}
 		return actions;
 	}

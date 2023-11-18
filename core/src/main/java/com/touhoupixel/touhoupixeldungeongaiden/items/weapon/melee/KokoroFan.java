@@ -43,6 +43,6 @@ public class KokoroFan extends MeleeWeapon {
 
 	@Override
 	public int defenseFactor( Char owner ) {
-		return Statistics.difficulty > 3 ? 3 : 1;
+		return 1;
 	}
 }

@@ -25,6 +25,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.GoldenMimic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mimic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
@@ -48,7 +49,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.SpecialRoom
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.standard.EntranceRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.standard.ExitRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.standard.StandardRoom;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.InversionTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.BlazingTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.BurningTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.ChillingTrap;
@@ -166,11 +166,11 @@ public abstract class RegularLevel extends Level {
 	protected abstract Painter painter();
 
 	protected int nTraps() {
-		return Statistics.difficulty == 6 ? Random.NormalIntRange(6, 8) : Random.NormalIntRange(4, 6);
+		return Random.NormalIntRange(4, 6);
 	}
 
 	protected Class<?>[] trapClasses(){
-		return new Class<?>[]{InversionTrap.class};
+		return new Class<?>[]{Inversion.class};
 	}
 
 	protected float[] trapChances() {
@@ -318,10 +318,7 @@ public abstract class RegularLevel extends Level {
 	@Override
 	protected void createItems() {
 		int nItems = 8;
-
-		if (Statistics.difficulty == 6){
-			nItems -= 1;
-		}
+		//todo
 
 		if (Statistics.card65) {
 			nItems += 1;

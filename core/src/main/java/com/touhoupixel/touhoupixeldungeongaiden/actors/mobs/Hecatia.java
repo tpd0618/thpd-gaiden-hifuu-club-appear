@@ -71,7 +71,7 @@ public class Hecatia extends Mob {
 	@Override
 	public int attackProc(Char hero, int damage) {
 		damage = super.attackProc(enemy, damage);
-		if (!(Dungeon.heroine.belongings.armor() instanceof HecatiaArmor) || !(Dungeon.floor == 40)) {
+		if (!(Dungeon.heroine.belongings.armor() instanceof HecatiaArmor)) {
 			if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0) {
 				Sample.INSTANCE.play(Assets.Sounds.READ);
 				CellEmitter.get(pos).burst(ShadowParticle.UP, 5);

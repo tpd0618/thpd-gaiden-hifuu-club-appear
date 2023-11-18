@@ -208,29 +208,9 @@ public abstract class Level implements Bundlable {
 				addItemToSpawn( new StoneOfIntuition() );
 			}
 
-			if (Dungeon.floor > 40) {
-				switch (Random.Int(12)) {
-					case 0:
-						feeling = Feeling.CHASM;
-						break;
-					case 1:
-						feeling = Feeling.WATER;
-						break;
-					case 2:
-						feeling = Feeling.GRASS;
-						break;
-					case 3:
-						feeling = Feeling.DARK;
-						addItemToSpawn(new Torch());
-						viewDistance = Math.round(viewDistance / 2f);
-						break;
-					case 4:
-						feeling = Feeling.TRAPS;
-						break;
-					case 5:
-						feeling = Feeling.SECRETS;
-						break;
-				}
+			if (Dungeon.floor > 95) {
+				feeling = Feeling.LARGE;
+				addItemToSpawn(Generator.random(Generator.Category.FOOD));
 			} else {
 				//50% chance of getting a level feeling
 				//~7.15% chance for each feeling
@@ -252,7 +232,6 @@ public abstract class Level implements Bundlable {
 					case 4:
 						feeling = Feeling.LARGE;
 						addItemToSpawn(Generator.random(Generator.Category.FOOD));
-						//add a second torch to help with the larger floor
 						break;
 					case 5:
 						feeling = Feeling.TRAPS;

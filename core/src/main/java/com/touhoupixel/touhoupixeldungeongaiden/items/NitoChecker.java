@@ -60,24 +60,6 @@ public class NitoChecker extends Item {
 		info += "\n\n" + Messages.get( this, "stats4", Statistics.spellcard, Statistics.bomb_count);
 		info += "\n\n" + Messages.get( this, "stats5", Statistics.spellcardfragment);
 		info += "\n\n" + Messages.get( this, "stats6", Statistics.dismantle_count);
-		if (Statistics.difficulty == 1) {
-			info += "\n\n" + Messages.get(this, "easy");
-		}
-		if (Statistics.difficulty == 2) {
-			info += "\n\n" + Messages.get(this, "normal");
-		}
-		if (Statistics.difficulty == 3) {
-			info += "\n\n" + Messages.get(this, "hard");
-		}
-		if (Statistics.difficulty == 4) {
-			info += "\n\n" + Messages.get(this, "lunatic");
-		}
-		if (Statistics.difficulty == 5) {
-			info += "\n\n" + Messages.get(this, "overdrive");
-		}
-		if (Statistics.difficulty == 6) {
-			info += "\n\n" + Messages.get(this, "risky");
-		}
 		return info;
 	}
 

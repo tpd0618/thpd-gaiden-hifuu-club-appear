@@ -28,6 +28,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cripple;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.LockedFloor;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Chains;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Pushing;
@@ -66,8 +67,10 @@ public class EtherealChains extends Artifact {
 	@Override
 	public ArrayList<String> actions(Hero heroine) {
 		ArrayList<String> actions = super.actions(heroine);
-		if (isEquipped(heroine) && charge > 0 && !cursed)
-			actions.add(AC_CAST);
+		if (Dungeon.heroine.buff(Onigiri.class) == null) {
+			if (isEquipped(heroine) && charge > 0 && !cursed)
+				actions.add(AC_CAST);
+		}
 		return actions;
 	}
 
