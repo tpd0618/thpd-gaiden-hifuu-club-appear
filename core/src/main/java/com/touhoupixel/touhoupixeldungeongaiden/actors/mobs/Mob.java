@@ -76,6 +76,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Lucky;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.darts.Dart;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.features.Chasm;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Swiftthistle;
@@ -427,7 +428,7 @@ public abstract class Mob extends Char {
 
 			if (Actor.findChar( target ) == null
 					&& (Dungeon.level.passable[target] || (flying && Dungeon.level.avoid[target]))
-					&& (!Char.hasProp(this, Property.NONE) || Dungeon.level.openSpace[target])) {
+					&& (!Char.hasProp(this, Property.NONE) || Dungeon.level.openSpace[target]) || (Dungeon.level.solid[target] && passWall)) {
 				step = target;
 			}
 
@@ -481,7 +482,7 @@ public abstract class Mob extends Char {
 			//checks if the next cell along the current path can be stepped into
 			if (!newPath) {
 				int nextCell = path.removeFirst();
-				if (!Dungeon.level.passable[nextCell]
+				if (!Dungeon.level.passable[nextCell] || (Dungeon.level.solid[target] && passWall)
 						|| (!flying && Dungeon.level.avoid[nextCell])
 						|| (Char.hasProp(this, Property.NONE) && !Dungeon.level.openSpace[nextCell])
 						|| Actor.findChar(nextCell) != null) {
@@ -589,7 +590,8 @@ public abstract class Mob extends Char {
 
 	@Override
 	public boolean isInvulnerable(Class effect) {
-		return Dungeon.heroine.buff(HinaCurse.class) != null && Dungeon.heroine.justMoved;
+		return Dungeon.heroine.buff(HinaCurse.class) != null && Dungeon.heroine.justMoved ||
+				Dungeon.level.map[this.pos] == Terrain.WALL || Dungeon.level.map[this.pos] == Terrain.WALL_DECO;
 	}
 
 	@Override
