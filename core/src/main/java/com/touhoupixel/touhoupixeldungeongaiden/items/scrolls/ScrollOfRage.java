@@ -26,7 +26,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Amok;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HecatiaRule;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -42,13 +41,10 @@ public class ScrollOfRage extends Scroll {
 
 	@Override
 	public void doRead() {
-
-		if (curUser.buff(HecatiaRule.class) == null) {
-			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-				mob.beckon(curUser.pos);
-				if (mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[mob.pos]) {
-					Buff.prolong(mob, Amok.class, 5f);
-				}
+		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
+			mob.beckon(curUser.pos);
+			if (mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[mob.pos]) {
+				Buff.prolong(mob, Amok.class, 5f);
 			}
 		}
 

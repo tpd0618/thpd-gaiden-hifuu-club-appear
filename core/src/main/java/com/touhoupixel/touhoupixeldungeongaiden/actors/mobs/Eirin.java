@@ -22,11 +22,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.items.Dewdrop;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -105,7 +102,7 @@ public class Eirin extends Mob implements Callback {
         if (hit( this, enemy, true )) {
             //TODO would be nice for this to work on ghost/statues too
             if (enemy == Dungeon.heroine && enemy.alignment != this.alignment) {
-                Buff.prolong(enemy, Inversion.class, Inversion.DURATION);
+                //todo reset
             }
 
             int dmg = Random.NormalIntRange( 13, 18 );

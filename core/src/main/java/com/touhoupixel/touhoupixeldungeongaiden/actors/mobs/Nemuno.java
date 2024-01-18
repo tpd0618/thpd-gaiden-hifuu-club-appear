@@ -25,8 +25,7 @@ public class Nemuno extends Mob {
 
         properties.add(Property.YOKAI);
 
-        loot = Generator.Category.WEP_T4;
-        lootChance = 0.1f;
+        //todo
     }
 
     @Override

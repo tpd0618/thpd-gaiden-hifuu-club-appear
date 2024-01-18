@@ -5,9 +5,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FlandreCooldown;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FiveStarTicket;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FourStarTicket;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.ThreeStarTicket;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.FlandreSprite;
@@ -59,9 +56,7 @@ public class Flandre extends Mob {
 
     @Override
     public void die( Object cause ) {
-        Dungeon.level.drop(new ThreeStarTicket(), pos ).sprite.drop();
-        Dungeon.level.drop(new FourStarTicket(), pos ).sprite.drop();
-        Dungeon.level.drop(new FiveStarTicket(), pos ).sprite.drop();
+        //todo
         super.die( cause );
     }
 

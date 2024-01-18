@@ -26,7 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.PrismaticImage;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.ui.BuffIndicator;

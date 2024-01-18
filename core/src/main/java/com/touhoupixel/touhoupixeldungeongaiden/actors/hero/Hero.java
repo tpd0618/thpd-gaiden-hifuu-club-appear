@@ -25,7 +25,6 @@ import static java.lang.Math.max;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Badges;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.GamesInProgress;
 import com.touhoupixel.touhoupixeldungeongaiden.ShatteredPixelDungeon;
@@ -34,48 +33,40 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AdrenalineSurge;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Amok;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AnkhInvulnerability;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CritChanceUp;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HecatiaBody;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CelestialBody;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DeSlaying;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DistortedAvarice;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeedResist;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Empathetic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeFear;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeHunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FumoLover;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.GhostHalf;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.GoldCreation;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeatRiser;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HexCancel;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HomingBlade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HumanHalf;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inaccurate;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.KeyHeal;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MeleeNullify;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BossKiller;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Randomizer;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SanctuaryZone;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Vulnerable;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Weakness;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.YokaiBorder;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ZeroDexterity;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Awareness;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bless;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Burning;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CursedBlow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DanmakuPowerUp;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantlePressure;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Doublerainbow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Drowsy;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Foresight;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HardSearch;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HighStress;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Calm;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Invisibility;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.KomachiCurse;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Might;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MindVision;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Paralysis;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Regeneration;
@@ -92,22 +83,19 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Reimu;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Suika;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Yuuka;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Sheep;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Zanmu;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CheckedCell;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
-import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Amulet;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Dewdrop;
-import com.touhoupixel.touhoupixeldungeongaiden.items.EquipableItem;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap.Type;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.KindOfWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.JokerArmor;
-import com.touhoupixel.touhoupixeldungeongaiden.items.armor.NarukamiYuArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.AntiMagic;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Brimstone;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Viscosity;
@@ -117,7 +105,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.HornOfPlenty;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.MasterThievesArmband;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TalismanOfForesight;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
-import com.touhoupixel.touhoupixeldungeongaiden.items.bags.MagicalHolster;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.CrystalKey;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.GoldenKey;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.IronKey;
@@ -126,38 +113,23 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.keys.SkeletonKey;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfExperience;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfMight;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfAccuracy;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEvasion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfForce;
-import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfFuror;
-import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfHaste;
-import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfMight;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfTenacity;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.CursedWand;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfBlastWave;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfLivingEarth;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.EgoRock;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.CirnoWing;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.BulletDanmaku;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.YuukaDanmaku;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MeleeWeapon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.Roukanken;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.RustyRoukanken;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Notes;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.features.Chasm;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.features.LevelTransition;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.CursingTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.Trap;
-import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.ShadowCaster;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Earthroot;
@@ -172,7 +144,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.sprites.HeroSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.ui.AttackIndicator;
 import com.touhoupixel.touhoupixeldungeongaiden.ui.BuffIndicator;
 import com.touhoupixel.touhoupixeldungeongaiden.ui.QuickSlotButton;
-import com.touhoupixel.touhoupixeldungeongaiden.utils.BArray;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.touhoupixel.touhoupixeldungeongaiden.windows.WndOptions;
 import com.touhoupixel.touhoupixeldungeongaiden.windows.WndTradeItem;
@@ -182,7 +153,6 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
-import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
@@ -198,9 +168,10 @@ public class Hero extends Char {
 		alignment = Alignment.ALLY;
 	}
 
-	public static final int MAX_LEVEL = 99; //same as touhou genso wanderer series
+	public static final int MAX_LEVEL = 99;
 
-	public static final int STARTING_STR = 10; //test ver. 300, original ver. 10
+	public static final int STARTING_STR = 8;
+	public int MAX_STR = 8;
 
 	private static final float TIME_TO_REST		    = 1f;
 	private static final float TIME_TO_SEARCH	    = 2f;
@@ -208,8 +179,8 @@ public class Hero extends Char {
 
 	public HeroClass heroClass = HeroClass.PLAYERRENKO;
 
-	private int attackSkill = 10; //test ver. 100, original ver. 10
-	private int defenseSkill = 5; //test ver. 0, original ver. 5
+	private int attackSkill = 10;
+	private int defenseSkill = 5;
 
 	public boolean ready = false;
 	private boolean damageInterrupt = true;
@@ -229,8 +200,6 @@ public class Hero extends Char {
 	public int lvl = 1;
 	public int exp = 0;
 
-	public int HTBoost = 0;
-
 	private ArrayList<Mob> visibleEnemies;
 
 	//This list is maintained so that some logic checks can be skipped
@@ -240,7 +209,7 @@ public class Hero extends Char {
 	public Hero() {
 		super();
 
-		HP = HT = 25; //test ver. 3000, original ver. 30
+		HP = HT = 15;
 		STR = STARTING_STR;
 
 		belongings = new Belongings( this );
@@ -251,13 +220,7 @@ public class Hero extends Char {
 	public void updateHT( boolean boostHP ){
 		int curHT = HT;
 
-		HT = 25 + Statistics.maxHP_down + 5 * (lvl - 1) + HTBoost;
-		float multiplier = RingOfMight.HTMultiplier(this);
-		HT = Math.round(multiplier * HT);
-
-		if (buff(ElixirOfMight.HTBoost.class) != null){
-			HT += buff(ElixirOfMight.HTBoost.class).boost();
-		}
+		HT = 15 + Statistics.maxHP_change + 5 * (lvl - 1);
 
 		if (boostHP){
 			HP += max(HT - curHT, 0);
@@ -267,8 +230,6 @@ public class Hero extends Char {
 
 	public int STR() {
 		int strBonus = 0;
-
-		strBonus += RingOfMight.strengthBonus( this );
 
 		AdrenalineSurge buff = buff(AdrenalineSurge.class);
 		if (buff != null){
@@ -283,9 +244,9 @@ public class Hero extends Char {
 	private static final String ATTACK		= "attackSkill";
 	private static final String DEFENSE		= "defenseSkill";
 	private static final String STRENGTH	= "STR";
+	private static final String MAX_STRENGTH = "MAX_STR";
 	private static final String LEVEL		= "lvl";
 	private static final String EXPERIENCE	= "exp";
-	private static final String HTBOOST     = "htboost";
 
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -298,11 +259,10 @@ public class Hero extends Char {
 		bundle.put( DEFENSE, defenseSkill );
 
 		bundle.put( STRENGTH, STR );
+		bundle.put( MAX_STRENGTH, MAX_STR );
 
 		bundle.put( LEVEL, lvl );
 		bundle.put( EXPERIENCE, exp );
-
-		bundle.put( HTBOOST, HTBoost );
 
 		belongings.storeInBundle( bundle );
 	}
@@ -313,8 +273,6 @@ public class Hero extends Char {
 		lvl = bundle.getInt( LEVEL );
 		exp = bundle.getInt( EXPERIENCE );
 
-		HTBoost = bundle.getInt(HTBOOST);
-
 		super.restoreFromBundle( bundle );
 
 		heroClass = bundle.getEnum( CLASS, HeroClass.class );
@@ -323,6 +281,7 @@ public class Hero extends Char {
 		defenseSkill = bundle.getInt( DEFENSE );
 
 		STR = bundle.getInt( STRENGTH );
+		MAX_STR = bundle.getInt( MAX_STRENGTH );
 
 		belongings.restoreFromBundle( bundle );
 	}
@@ -330,6 +289,7 @@ public class Hero extends Char {
 	public static void preview( GamesInProgress.Info info, Bundle bundle ) {
 		info.level = bundle.getInt( LEVEL );
 		info.str = bundle.getInt( STRENGTH );
+		info.max_str = bundle.getInt( MAX_STRENGTH );
 		info.exp = bundle.getInt( EXPERIENCE );
 		info.hp = bundle.getInt( Char.TAG_HP );
 		info.ht = bundle.getInt( Char.TAG_HT );
@@ -342,9 +302,6 @@ public class Hero extends Char {
 	public void hitSound(float pitch) {
 		if (belongings.weapon() != null){
 			belongings.weapon().hitSound(pitch);
-		} else if (RingOfForce.getBuffedBonus(this, RingOfForce.Force.class) > 0) {
-			//pitch deepens by 2.5% (additive) per point of strength, down to 75%
-			super.hitSound( pitch * GameMath.gate( 0.75f, 1.25f - 0.025f*STR(), 1f) );
 		} else {
 			super.hitSound(pitch * 1.1f);
 		}
@@ -411,9 +368,6 @@ public class Hero extends Char {
 		if (Dungeon.heroine.buff(HomingBlade.class) != null) {
 			return INFINITE_ACCURACY;
 		}
-		if (Dungeon.heroine.buff(HumanHalf.class) != null) {
-			return INFINITE_ACCURACY;
-		}
 
 		if (wep != null) {
 			return (int)(attackSkill * accuracy * wep.accuracyFactor( this ));
@@ -431,9 +385,6 @@ public class Hero extends Char {
 			return INFINITE_EVASION;
 		}
 
-		if (Dungeon.heroine.buff(GhostHalf.class) != null){
-			evasion *= GhostHalf.bonusEvasion();
-		}
 		evasion *= RingOfEvasion.evasionMultiplier( this );
 
 		if (paralysed > 0) {
@@ -453,16 +404,10 @@ public class Hero extends Char {
 
 		if (belongings.armor() != null) {
 			int armDr = Random.NormalIntRange( belongings.armor().DRMin(), belongings.armor().DRMax());
-			if (STR() < belongings.armor().STRReq()){
-				armDr -= 2*(belongings.armor().STRReq() - STR());
-			}
 			if (armDr > 0) dr += armDr;
 		}
 		if (belongings.weapon() != null)  {
 			int wepDr = Random.NormalIntRange( 0 , belongings.weapon().defenseFactor( this ) );
-			if (STR() < ((Weapon)belongings.weapon()).STRReq()){
-				wepDr -= 2*(((Weapon)belongings.weapon()).STRReq() - STR());
-			}
 			if (wepDr > 0) dr += wepDr;
 		}
 
@@ -474,11 +419,17 @@ public class Hero extends Char {
 		KindOfWeapon wep = belongings.weapon();
 		int dmg;
 
-		if (wep != null) {
-			dmg = wep.damageRoll(this);
-			if (!(wep instanceof MissileWeapon)) dmg += RingOfForce.armedDamageBonus(this);
-		} else {
-			dmg = RingOfForce.damageRoll(this);
+		if (wep instanceof MeleeWeapon && isCrit() && wep != null || Dungeon.heroine.buff(CritChanceUp.class) != null && wep != null) {
+			dmg = ((MeleeWeapon) wep).critDamageRoll(this);
+			GLog.p(Messages.get(this, "crit"));
+		}
+		else {
+			if (wep != null) {
+				dmg = wep.damageRoll(this);
+			} else {
+				MeleeWeapon meleeWeapon = new MeleeWeapon();
+				dmg = meleeWeapon.damageRoll(Dungeon.heroine);
+			}
 		}
 		if (dmg < 0) dmg = 0;
 
@@ -562,33 +513,6 @@ public class Hero extends Char {
 			}
 		}
 
-		if (Statistics.card7 && enemy.properties().contains(Char.Property.YOKAI)) {
-			dmg *= 1.3f;
-		}
-		if (Statistics.card8 && enemy.properties().contains(Char.Property.YOKAI) && this.HP % 2 == 0) {
-			dmg *= 1.5f;
-		}
-		if (Statistics.card9 && enemy.properties().contains(Char.Property.GOD)) {
-			dmg *= 1.3f;
-		}
-		if (Statistics.card11 && enemy.properties().contains(Char.Property.HUMAN)) {
-			dmg *= 1.3f;
-		}
-		if (Statistics.card13 && enemy.properties().contains(Char.Property.ANIMAL)) {
-			dmg *= 1.3f;
-		}
-		if (Statistics.card15 && enemy.properties().contains(Char.Property.WARP)) {
-			dmg *= 1.3f;
-		}
-
-		if (Dungeon.heroine.buff(ExtremeHunger.class) != null) {
-			dmg *= 0.1f;
-		} //extreme hunger
-
-		if (Dungeon.heroine.buff(DistortedAvarice.class) != null) {
-			dmg *= 0.05f;
-		} //distorted avarice
-
 		if (Dungeon.heroine.buff(HeatRiser.class) != null) {
 			dmg *= 1.5f;
 		} //heat riser
@@ -596,19 +520,6 @@ public class Hero extends Char {
 		if (Dungeon.heroine.buff(Randomizer.class) != null) {
 			dmg *= 0.5f;
 		} //heat riser
-
-		if (Dungeon.heroine.buff(BossKiller.class) != null && enemy.properties().contains(Char.Property.MINIBOSS) ||
-				Dungeon.heroine.buff(BossKiller.class) != null && enemy.properties().contains(Char.Property.BOSS)){
-			dmg *= 2f;
-		}
-		HumanHalf humanHalf = buff(HumanHalf.class);
-		if (humanHalf != null) {
-			dmg *= (1f+humanHalf.getBonusDamage());
-		}
-
-		if (Statistics.card38 && Dungeon.heroine.belongings.weapon() instanceof MeleeWeapon) {
-			dmg *= 1.3f;
-		}
 
 		if (Dungeon.heroine.buff(DanmakuPowerUp.class) != null && Dungeon.heroine.belongings.weapon() instanceof MissileWeapon) {
 			dmg *= 1.4f;
@@ -624,60 +535,31 @@ public class Hero extends Char {
 			dmg *= 1.1f;
 		}
 
-		if (Statistics.card57){
-			dmg *= 1.25f;
-		}
-
-		if (Statistics.card25){
-			if (Notes.keyCount(new IronKey(Dungeon.floor)) > 0) {
-				dmg *= 1.1f;
-			}
-			if (Notes.keyCount(new GoldenKey(Dungeon.floor)) > 0) {
-				dmg *= 1.2f;
-			}
-			if (Notes.keyCount(new CrystalKey(Dungeon.floor)) > 0) {
-				dmg *= 1.15f;
-			}
-		}
 		return dmg;
 	}
 	public boolean isCrit(){
-		if (getCritChance() > Random.Float()){
+		if (getCritChance() > Random.Float() || Dungeon.heroine.buff(CritChanceUp.class) != null){
 			return true;
 		}
 		else{
 			return false;
 		}
-	}
+	}//todo
+
 	public float getCritChance(){
 		float critChance = (float) (1 - (1 - Statistics.power * 0.0005)*(1 - (lvl - 1) * 0.01));
 
-		HumanHalf humanHalf = buff(HumanHalf.class);
-		if (humanHalf != null) {
-			critChance = (1 - (1 - critChance)*(1 - humanHalf.getBonusCrit()));
+		if (Dungeon.heroine.buff(CritChanceUp.class) != null){
+			critChance += 0.3f;
 		}
 
-		if (Dungeon.heroine.belongings.weapon instanceof RustyRoukanken){
-			critChance = (1 - (1 - critChance)*(1 - 0.05f));
-		}
-		if (Dungeon.heroine.belongings.weapon instanceof Roukanken){
-			critChance = (1 - (1 - critChance)*(1 - 0.15f));
-		}		return critChance;
-	}
+		return critChance;
+	}//todo
+
 	@Override
 	public float speed() {
 
 		float speed = super.speed();
-
-		if (Statistics.card39){
-			speed *= 1.2f;
-		}
-
-		if (Statistics.card57){
-			speed *= 1.25f;
-		}
-
-		speed *= RingOfHaste.speedMultiplier(this);
 
 		if (belongings.armor() != null) {
 			speed = belongings.armor().speedFactor(this, speed);
@@ -691,10 +573,8 @@ public class Hero extends Char {
 
 	public boolean canSurpriseAttack(){
 		if (belongings.weapon() == null || !(belongings.weapon() instanceof Weapon))    return true;
-		if (STR() < ((Weapon)belongings.weapon()).STRReq())                             return false;
 		if (Dungeon.heroine.buff(ZeroDexterity.class) != null)                           return false;
 		if (belongings.weapon() instanceof CirnoWing)                                   return false;
-		if (Statistics.card57)                                                          return false;
 
 		return true;
 	}
@@ -720,14 +600,9 @@ public class Hero extends Char {
 
 	public float attackDelay() {
 		if (belongings.weapon() != null) {
-
 			return belongings.weapon().delayFactor( this );
-
 		} else {
-			//Normally putting furor speed on unarmed attacks would be unnecessary
-			//But there's going to be that one guy who gets a furor+force ring combo
-			//This is for that one guy, you shall get your fists of fury!
-			return 1f/RingOfFuror.attackSpeedMultiplier(this);
+			return 1f;
 		}
 	}
 
@@ -750,9 +625,6 @@ public class Hero extends Char {
 
 		if (buff(Calm.class) != null) {
 			this.HP = Math.min(this.HP + 1, this.HT);
-		}
-		if (buff(GhostHalf.class) != null && Statistics.card53){
-			this.HP = Math.min(this.HP + 1 + (this.HT / 60), this.HT);
 		}
 
 		Swiftthistle.TimeBubble bubble = buff(Swiftthistle.TimeBubble.class);
@@ -1225,9 +1097,6 @@ public class Hero extends Char {
 		if (!fullRest) {
 			if (sprite != null) {
 				sprite.showStatus(CharSprite.DEFAULT, Messages.get(this, "wait"));
-				if (Statistics.card24 && Notes.keyCount(new IronKey(Dungeon.floor)) > 1) {
-					Buff.prolong(this, HexCancel.class, HexCancel.DURATION/5f);
-				}
 			}
 		}
 		resting = fullRest;
@@ -1247,88 +1116,26 @@ public class Hero extends Char {
 			GLog.w( Messages.get(this, "extreme_fear") );
 		}
 
-		if (Statistics.card38 && Dungeon.gold > 1) {
-			Dungeon.gold -= 2;
-		}
-
 		if (Dungeon.heroine.buff(Empathetic.class) != null) {
 			this.damage(damageRoll(), this);
 		}
+
+		if (Dungeon.heroine.buff(SanctuaryZone.class) != null) {
+			Buff.prolong(Dungeon.heroine, Weakness.class, Weakness.DURATION);
+			Buff.prolong(Dungeon.heroine, Vulnerable.class, Vulnerable.DURATION);
+			Buff.prolong(Dungeon.heroine, Slow.class, Slow.DURATION);
+			GameScene.flash(-65536);
+			Sample.INSTANCE.play( Assets.Sounds.BLAST );
+			GLog.w(Messages.get(Zanmu.class, "sanctuary_zone"));
+		}
+
 
 		if (Dungeon.heroine.buff(DismantlePressure.class) != null){
 			Buff.prolong(Dungeon.heroine, Slow.class, Slow.DURATION);
 		}
 
-		if (Statistics.card51 && Dungeon.level.map[this.pos] == Terrain.WATER && Random.Int(2) == 0) {
-			Buff.prolong(enemy, Vertigo.class, Vertigo.DURATION);
-
-			//repels enemy
-			Ballistica trajectory = new Ballistica(Dungeon.heroine.pos, enemy.pos, Ballistica.STOP_TARGET);
-			trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size()-1), Ballistica.PROJECTILE);
-			WandOfBlastWave.throwChar(enemy,
-					trajectory,
-					2,
-					true,
-					true,
-					getClass());
-		}
-
 		if (buff(SupernaturalBorder.class) == null) {
 			Statistics.bordercount += 1;
-		}
-
-		if (buff(CursedBlow.class) != null && Dungeon.heroine.belongings.weapon() instanceof MeleeWeapon){
-			CursedWand.cursedEffect(null, this, enemy);
-		}
-
-		if (Dungeon.heroine.belongings.weapon() instanceof YuukaDanmaku){
-			Ballistica trajectory = new Ballistica(this.pos, enemy.pos, Ballistica.STOP_TARGET);
-			//trim it to just be the part that goes past them
-			trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size() - 1), Ballistica.PROJECTILE);
-			//knock them back along that ballistica
-			WandOfBlastWave.throwChar(enemy, trajectory, 5, false, true, getClass());
-			Sample.INSTANCE.play(Assets.Sounds.CURSED);
-			CellEmitter.get(pos).burst(ShadowParticle.UP, 5);
-			return damage;
-		}
-
-		if (Statistics.card18 && (Random.Int(5) == 0) && !enemy.properties().contains(Char.Property.MINIBOSS) && !enemy.properties().contains(Char.Property.BOSS)) {
-			Buff.prolong(enemy, Slow.class, Slow.DURATION/2f);
-		}
-
-		if (Statistics.card6 && Dungeon.heroine.belongings.weapon() instanceof MissileWeapon){
-			PathFinder.buildDistanceMap( enemy.pos, BArray.not( Dungeon.level.solid, null ), 2 );
-			ArrayList<Integer> spawnPoints = new ArrayList<>();
-			for (int i = 0; i < PathFinder.distance.length; i++) {
-				if (PathFinder.distance[i] < Integer.MAX_VALUE) {
-					spawnPoints.add(i);
-				}
-			}
-
-			for (int i : spawnPoints){
-				if (Dungeon.level.insideMap(i)
-						&& Actor.findChar(i) == null
-						&& !(Dungeon.level.pit[i])) {
-					Sheep sheep = new Sheep();
-					sheep.lifespan = 8;
-					sheep.pos = i;
-					GameScene.add(sheep);
-					Dungeon.level.occupyCell(sheep);
-					CellEmitter.get(i).burst(Speck.factory(Speck.WOOL), 4);
-				}
-			}
-
-			CellEmitter.get(enemy.pos).burst(Speck.factory(Speck.WOOL), 4);
-			Sample.INSTANCE.play(Assets.Sounds.PUFF);
-			Sample.INSTANCE.play(Assets.Sounds.SHEEP);
-		}
-
-		if (Statistics.card37 && Dungeon.heroine.belongings.weapon() instanceof MissileWeapon){
-			Buff.affect(enemy, Burning.class).reignite(enemy, 7f);
-		}
-
-		if (Statistics.card23 && (Random.Int(6) == 0) && enemy.HP > 3 && !enemy.properties().contains(Char.Property.MINIBOSS) && !enemy.properties().contains(Char.Property.BOSS)) {
-			enemy.HP /= 2;
 		}
 
 		KindOfWeapon wep = belongings.weapon();
@@ -1340,15 +1147,6 @@ public class Hero extends Char {
 
 	@Override
 	public int defenseProc( Char enemy, int damage ) {
-		if (Dungeon.heroine.buff(HexCancel.class) != null){
-			if (Statistics.hexcancel > 4){
-				damage *= 0;
-				Statistics.hexcancel = 0;
-			} else {
-				Statistics.hexcancel += 1;
-			}
-		}
-
 		if (Dungeon.heroine.buff(Randomizer.class) != null){
 			damage *= 1.5f;
 		}
@@ -1363,20 +1161,8 @@ public class Hero extends Char {
 			damage *= 0.5f;
 		}
 
-		if (Dungeon.heroine.buff(HighStress.class) != null){
-			Dungeon.heroine.HP = 1;
-		}
-
-		if (Dungeon.heroine.belongings.armor() instanceof NarukamiYuArmor && (Random.Int(30) == 0)){
-			Buff.prolong(this, KeyHeal.class, KeyHeal.DURATION);
-		}
-
 		if (Dungeon.heroine.belongings.armor() instanceof JokerArmor && (Random.Int(30) == 0)){
 			Buff.prolong(this, Invisibility.class, Invisibility.DURATION);
-		}
-
-		if (Statistics.card29 && Random.Int(15) == 0){
-			Buff.prolong(this, GoldCreation.class, GoldCreation.DURATION);
 		}
 
 		Earthroot.Armor armor2 = buff( Earthroot.Armor.class );
@@ -1397,16 +1183,6 @@ public class Hero extends Char {
 			damage *= 0.75f;
 		}
 
-		if (Statistics.card21 && enemy.properties().contains(Char.Property.GOD)){
-			damage *= 0.75f;
-		}
-		if (Statistics.card20 && enemy.properties().contains(Char.Property.HUMAN)){
-			damage *= 0.75f;
-		}
-		if (Statistics.card19 && enemy.properties().contains(Char.Property.ANIMAL)){
-			damage *= 0.75f;
-		}
-
 		if (buff(YokaiBorder.class) != null && enemy.properties().contains(Char.Property.YOKAI)) {
 			damage = 1;
 		}
@@ -1418,11 +1194,6 @@ public class Hero extends Char {
 
 		if (armor != null) {
 			damage = armor.absorb( damage );
-		}
-
-		WandOfLivingEarth.RockArmor rockArmor = buff(WandOfLivingEarth.RockArmor.class);
-		if (rockArmor != null) {
-			damage = rockArmor.absorb(damage);
 		}
 
 		return damage;
@@ -1737,10 +1508,6 @@ public class Hero extends Char {
 				lvl++;
 				levelUp = true;
 
-				if (buff(ElixirOfMight.HTBoost.class) != null){
-					buff(ElixirOfMight.HTBoost.class).onLevelUp();
-				}
-
 				updateHT( true );
 				attackSkill++;
 				defenseSkill++;
@@ -1831,26 +1598,7 @@ public class Hero extends Char {
 			Badges.learnedYourLesson();
 		}
 
-		if (Statistics.card40 && Statistics.spellcard > 1){
-			interrupt();
-			resting = false;
-			Statistics.spellcard -= 2;
-			this.HP = HT / 4;
-			Statistics.power -= 100;
-			Statistics.life_count += 1;
-			PotionOfHealing.cure(this);
-			Buff.detach(this, Burning.class);
-			Buff.prolong(this, AnkhInvulnerability.class, AnkhInvulnerability.DURATION/2f);
-
-			SpellSprite.show(this, SpellSprite.ANKH);
-			GameScene.flash(0x80FFFF40);
-			Sample.INSTANCE.play(Assets.Sounds.TELEPORT);
-			GLog.w(Messages.get(this, "revive"));
-
-			for (Char ch : Actor.chars()) {
-			}
-			return;
-		} else if (Statistics.life > 0) {
+		if (Statistics.life > 0) {
 			interrupt();
 			resting = false;
 			Statistics.lifelose = true;
@@ -1860,15 +1608,12 @@ public class Hero extends Char {
 			Statistics.life_count += 1;
 			PotionOfHealing.cure(this);
 			Buff.detach(this, Burning.class);
-			Buff.prolong(this, AnkhInvulnerability.class, AnkhInvulnerability.DURATION/2f);
+			Buff.prolong(this, HecatiaBody.class, HecatiaBody.DURATION/2f);
 
 			SpellSprite.show(this, SpellSprite.ANKH);
 			GameScene.flash(0x80FFFF40);
 			Sample.INSTANCE.play(Assets.Sounds.TELEPORT);
 			GLog.w(Messages.get(this, "revive"));
-
-			for (Char ch : Actor.chars()) {
-			}
 			return;
 		}
 
@@ -1955,7 +1700,7 @@ public class Hero extends Char {
 		if (Statistics.bordercount == 50){
 			Statistics.bordercount = 0;
 			GLog.n(Messages.get(this, "border"));
-			Buff.prolong(this, AnkhInvulnerability.class, AnkhInvulnerability.DURATION/6f);
+			Buff.prolong(this, HecatiaBody.class, HecatiaBody.DURATION/6f);
 			Buff.prolong(this, SupernaturalBorder.class, SupernaturalBorder.DURATION);
 		}
 
@@ -2068,43 +1813,6 @@ public class Hero extends Char {
 	public void move(int step, boolean travelling) {
 		boolean wasHighGrass = Dungeon.level.map[step] == Terrain.HIGH_GRASS;
 
-		if (Dungeon.floor == 5 && !Statistics.boss1) {
-			Dungeon.level.seal();
-			Statistics.boss1 = true;
-		}
-		if (Dungeon.floor == 10 && !Statistics.boss2) {
-			Dungeon.level.seal();
-			Statistics.boss2 = true;
-		}
-		if (Dungeon.floor == 15 && !Statistics.boss3) {
-			Dungeon.level.seal();
-			Statistics.boss3 = true;
-		}
-		if (Dungeon.floor == 20 && !Statistics.boss4) {
-			Dungeon.level.seal();
-			Statistics.boss4 = true;
-		}
-		if (Dungeon.floor == 25 && !Statistics.boss5) {
-			Dungeon.level.seal();
-			Statistics.boss5 = true;
-		}
-		if (Dungeon.floor == 30 && !Statistics.boss6) {
-			Dungeon.level.seal();
-			Statistics.boss6 = true;
-		}
-		if (Dungeon.floor == 35 && !Statistics.boss7) {
-			Dungeon.level.seal();
-			Statistics.boss7 = true;
-		}
-		if (Dungeon.floor == 40 && !Statistics.boss8) {
-			Dungeon.level.seal();
-			Statistics.boss8 = true;
-		}
-		if (Dungeon.floor == 98 && !Statistics.boss9) {
-			Dungeon.level.seal();
-			Statistics.boss9 = true;
-		}
-
 		super.move( step, travelling);
 
 		if (!flying && travelling) {
@@ -2128,17 +1836,11 @@ public class Hero extends Char {
 
 	@Override
 	public void onAttackComplete() {
-
 		AttackIndicator.target(enemy);
 
 		boolean hit = attack( enemy );
 
 		Buff.detach( this, Calm.class);
-		if (Dungeon.heroine.buff(HumanHalf.class) != null){
-			Buff.detach(this, HumanHalf.class);
-
-		}
-		Buff.detach(this, GhostHalf.class);
 
 		Invisibility.dispel();
 		spend( attackDelay() );
@@ -2223,7 +1925,7 @@ public class Hero extends Char {
 
 	@Override
 	public boolean isInvulnerable(Class effect) {
-		return (buff(AnkhInvulnerability.class) != null);
+		return (buff(HecatiaBody.class) != null);
 	}
 
 	public boolean search( boolean intentional ) {
@@ -2232,7 +1934,8 @@ public class Hero extends Char {
 
 		boolean smthFound = false;
 
-		int distance = Statistics.card17 ? 3 : 1;
+		int distance = 1;
+		//todo
 
 		boolean foresight = buff(Foresight.class) != null;
 		boolean foresightScan = foresight && !Dungeon.level.mapped[pos];
@@ -2296,9 +1999,7 @@ public class Hero extends Char {
 							//intentional searches always succeed against regular traps and doors
 						} else if (intentional){
 							chance = 1f;
-							if (Statistics.card27){
-								this.HP = Math.min(this.HP + 10, this.HT);
-							}
+							//todo, for gimmick
 							//unintentional searches always fail with a cursed talisman
 						} else if (cursed) {
 							chance = 0f;
@@ -2371,35 +2072,6 @@ public class Hero extends Char {
 		}
 
 		return smthFound;
-	}
-
-	public void resurrect() {
-		HP = HT;
-		live();
-
-		MagicalHolster holster = belongings.getItem(MagicalHolster.class);
-
-		Buff.affect(this, Invisibility.class, 3f);
-		//lost inventory is dropped in interlevelscene
-
-		//activate items that persist after lost inventory
-		//FIXME this is very messy, maybe it would be better to just have one buff that
-		// handled all items that recharge over time?
-		for (Item i : belongings){
-			if (i instanceof EquipableItem && i.isEquipped(this)){
-				((EquipableItem) i).activate(this);
-			} else if (i instanceof Wand && i.keptThoughLostInvent){
-				if (holster != null && holster.contains(i)){
-					((Wand) i).charge(this, MagicalHolster.HOLSTER_SCALE_FACTOR);
-				} else {
-					((Wand) i).charge(this);
-				}
-			} else if (i instanceof MarisaStaff && i.keptThoughLostInvent){
-				((MarisaStaff) i).applyWandChargeBuff(this);
-			}
-		}
-
-		updateHT(false);
 	}
 
 	@Override

@@ -30,8 +30,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.effects.BlobEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.SparkParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.watabou.utils.PathFinder;
@@ -79,16 +77,6 @@ public class Electricity extends Blob {
 								Dungeon.fail( getClass() );
 								GLog.n( Messages.get(this, "ondeath") );
 							}
-						}
-					}
-					
-					Heap h = Dungeon.level.heaps.get( cell );
-					if (h != null){
-						Item toShock = h.peek();
-						if (toShock instanceof Wand){
-							((Wand) toShock).gainCharge(0.333f);
-						} else if (toShock instanceof MarisaStaff){
-							((MarisaStaff) toShock).gainCharge(0.333f);
 						}
 					}
 					

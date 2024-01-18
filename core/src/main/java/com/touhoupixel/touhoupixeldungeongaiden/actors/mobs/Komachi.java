@@ -23,17 +23,15 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RemiliaFate;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Chains;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Pushing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfExorcismRod;
+import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.ReachHerb;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfInvisibility;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -58,8 +56,8 @@ public class Komachi extends Mob {
 
         properties.add(Property.GOD);
 
-        loot = PotionOfExorcismRod.class;
-        lootChance = 0.08f;
+        loot = new ReachHerb();
+        lootChance = 0.05f;
 
         HUNTING = new Hunting();
     }

@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeHunger;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Silence;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Gold;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ShionSprite;
 import com.watabou.utils.Random;
@@ -49,7 +45,7 @@ public class Shion extends Mob {
     public int attackProc( Char hero, int damage ) {
         damage = super.attackProc( enemy, damage );
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0) {
-            Buff.prolong(enemy, ExtremeHunger.class, ExtremeHunger.DURATION);
+            //todo
             return damage;
         }
         return damage;

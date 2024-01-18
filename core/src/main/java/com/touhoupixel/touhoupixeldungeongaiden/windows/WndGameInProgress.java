@@ -44,7 +44,7 @@ public class WndGameInProgress extends Window {
 	
 	private static final int WIDTH    = 120;
 	
-	private int GAP	  = 6;
+	private int GAP	= 6;
 	
 	private float pos;
 	
@@ -83,10 +83,8 @@ public class WndGameInProgress extends Window {
 		
 		pos += GAP;
 
-		int strBonus = info.strBonus;
-		if (strBonus > 0)           statSlot( Messages.get(this, "str"), info.str + " + " + strBonus );
-		else if (strBonus < 0)      statSlot( Messages.get(this, "str"), info.str + " - " + -strBonus );
-		else                        statSlot( Messages.get(this, "str"), info.str );
+		statSlot( Messages.get(this, "str"), info.str);
+		statSlot( Messages.get(this, "max_str"), info.max_str);
 		if (info.shld > 0)  statSlot( Messages.get(this, "health"), info.hp + "+" + info.shld + "/" + info.ht );
 		else                statSlot( Messages.get(this, "health"), (info.hp) + "/" + info.ht );
 		statSlot( Messages.get(this, "exp"), info.exp + "/" + Hero.maxExp(info.level) );

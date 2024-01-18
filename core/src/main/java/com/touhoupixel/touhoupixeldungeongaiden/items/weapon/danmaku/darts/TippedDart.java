@@ -28,7 +28,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.PinCushion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Blindweed;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Dreamfoil;
@@ -139,25 +138,9 @@ public abstract class TippedDart extends Dart {
 		//checks both destination and source position
 		float lotusPreserve = 0f;
 		if (targetPos != -1){
-			for (Char ch : Actor.chars()){
-				if (ch instanceof WandOfRegrowth.Lotus){
-					WandOfRegrowth.Lotus l = (WandOfRegrowth.Lotus) ch;
-					if (l.inRange(targetPos)){
-						lotusPreserve = Math.max(lotusPreserve, l.seedPreservation());
-					}
-				}
-			}
 			targetPos = -1;
 		}
 		int p = curUser == null ? Dungeon.heroine.pos : curUser.pos;
-		for (Char ch : Actor.chars()){
-			if (ch instanceof WandOfRegrowth.Lotus){
-				WandOfRegrowth.Lotus l = (WandOfRegrowth.Lotus) ch;
-				if (l.inRange(p)){
-					lotusPreserve = Math.max(lotusPreserve, l.seedPreservation());
-				}
-			}
-		}
 		use *= (1f - lotusPreserve);
 
 		return use;
@@ -172,7 +155,6 @@ public abstract class TippedDart extends Dart {
 	private static HashMap<Class<?extends Plant.Seed>, Class<?extends TippedDart>> types = new HashMap<>();
 	static {
 		types.put(Blindweed.Seed.class,     BlindingDart.class);
-		types.put(Dreamfoil.Seed.class,     CleansingDart.class);
 		types.put(Earthroot.Seed.class,     ParalyticDart.class);
 		types.put(Fadeleaf.Seed.class,      DisplacingDart.class);
 		types.put(Firebloom.Seed.class,     IncendiaryDart.class);

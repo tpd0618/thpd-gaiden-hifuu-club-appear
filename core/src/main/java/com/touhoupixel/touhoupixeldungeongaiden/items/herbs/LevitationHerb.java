@@ -38,7 +38,7 @@ public class LevitationHerb extends Herb {
 		super.execute(heroine, action);
 
 		if (action.equals( AC_EAT )) {
-			Buff.prolong(heroine, Levitation.class, Levitation.DURATION / 10f);
+			Buff.prolong(heroine, Levitation.class, Levitation.DURATION/2f);
 		}
 	}
 }

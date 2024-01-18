@@ -1,11 +1,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HerbDegrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.PotionFreeze;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.ExplosiveTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.PatchouliSprite;
 import com.watabou.utils.Random;

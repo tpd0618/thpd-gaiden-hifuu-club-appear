@@ -22,16 +22,12 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Adrenaline;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AllyBuff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ArcaneArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Barkskin;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bless;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Blindness;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BrainWash;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Charm;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Chill;
@@ -41,15 +37,10 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Doublerainbow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Dread;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Drowsy;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FireImbue;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FloatSlayer;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Frost;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FrostImbue;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Fury;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.GhostHalf;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Haste;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeatRiser;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hex;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BlurryMagic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicalSleep;
@@ -69,12 +60,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.AntiMagic;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfCleansing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfElements;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRetribution;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfChallenge;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfPsionicBlast;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.DamageWand;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfChallenge;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Blocking;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Grim;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
@@ -293,10 +281,6 @@ public abstract class Char extends Actor {
 
             dmg = Math.round(dmg*dmgMulti);
 
-            if (buff( Fury.class ) != null) {
-                dmg *= 1.5f;
-            }
-
             dmg += dmgBonus;
 
             if (enemy.buff(ScrollOfChallenge.ChallengeArena.class) != null){
@@ -328,9 +312,6 @@ public abstract class Char extends Actor {
 
             enemy.damage( effectiveDamage, this );
 
-            if (buff(FireImbue.class) != null)  buff(FireImbue.class).proc(enemy);
-            if (buff(FrostImbue.class) != null) buff(FrostImbue.class).proc(enemy);
-
             enemy.sprite.bloodBurstA( sprite.center(), effectiveDamage );
             enemy.sprite.flash();
 
@@ -358,22 +339,6 @@ public abstract class Char extends Actor {
                 enemy.sprite.showStatus( CharSprite.NEUTRAL, defense );
 
                 //TODO enemy.defenseSound? currently miss plays for monks/crab even when they parry
-                if (enemy.buff(GhostHalf.class) != null){
-                    if (Dungeon.heroine.buff(GhostHalf.class).isSourceBomb()){
-                        Buff.prolong(this, Blindness.class, 10f);
-                        Buff.prolong(this, Cripple.class, 10f);
-                        Buff.prolong(this, Vulnerable.class, 10f);
-                        Buff.prolong(this, Weakness.class, 10f);
-                        Buff.prolong(this, Hex.class, 10f);
-                    }
-                    else{
-                        Buff.prolong(this, Blindness.class, Blindness.DURATION/3.33f);
-                        Buff.prolong(this, Cripple.class, Cripple.DURATION/3.33f);
-                    }
-                    if (Statistics.card53){
-                        Dungeon.heroine.HP = Math.min((int)(Dungeon.heroine.HP + Dungeon.heroine.HT*0.02f), Dungeon.heroine.HT);
-                    }
-                }
                 Sample.INSTANCE.play(Assets.Sounds.MISS);
             }
 
@@ -406,14 +371,14 @@ public abstract class Char extends Actor {
         if (attacker.buff(Doublerainbow.class) != null) acuRoll *= 1.45f;
         if (attacker.buff(HeatRiser.class) != null) acuRoll *= 1.5f; //heat riser
         if (attacker.buff(Randomizer.class) != null) acuRoll *= 0.5f; //randomizer
-        if (attacker.buff(Hex.class) != null) acuRoll *= 0.8f;
+        if (attacker.buff(BlurryMagic.class) != null) acuRoll *= 0.8f;
 
         float defRoll = Random.Float( defStat );
         if (defender.buff(Bless.class) != null) defRoll *= 1.25f;
         if (defender.buff(Doublerainbow.class) != null) defRoll *= 1.45f;
         if (attacker.buff(HeatRiser.class) != null) defRoll *= 1.5f; //heat riser
         if (attacker.buff(Randomizer.class) != null) defRoll *= 0.5f; //randomizer
-        if (defender.buff(Hex.class) != null) defRoll *= 0.8f;
+        if (defender.buff(BlurryMagic.class) != null) defRoll *= 0.8f;
 
         return (acuRoll * accMulti) >= defRoll;
     }
@@ -446,15 +411,11 @@ public abstract class Char extends Actor {
             damage *= 0.67f;
         }
         if (buff(Might.class) != null ) {
-            damage *= 1.25f;
+            damage *= 1.3f;
         }
         if (buff(Hisou.class) != null && !enemy.flying ){
-            damage *= 1.35f;
-        }
-        if (buff(FloatSlayer.class) != null && enemy.flying ){
-            damage *= 1.4f;
-        }
-        //todo
+            damage *= 1.38f;
+        }//todo
         return damage;
     }
 
@@ -654,14 +615,6 @@ public abstract class Char extends Actor {
     }
 
     public synchronized void add( Buff buff ) {
-
-        if (buff(PotionOfCleansing.Cleanse.class) != null) { //cleansing buff
-            if (buff.type == Buff.buffType.NEGATIVE
-                    && !(buff instanceof AllyBuff)){
-                return;
-            }
-        }
-
         buffs.add( buff );
         if (Actor.chars().contains(this)) Actor.add( buff );
 
@@ -818,11 +771,11 @@ public abstract class Char extends Actor {
 
     public enum Property{
         BOSS ( new HashSet<Class>( Arrays.asList(Drowsy.class, Paralysis.class)),
-                new HashSet<Class>( Arrays.asList(AllyBuff.class, Dread.class, BrainWash.class, Grim.class, GrimTrap.class, ScrollOfRetribution.class, ScrollOfPsionicBlast.class) )),
+                new HashSet<Class>( Arrays.asList(AllyBuff.class, Dread.class, Grim.class, GrimTrap.class, ScrollOfRetribution.class))),
         MINIBOSS ( new HashSet<Class>(),
-                new HashSet<Class>( Arrays.asList(AllyBuff.class, Dread.class, BrainWash.class) )),
+                new HashSet<Class>( Arrays.asList(AllyBuff.class, Dread.class) )),
         MITAMA ( new HashSet<Class>(),
-                new HashSet<Class>( Arrays.asList(DamageWand.class, Mob.class, Grim.class, Trap.class, ScrollOfRetribution.class, ScrollOfPsionicBlast.class) )),
+                new HashSet<Class>( Arrays.asList(Mob.class, Grim.class, Trap.class, ScrollOfRetribution.class))),
         NONE,
         ELIXIR,
         IMMOVABLE,
@@ -833,7 +786,8 @@ public abstract class Char extends Actor {
         GOD,
         HUMAN,
         ANIMAL,
-        WARP;
+        WARP,
+        NOT_EXTERMINABLE;
 
         private HashSet<Class> resistances;
         private HashSet<Class> immunities;

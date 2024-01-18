@@ -32,7 +32,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.KindOfWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
@@ -75,7 +74,7 @@ public class CursingTrap extends Trap {
 		ArrayList<Item> canCurse = new ArrayList<>();
 
 		KindOfWeapon weapon = heroine.belongings.weapon();
-		if (weapon instanceof Weapon && !(weapon instanceof MarisaStaff)){
+		if (weapon instanceof Weapon){
 			if (((Weapon) weapon).enchantment == null)
 				priorityCurse.add(weapon);
 			else

@@ -58,40 +58,12 @@ public enum Catalog {
 	}
 
 	static {
-		for (Class weapon : Generator.Category.WEP_T1.classes){
-			WEAPONS.seen.put( weapon, true);
-		}
-		for (Class weapon : Generator.Category.WEP_T2.classes){
-			WEAPONS.seen.put( weapon, true);
-		}
-		for (Class weapon : Generator.Category.WEP_T3.classes){
-			WEAPONS.seen.put( weapon, true);
-		}
-		for (Class weapon : Generator.Category.WEP_T4.classes){
-			WEAPONS.seen.put( weapon, true);
-		}
-		for (Class weapon : Generator.Category.WEP_T5.classes){
+		for (Class weapon : Generator.Category.WEAPON.classes){
 			WEAPONS.seen.put( weapon, true);
 		}
 
-		for (Class armor : Generator.Category.ARMOR_T1.classes){
+		for (Class armor : Generator.Category.ARMOR.classes){
 			ARMORS.seen.put( armor, true);
-		}
-		for (Class armor : Generator.Category.ARMOR_T2.classes){
-			ARMORS.seen.put( armor, true);
-		}
-		for (Class armor : Generator.Category.ARMOR_T3.classes){
-			ARMORS.seen.put( armor, true);
-		}
-		for (Class armor : Generator.Category.ARMOR_T4.classes){
-			ARMORS.seen.put( armor, true);
-		}
-		for (Class armor : Generator.Category.ARMOR_T5.classes){
-			ARMORS.seen.put( armor, true);
-		}
-
-		for (Class wand : Generator.Category.WAND.classes){
-			WANDS.seen.put( wand, true);
 		}
 
 		for (Class ring : Generator.Category.RING.classes){

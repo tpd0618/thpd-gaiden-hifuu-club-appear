@@ -32,7 +32,6 @@ public class CirnoWing extends MeleeWeapon {
 		hitSound = Assets.Sounds.HIT_CRUSH;
 		hitSoundPitch = 0.8f;
 
-		tier = 4;
 		ACC = 0.8f; //0.8x accuracy
 		//also cannot surprise attack, see Hero.canSurpriseAttack
 	}
@@ -40,11 +39,5 @@ public class CirnoWing extends MeleeWeapon {
 	@Override
 	public int HumanFactor( Char owner ) {
 		return 1;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  Math.round(7*(tier+1)) +        //35 base, up from 25
-				lvl*Math.round(1.6f*(tier+1));  //+8 per level, up from +5
 	}
 }

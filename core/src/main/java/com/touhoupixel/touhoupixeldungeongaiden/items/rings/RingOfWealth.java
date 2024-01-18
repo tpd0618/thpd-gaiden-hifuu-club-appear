@@ -21,7 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.items.rings;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Flare;
@@ -32,9 +32,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.AlchemicalCatalyst;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfExperience;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.ExoticPotion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTransmutation;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ExoticScroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.ArcaneCatalyst;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.StoneOfEnchantment;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
@@ -43,7 +41,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.watabou.noosa.Visual;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-import com.watabou.utils.Reflection;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -124,14 +121,14 @@ public class RingOfWealth extends Ring {
 				Item i;
 				do {
 					i = genEquipmentDrop(bonus - 1);
-				} while (Challenges.isItemBlocked(i));
+				} while (HardMode.isItemBlocked(i));
 				drops.add(i);
 				dropsToEquip = Random.NormalIntRange(4, 8);
 			} else {
 				Item i;
 				do {
 					i = genConsumableDrop(bonus - 1);
-				} while (Challenges.isItemBlocked(i));
+				} while (HardMode.isItemBlocked(i));
 				drops.add(i);
 				dropsToEquip--;
 			}
@@ -205,19 +202,13 @@ public class RingOfWealth extends Ring {
 	}
 
 	private static Item genMidValueConsumable(){
-		switch (Random.Int(5)){
+		switch (Random.Int(3)){
 			case 0: default:
 				Item i = genLowValueConsumable();
 				return i.quantity(i.quantity()*2);
 			case 1:
-				i = Generator.randomUsingDefaults(Generator.Category.POTION);
-				return Reflection.newInstance(ExoticPotion.regToExo.get(i.getClass()));
-			case 2:
-				i = Generator.randomUsingDefaults(Generator.Category.SCROLL);
-				return Reflection.newInstance(ExoticScroll.regToExo.get(i.getClass()));
-			case 3:
 				return Random.Int(2) == 0 ? new ArcaneCatalyst() : new AlchemicalCatalyst();
-			case 4:
+			case 2:
 				return new Honeypot();
 		}
 	}

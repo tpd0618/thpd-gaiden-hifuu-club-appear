@@ -2,12 +2,8 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Empathetic;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.LifeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;

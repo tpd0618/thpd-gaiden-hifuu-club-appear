@@ -26,7 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TalismanOfForesight;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.BArray;
 import com.watabou.utils.PathFinder;

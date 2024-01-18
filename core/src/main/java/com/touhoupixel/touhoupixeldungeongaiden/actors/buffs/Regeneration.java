@@ -22,9 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.buffs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.ChaliceOfBlood;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
 
 public class Regeneration extends Buff {
@@ -35,21 +33,17 @@ public class Regeneration extends Buff {
 		actPriority = HERO_PRIO - 1;
 	}
 
-	private static final float REGENERATION_DELAY = 10;
+	private static final float REGENERATION_DELAY = 1; //same as shiren
 
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
-
-			Hunger hunger = Buff.affect(target, Hunger.class);
-
-			if (target.HP < regencap() && !((Hero)target).isStarving()) {
+			if (target.HP < regencap() && !((Hero) target).isStarving()) {
 				LockedFloor lock = target.buff(LockedFloor.class);
 				if (target.HP > 0 && (lock == null || lock.regenOn())) {
-					if (Statistics.card32){
+					if (target.buff(FastRegen.class) != null) {
 						if (target.buff(RegenBlock.class) == null && target.HT > target.HP + 2) {
 							target.HP += 3;
-							hunger.affectHunger( -10);
 						}
 					} else {
 						if (target.buff(RegenBlock.class) == null) {
@@ -62,16 +56,9 @@ public class Regeneration extends Buff {
 				}
 			}
 
-			ChaliceOfBlood.chaliceRegen regenBuff = Dungeon.heroine.buff( ChaliceOfBlood.chaliceRegen.class);
-
 			float delay = REGENERATION_DELAY;
-			if (regenBuff != null) {
-				if (regenBuff.isCursed()) {
-					delay *= 1.5f;
-				} else {
-					delay -= regenBuff.itemLevel()*0.9f;
-					delay /= RingOfEnergy.artifactChargeMultiplier(target);
-				}
+			if (target.HT > 200) {
+				delay += 1f;
 			}
 			spend( delay );
 

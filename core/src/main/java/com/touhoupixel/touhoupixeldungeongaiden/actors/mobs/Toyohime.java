@@ -23,13 +23,9 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DeSlaying;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantlePressure;
-import com.touhoupixel.touhoupixeldungeongaiden.items.StrengthCard;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FiveStarTicket;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
@@ -55,8 +51,7 @@ public class Toyohime extends Mob implements Callback {
 
 		properties.add(Property.WARP);
 
-		loot = new FiveStarTicket();
-		lootChance = 0.1f;
+		//todo
 	}
 
 	@Override

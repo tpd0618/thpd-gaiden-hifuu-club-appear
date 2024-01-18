@@ -24,7 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.stones;
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CheckedCell;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.ShadowCaster;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;

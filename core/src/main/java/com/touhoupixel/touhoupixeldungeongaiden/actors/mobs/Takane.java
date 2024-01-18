@@ -1,12 +1,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.AquaBlast;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.GeyserTrap;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfPowerUp;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.TakaneSprite;
 import com.watabou.utils.Random;
 
@@ -22,7 +17,7 @@ public class Takane extends Mob {
 
         properties.add(Property.YOKAI);
 
-        loot = new AquaBlast();
+        loot = new PotionOfPowerUp();
         lootChance = 0.1f;
     }
 
@@ -44,7 +39,7 @@ public class Takane extends Mob {
     @Override
     public int attackProc( Char hero, int damage ) {
         damage = super.attackProc( enemy, damage );
-        new GeyserTrap().set(this.pos).activate();
+        //todo
         return damage;
     }
 }

@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -38,7 +38,7 @@ public class LunaticDanmaku extends MissileWeapon {
 
 	@Override
 	public int max(int lvl) {
-		return  (4+Challenges.activeChallenges()+Dungeon.heroine.lvl/3) * tier +                      //base
+		return  (4+ HardMode.activeChallenges()+Dungeon.heroine.lvl/3) * tier +                      //base
 				(tier == 1 ? 2*lvl : tier*lvl); //level scaling
 	}
 }

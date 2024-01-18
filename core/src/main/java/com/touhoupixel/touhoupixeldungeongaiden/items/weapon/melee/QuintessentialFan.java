@@ -34,8 +34,6 @@ public class QuintessentialFan extends MeleeWeapon {
         image = ItemSpriteSheet.QUINTESSENTIAL_FAN;
         hitSound = Assets.Sounds.HIT_CRUSH;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override
@@ -45,9 +43,7 @@ public class QuintessentialFan extends MeleeWeapon {
 
     @Override
     public int proc(Char attacker, Char defender, int damage) {
-        if (Dungeon.heroine.STR - ((Weapon) Dungeon.heroine.belongings.weapon()).STRReq() > 0 && Random.Int(10) == 0) {
-            Dungeon.energy += Dungeon.heroine.STR - ((Weapon) Dungeon.heroine.belongings.weapon()).STRReq();
-        }
+        //todo
         return super.proc(attacker, defender, damage);
     }
 }

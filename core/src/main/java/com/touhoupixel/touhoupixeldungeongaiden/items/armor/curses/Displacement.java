@@ -24,7 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.armor.curses;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
 import com.watabou.utils.Random;
 

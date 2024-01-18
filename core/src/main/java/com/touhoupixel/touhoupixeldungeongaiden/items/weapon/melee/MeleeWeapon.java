@@ -25,7 +25,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RemiliaFate;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.HeroClass;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaAra;
@@ -33,55 +32,41 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaKusi;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaNigi;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaSaki;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
-import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.watabou.utils.Random;
 
 public class MeleeWeapon extends Weapon {
-	
-	public int tier;
 
 	@Override
 	public int min(int lvl) {
-		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return 0;
-		} else {
-			return tier +  //base
-					lvl;    //level scaling
-		}
-	}
+		return 4+Dungeon.heroine.lvl+Dungeon.heroine.STR;
+	}//all weapons must need this
 
 	@Override
 	public int max(int lvl) {
-		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return 0;
-		} else {
-			return 5 * (tier + 1) +    //base
-					lvl * (tier + 1);   //level scaling
-		}
-	}
-
-	public int STRReq(int lvl){
-		return STRReq(tier, lvl);
-	}
+		return 5+Dungeon.heroine.lvl*2+Dungeon.heroine.STR*2;
+	}//all weapons must need this
 
 	@Override
 	public int damageRoll(Char owner) {
 		int damage = augment.damageFactor(super.damageRoll(owner));
 		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return Random.NormalIntRange(Dungeon.heroine.STR, Dungeon.heroine.STR+9);
+			return Random.NormalIntRange(4+Dungeon.heroine.lvl+Dungeon.heroine.STR, 5+Dungeon.heroine.lvl*2+Dungeon.heroine.STR*2);
 		} else {
-			if (owner.buff(RemiliaFate.class) != null) {
-				damage = min() * 2;
-			} else if (owner instanceof Hero) {
-				int exStr = ((Hero) owner).STR() - STRReq();
-				if (exStr > 0) {
-					damage += Random.IntRange(0, exStr);
-				}
-			}
+			//normal
 		}
 
+		return damage;
+	}
+
+	public int critDamageRoll(Char owner) {
+		int damage = augment.damageFactor(Random.IntRange((int) (max()), max()));
+		if (Dungeon.heroine.buff(Onigiri.class) != null) {
+			return Random.NormalIntRange(4+Dungeon.heroine.lvl+Dungeon.heroine.STR, 5+Dungeon.heroine.lvl*2+Dungeon.heroine.STR*2);
+		} else {
+			//normal
+		}
 		return damage;
 	}
 
@@ -95,8 +80,8 @@ public class MeleeWeapon extends Weapon {
 				ch.damage(0, curUser);
 				//zero damage
 			} else {
-				ch.damage(Random.NormalIntRange(Dungeon.heroine.STR + (meleeWeapon.min() * (meleeWeapon.level() + 1)) + 8 * meleeWeapon.tier,
-						Dungeon.heroine.STR + (meleeWeapon.max() * (meleeWeapon.level() + 1)) + 8 * meleeWeapon.tier), curUser);
+				ch.damage(Random.NormalIntRange(Dungeon.heroine.STR + (meleeWeapon.min() * (meleeWeapon.level() + 1)),
+						Dungeon.heroine.STR + (meleeWeapon.max() * (meleeWeapon.level() + 1))), curUser);
 				//high damage
 			}
 			Heap[] equipHeaps = new Heap[1];
@@ -112,17 +97,12 @@ public class MeleeWeapon extends Weapon {
 
 		String info = desc();
 		if (levelKnown) {
-			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_known", tier, augment.damageFactor(min()), augment.damageFactor(max()), STRReq());
-			if (STRReq() > Dungeon.heroine.STR()) {
-				info += " " + Messages.get(Weapon.class, "too_heavy");
-			} else if (Dungeon.heroine.STR() > STRReq()){
-				info += " " + Messages.get(Weapon.class, "excess_str", Dungeon.heroine.STR() - STRReq());
+			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_known", augment.damageFactor(min()), augment.damageFactor(max()));
+			if (Dungeon.heroine.heroClass == HeroClass.PLAYERHEARN){
+				info += "\n\n" + Messages.get(MeleeWeapon.class, "crit_chance", (int)(Dungeon.heroine.getCritChance()*100));
 			}
 		} else {
-			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_unknown", tier, min(0), max(0), STRReq(0));
-			if (STRReq(0) > Dungeon.heroine.STR()) {
-				info += " " + Messages.get(MeleeWeapon.class, "probably_too_heavy");
-			}
+			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_unknown", min(0), max(0));
 		}
 
 		String statsInfo = statsInfo();
@@ -160,7 +140,7 @@ public class MeleeWeapon extends Weapon {
 	
 	@Override
 	public int value() {
-		int price = 20 * tier;
+		int price = 20;
 		if (hasGoodEnchant()) {
 			price *= 1.5;
 		}

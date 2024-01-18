@@ -25,7 +25,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;

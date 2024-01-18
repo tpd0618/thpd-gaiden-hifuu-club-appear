@@ -23,28 +23,15 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CursedBlow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Empathetic;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MeleeNullify;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Might;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Paralysis;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Randomizer;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Slow;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
-import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
-import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.Herb;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.LifeFragment;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
@@ -53,8 +40,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 public class Renko extends Mob implements Callback {
 

@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.hero;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.GlassBottle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
@@ -35,12 +34,11 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.bags.SpellcardHolder;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.HerbPouch;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.VelvetPouch;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.Food;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfMagicMissile;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Miracle;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfRandomLife;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfSuperUnlucky;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfYuyuko;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.ThrowingKnife;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.ReimuExorcismRod;
+import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.KoishiDagger;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 
 public enum HeroClass {
@@ -52,35 +50,42 @@ public enum HeroClass {
 		//mobs bestiary flavor text todo
 
 		//test, put too many stuffs will trigger a certain bug
+		PotionOfSuperUnlucky sda = new PotionOfSuperUnlucky();
+		sda.collect();
 
+		PotionOfRandomLife sda2 = new PotionOfRandomLife();
+		sda2.collect();
+
+		KoishiDagger sda222 = new KoishiDagger();
+		sda222.collect();
+
+		KoishiDagger sda2223 = new KoishiDagger();
+		sda2223.collect();
+
+		KoishiDagger sda22233 = new KoishiDagger();
+		sda22233.collect();
+
+		ScrollOfYuyuko  asd = new ScrollOfYuyuko();
+		asd.quantity(30).collect();
 		//test, put too many stuffs will trigger a certain bug
 		ThrowingKnife throwingKnife = new ThrowingKnife();
 		throwingKnife.quantity(3).collect();
 		Dungeon.quickslot.setSlot(2, throwingKnife);
-
-		ReimuExorcismRod reimuExorcismRod = new ReimuExorcismRod();
-		reimuExorcismRod.identify().collect();
-
-		MarisaStaff staff;
-		staff = new MarisaStaff(new WandOfMagicMissile());
-		(heroine.belongings.weapon = staff).identify();
-		heroine.belongings.weapon.activate(heroine);
-		Dungeon.quickslot.setSlot(0, staff);
 
 		Food food = new Food();
 		food.collect();
 
 		heroine.heroClass = this;
 
+		Item k = new KoishiDagger().identify();
+		heroine.belongings.weapon = (KoishiDagger) k;
+
 		Item i = new ReimuArmor().identify();
-		if (!Challenges.isItemBlocked(i)) heroine.belongings.armor = (ReimuArmor) i;
+		heroine.belongings.armor = (ReimuArmor) i;
 
 		GlassBottle glassBottle = new GlassBottle();
 		glassBottle.collect();
 		Dungeon.quickslot.setSlot(1, glassBottle);
-
-		Miracle miracle = new Miracle();
-		miracle.identify().collect();
 
 		NitoChecker nitoChecker = new NitoChecker();
 		nitoChecker.collect();

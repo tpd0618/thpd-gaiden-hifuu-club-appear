@@ -45,7 +45,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Honeypot;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Journal;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.Trap;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;

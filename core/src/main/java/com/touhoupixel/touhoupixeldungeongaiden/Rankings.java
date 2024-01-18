@@ -141,7 +141,7 @@ public enum Rankings {
 
 			Statistics.exploreScore = Statistics.highestFloor;
 
-		Statistics.chalMultiplier = (float)Math.pow(1.15, Challenges.activeChallenges());
+		Statistics.chalMultiplier = (float)Math.pow(1.15, HardMode.activeChallenges());
 		Statistics.chalMultiplier = Math.round(Statistics.chalMultiplier*20f)/20f;
 
 		Statistics.totalScore = Statistics.progressScore + Statistics.treasureScore + Statistics.exploreScore;

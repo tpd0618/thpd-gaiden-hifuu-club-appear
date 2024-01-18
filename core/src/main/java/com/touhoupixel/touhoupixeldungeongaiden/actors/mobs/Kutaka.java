@@ -22,12 +22,9 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cripple;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DeSlaying;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RemiliaFate;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KutakaSprite;
 import com.watabou.utils.Random;

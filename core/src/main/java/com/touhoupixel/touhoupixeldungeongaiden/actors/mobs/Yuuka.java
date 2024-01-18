@@ -6,7 +6,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bless;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Haste;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.YuukaRage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MeleeWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.YuukaSprite;
@@ -18,7 +17,7 @@ public class Yuuka extends Mob {
     {
         spriteClass = YuukaSprite.class;
 
-        HP = HT = 450;
+        HP = HT = 450; //todo
         defenseSkill = 0;
         EXP = 1;
         maxLvl = 27;
@@ -50,15 +49,11 @@ public class Yuuka extends Mob {
     }
 
     @Override
-    public int defenseProc(Char enemy, int damage) {
-        if (Dungeon.heroine.belongings.weapon() instanceof MeleeWeapon) {
-            enemy.damage(damage/2, target);
-            Buff.prolong(this, Bless.class, Bless.DURATION*10000f);
-            Buff.prolong(this, YuukaRage.class, YuukaRage.DURATION);
-            Buff.prolong(this, Haste.class, Haste.DURATION*10000f);
-            Buff.prolong(this, DoubleSpeed.class, DoubleSpeed.DURATION*10000f);
-            GLog.w(Messages.get(this, "reflect"));
+    public int attackProc(Char hero, int damage) {
+        damage = super.attackProc(enemy, damage);
+        if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0) {
+            //todo
         }
-        return super.defenseProc(enemy, damage);
+        return damage;
     }
 }

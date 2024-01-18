@@ -34,8 +34,6 @@ public class EveKeytar extends MeleeWeapon {
 		image = ItemSpriteSheet.EVE_KEYTAR;
 		hitSound = Assets.Sounds.HIT_MAGIC;
 		hitSoundPitch = 1f;
-
-		tier = 5;
 	}
 
 	@Override
@@ -94,11 +92,5 @@ public class EveKeytar extends MeleeWeapon {
 			}
 		}
 		return super.proc(attacker, defender, damage);
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  3*(tier+1) +
-				lvl*(tier+1);
 	}
 }

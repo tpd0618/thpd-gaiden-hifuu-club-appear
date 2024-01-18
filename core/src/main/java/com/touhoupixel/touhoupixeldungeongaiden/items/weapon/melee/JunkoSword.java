@@ -21,6 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee;
 
+import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -28,15 +29,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 public class JunkoSword extends MeleeWeapon {
 
 	{
-		image = ItemSpriteSheet.JUNKOSWORD;
-
-		tier = 5;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  Math.round(2.5f*(tier+1)) +     //15 base, down from 30
-				lvl*(tier-2);                   //+3 per level, down from +6
+		image = ItemSpriteSheet.JUNKO_SWORD;
+		hitSound = Assets.Sounds.HIT_STRONG;
+		hitSoundPitch = 1f;
 	}
 
 	@Override

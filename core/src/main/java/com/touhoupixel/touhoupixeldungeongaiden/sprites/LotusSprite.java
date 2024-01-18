@@ -26,7 +26,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.LeafParticle;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.particles.Emitter;
 
@@ -65,18 +64,6 @@ public class LotusSprite extends MobSprite {
 		super.link( ch );
 
 		renderShadow = false;
-
-		if (grassVfx == null && ch instanceof WandOfRegrowth.Lotus){
-			WandOfRegrowth.Lotus l = (WandOfRegrowth.Lotus) ch;
-			grassVfx = new ArrayList<>();
-			for (int i = 0; i < Dungeon.level.length(); i++){
-				if (!Dungeon.level.solid[i] && l.inRange(i)) {
-					Emitter e = CellEmitter.get(i);
-					e.pour(LeafParticle.LEVEL_SPECIFIC, 0.5f);
-					grassVfx.add(e);
-				}
-			}
-		}
 	}
 
 	@Override

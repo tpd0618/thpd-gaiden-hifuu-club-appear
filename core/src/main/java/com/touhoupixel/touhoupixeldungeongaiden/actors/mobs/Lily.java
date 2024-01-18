@@ -1,12 +1,9 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HardSearch;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Haste;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.LilySprite;
 import com.watabou.utils.Random;

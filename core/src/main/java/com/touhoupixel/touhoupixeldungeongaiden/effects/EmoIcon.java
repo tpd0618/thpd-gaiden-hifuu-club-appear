@@ -21,11 +21,18 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.effects;
 
+import com.touhoupixel.touhoupixeldungeongaiden.Assets;
+import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoomedZone;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Zanmu;
+import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.ui.Icons;
+import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class EmoIcon extends Image {
@@ -113,6 +120,13 @@ public class EmoIcon extends Image {
 			
 			maxSize = 1.25f;
 			timeScale = 1;
+
+			if (Dungeon.heroine.buff(DoomedZone.class) != null){
+				Dungeon.heroine.HP = 1;
+				GameScene.flash(-65536);
+				Sample.INSTANCE.play( Assets.Sounds.BLAST );
+				GLog.w(Messages.get(Zanmu.class, "doomed_zone"));
+			}
 			
 			origin.set( 2.5f, height - 2.5f );
 			scale.set( Random.Float( 1, maxSize ) );

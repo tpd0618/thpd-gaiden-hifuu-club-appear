@@ -21,7 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
@@ -120,11 +120,11 @@ public class TrapsRoom extends SpecialRoom {
 		//1 floor set higher in probability, never cursed
 		do {
 			if (Random.Int(2) == 0) {
-				prize = Generator.randomWeapon(Math.min(5, (Dungeon.floor / 10)));
+				prize = Generator.randomWeapon();
 			} else {
-				prize = Generator.randomArmor(Math.min(5, (Dungeon.floor / 10)));
+				prize = Generator.randomArmor();
 			}
-		} while (prize.cursed || Challenges.isItemBlocked(prize));
+		} while (prize.cursed || HardMode.isItemBlocked(prize));
 		prize.cursedKnown = true;
 
 		//33% chance for an extra update.

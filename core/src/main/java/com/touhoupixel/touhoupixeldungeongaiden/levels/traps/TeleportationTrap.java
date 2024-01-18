@@ -27,7 +27,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.watabou.utils.PathFinder;
 
 public class TeleportationTrap extends Trap {

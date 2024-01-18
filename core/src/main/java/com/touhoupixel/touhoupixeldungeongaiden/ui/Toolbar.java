@@ -21,12 +21,18 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.ui;
 
+import static com.touhoupixel.touhoupixeldungeongaiden.Dungeon.heroine;
+
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.QuickSlot;
 import com.touhoupixel.touhoupixeldungeongaiden.SPDAction;
 import com.touhoupixel.touhoupixeldungeongaiden.SPDSettings;
+import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HecatiaBody;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Belongings;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Marisa;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -36,6 +42,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.scenes.PixelScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.tiles.DungeonTerrainTilemap;
+import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.touhoupixel.touhoupixeldungeongaiden.windows.WndBag;
 import com.touhoupixel.touhoupixeldungeongaiden.windows.WndKeyBindings;
 import com.touhoupixel.touhoupixeldungeongaiden.windows.WndMessage;
@@ -49,9 +56,12 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.PointerArea;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Component;
+import com.watabou.utils.Callback;
 import com.watabou.utils.Point;
 import com.watabou.utils.PointF;
+import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
@@ -62,9 +72,9 @@ public class Toolbar extends Component {
 	private Tool btnInventory;
 	private QuickslotTool[] btnQuick;
 	private SlotSwapTool btnSwap;
-	
+
 	private PickedUpItem pickedUp;
-	
+
 	private boolean lastEnabled = true;
 	public boolean examining = false;
 
@@ -75,7 +85,7 @@ public class Toolbar extends Component {
 		GROUP,
 		CENTER
 	}
-	
+
 	public Toolbar() {
 		super();
 
@@ -190,7 +200,7 @@ public class Toolbar extends Component {
 				else				return null;
 			}
 		});
-		
+
 		add(btnWait = new Tool(24, 0, 20, 26) {
 			@Override
 			protected void onClick() {
@@ -199,7 +209,7 @@ public class Toolbar extends Component {
 					Dungeon.heroine.rest(false);
 				}
 			}
-			
+
 			@Override
 			public GameAction keyAction() {
 				return SPDAction.WAIT;
@@ -224,7 +234,6 @@ public class Toolbar extends Component {
 			}
 		});
 
-		//hidden button for rest keybind
 		add(new Button(){
 			@Override
 			protected void onClick() {
@@ -241,13 +250,12 @@ public class Toolbar extends Component {
 			}
 		});
 
-		//hidden button for wait / pickup keybind
 		add(new Button(){
 			@Override
 			protected void onClick() {
 				if (Dungeon.heroine.ready && !GameScene.cancel()) {
 					if (Dungeon.level.heaps.get(Dungeon.heroine.pos) != null
-						&& Dungeon.heroine.handle(Dungeon.heroine.pos)){
+							&& Dungeon.heroine.handle(Dungeon.heroine.pos)){
 						Dungeon.heroine.next();
 					} else {
 						examining = false;
@@ -270,7 +278,7 @@ public class Toolbar extends Component {
 				else				return null;
 			}
 		});
-		
+
 		add(btnSearch = new Tool(44, 0, 20, 26) {
 			@Override
 			protected void onClick() {
@@ -284,24 +292,37 @@ public class Toolbar extends Component {
 					}
 				}
 			}
-			
+
 			@Override
 			public GameAction keyAction() {
-				return SPDAction.EXAMINE;
+				if (btnSearch.active) return SPDAction.SPELL_CARD;
+				else				return null;
 			}
 
 			@Override
 			protected String hoverText() {
-				return Messages.titleCase(Messages.get(WndKeyBindings.class, "examine"));
+				return Messages.titleCase(Messages.get(WndKeyBindings.class, "spell_card"));
 			}
-			
+
 			@Override
 			protected boolean onLongClick() {
-				Dungeon.heroine.search(true);
+				if (Statistics.spellcard < 1) {
+					GLog.w(Messages.get(Marisa.class, "no_spell_card"));
+				} else if (heroine.buff(HecatiaBody.class) != null) {
+					GLog.w(Messages.get(Marisa.class, "already_inv"));
+				} else {
+					Buff.prolong(heroine, HecatiaBody.class, HecatiaBody.DURATION / 2f);
+					Statistics.spellcard -= 1;
+					Statistics.bomb_count += 1;
+					Statistics.spellcarduse = true;
+					GameScene.flash(0x80FFFFFF);
+					Sample.INSTANCE.play(Assets.Sounds.BLAST);
+					heroine.spendAndNext(1f);
+				}
 				return true;
 			}
 		});
-		
+
 		add(btnInventory = new Tool(0, 0, 24, 26) {
 			private CurrencyIndicator ind;
 
@@ -319,7 +340,7 @@ public class Toolbar extends Component {
 					}
 				}
 			}
-			
+
 			@Override
 			public GameAction keyAction() {
 				return SPDAction.INVENTORY;
@@ -334,7 +355,7 @@ public class Toolbar extends Component {
 			protected String hoverText() {
 				return Messages.titleCase(Messages.get(WndKeyBindings.class, "inventory"));
 			}
-			
+
 			@Override
 			protected boolean onLongClick() {
 				GameScene.show(new WndQuickBag(null));
@@ -458,7 +479,7 @@ public class Toolbar extends Component {
 
 		add(pickedUp = new PickedUpItem());
 	}
-	
+
 	@Override
 	protected void layout() {
 
@@ -517,7 +538,7 @@ public class Toolbar extends Component {
 
 		for(int i = startingSlot; i <= endingSlot; i++) {
 			if (i == startingSlot && !SPDSettings.flipToolbar() ||
-				i == endingSlot && SPDSettings.flipToolbar()){
+					i == endingSlot && SPDSettings.flipToolbar()){
 				btnQuick[i].border(0, 2);
 				btnQuick[i].frame(106, 0, 19, 24);
 			} else if (i == startingSlot && SPDSettings.flipToolbar() ||
@@ -577,7 +598,7 @@ public class Toolbar extends Component {
 					btnSwap.setPos(btnQuick[endingSlot].left() - (btnSwap.width()-2), y+3);
 					shift = -btnSwap.left();
 				}
-				
+
 				break;
 		}
 
@@ -614,33 +635,33 @@ public class Toolbar extends Component {
 	public static void updateLayout(){
 		if (instance != null) instance.layout();
 	}
-	
+
 	@Override
 	public void update() {
 		super.update();
-		
+
 		if (lastEnabled != (Dungeon.heroine.ready && Dungeon.heroine.isAlive())) {
 			lastEnabled = (Dungeon.heroine.ready && Dungeon.heroine.isAlive());
-			
+
 			for (Gizmo tool : members.toArray(new Gizmo[0])) {
 				if (tool instanceof Tool) {
 					((Tool)tool).enable( lastEnabled );
 				}
 			}
 		}
-		
+
 		if (!Dungeon.heroine.isAlive()) {
 			btnInventory.enable(true);
 		}
 	}
-	
+
 	public void pickup( Item item, int cell ) {
 		pickedUp.reset( item,
-			cell,
-			btnInventory.centerX(),
-			btnInventory.centerY());
+				cell,
+				btnInventory.centerX(),
+				btnInventory.centerY());
 	}
-	
+
 	private static CellSelector.Listener informer = new CellSelector.Listener() {
 		@Override
 		public void onSelect( Integer cell ) {
@@ -654,13 +675,13 @@ public class Toolbar extends Component {
 			return Messages.get(Toolbar.class, "examine_prompt");
 		}
 	};
-	
+
 	private static class Tool extends Button {
-		
+
 		private static final int BGCOLOR = 0x7B8073;
-		
+
 		private Image base;
-		
+
 		public Tool( int x, int y, int width, int height ) {
 			super();
 
@@ -674,28 +695,28 @@ public class Toolbar extends Component {
 			this.width = width;
 			this.height = height;
 		}
-		
+
 		@Override
 		protected void createChildren() {
 			super.createChildren();
-			
+
 			base = new Image( Assets.Interfaces.TOOLBAR );
 			add( base );
 		}
-		
+
 		@Override
 		protected void layout() {
 			super.layout();
-			
+
 			base.x = x;
 			base.y = y;
 		}
-		
+
 		@Override
 		protected void onPointerDown() {
 			base.brightness( 1.4f );
 		}
-		
+
 		@Override
 		protected void onPointerUp() {
 			if (active) {
@@ -704,7 +725,7 @@ public class Toolbar extends Component {
 				base.tint( BGCOLOR, 0.7f );
 			}
 		}
-		
+
 		public void enable( boolean value ) {
 			if (value != active) {
 				if (value) {
@@ -716,13 +737,13 @@ public class Toolbar extends Component {
 			}
 		}
 	}
-	
+
 	private static class QuickslotTool extends Tool {
-		
+
 		private QuickSlotButton slot;
 		private int borderLeft = 2;
 		private int borderRight = 2;
-		
+
 		public QuickslotTool( int x, int y, int width, int height, int slotNum ) {
 			super( x, y, width, height );
 
@@ -735,14 +756,14 @@ public class Toolbar extends Component {
 			borderRight = right;
 			layout();
 		}
-		
+
 		@Override
 		protected void layout() {
 			super.layout();
 			slot.setRect( x, y, width, height );
 			slot.slotMargins(borderLeft, 2, borderRight, 2);
 		}
-		
+
 		@Override
 		public void enable( boolean value ) {
 			super.enable( value && visible );
@@ -857,63 +878,63 @@ public class Toolbar extends Component {
 		//private
 
 	}
-	
+
 	public static class PickedUpItem extends ItemSprite {
-		
+
 		private static final float DURATION = 0.5f;
-		
+
 		private float startScale;
 		private float startX, startY;
 		private float endX, endY;
 		private float left;
-		
+
 		public PickedUpItem() {
 			super();
-			
+
 			originToCenter();
-			
+
 			active =
-			visible =
-				false;
+					visible =
+							false;
 		}
-		
+
 		public void reset( Item item, int cell, float endX, float endY ) {
 			view( item );
-			
+
 			active =
-			visible =
-				true;
-			
+					visible =
+							true;
+
 			PointF tile = DungeonTerrainTilemap.raisedTileCenterToWorld(cell);
 			Point screen = Camera.main.cameraToScreen(tile.x, tile.y);
 			PointF start = camera().screenToCamera(screen.x, screen.y);
-			
+
 			x = this.startX = start.x - width() / 2;
 			y = this.startY = start.y - width() / 2;
-			
+
 			this.endX = endX - width() / 2;
 			this.endY = endY - width() / 2;
 			left = DURATION;
-			
+
 			scale.set( startScale = Camera.main.zoom / camera().zoom );
-			
+
 		}
-		
+
 		@Override
 		public void update() {
 			super.update();
-			
+
 			if ((left -= Game.elapsed) <= 0) {
-				
+
 				visible =
-				active =
-					false;
+						active =
+								false;
 				if (emitter != null) emitter.on = false;
-				
+
 			} else {
 				float p = left / DURATION;
 				scale.set( startScale * (float)Math.sqrt( p ) );
-				
+
 				x = startX*p + endX*(1-p);
 				y = startY*p + endY*(1-p);
 			}

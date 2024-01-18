@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Burning;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DeSlaying;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfPhilosopher;
+import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.SpearheadHerb;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.YoumuSprite;
 import com.watabou.utils.Random;
 
@@ -25,7 +21,7 @@ public class Youmu extends Mob {
         properties.add(Property.FUMO);
         //used for fumo lover buff
 
-        loot = new PotionOfPhilosopher();
+        loot = new SpearheadHerb();
         lootChance = 0.1f;
     }
 

@@ -23,12 +23,8 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeHunger;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Chains;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Pushing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;

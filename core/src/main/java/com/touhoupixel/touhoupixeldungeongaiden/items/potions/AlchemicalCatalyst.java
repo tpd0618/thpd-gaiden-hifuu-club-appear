@@ -23,7 +23,6 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.potions;
 
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.ExoticPotion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.Runestone;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Plant;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -93,20 +92,16 @@ public class AlchemicalCatalyst extends Potion {
 		
 		@Override
 		public boolean testIngredients(ArrayList<Item> ingredients) {
-			boolean potion = false;
 			boolean secondary = false;
 			
 			for (Item i : ingredients){
 				if (i instanceof Plant.Seed || i instanceof Runestone){
 					secondary = true;
 				//if it is a regular or exotic potion
-				} else if (ExoticPotion.regToExo.containsKey(i.getClass())
-						|| ExoticPotion.regToExo.containsValue(i.getClass())) {
-					potion = true;
 				}
 			}
 			
-			return potion && secondary;
+			return secondary;
 		}
 		
 		@Override

@@ -34,14 +34,7 @@ public class GreenBamboo extends MeleeWeapon {
         hitSound = Assets.Sounds.HIT_STRONG;
         hitSoundPitch = 1f;
 
-        tier = 3;
         RCH = 2;    //extra reach
-    }
-
-    @Override
-    public int max(int lvl) {
-        return  6*(tier+1) +
-                lvl*(tier+1);
     }
 
     @Override

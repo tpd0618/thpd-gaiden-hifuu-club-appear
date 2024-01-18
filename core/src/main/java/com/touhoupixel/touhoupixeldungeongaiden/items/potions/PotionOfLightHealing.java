@@ -22,10 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.potions;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.IronKey;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Notes;
@@ -44,19 +40,8 @@ public class PotionOfLightHealing extends Potion {
 	@Override
 	public void apply(Hero heroine) {
 		identify();
-		if (Statistics.card26){
-			Buff.detach(curUser, Degrade.class);
-		}
-		if (heroine.buff(Inversion.class) != null) {
-			heroine.damage(heroine.HT / 2, heroine);
-			if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-				Dungeon.fail(Inversion.class);
-				GLog.n( Messages.get(Inversion.class, "ondeath") );
-			}
-		} else {
-			heroine.HP = Math.min(heroine.HP + 50*(Notes.keyCount(new IronKey(Dungeon.floor))+1), heroine.HT);
-			GLog.p(Messages.get(this, "lightheal"));
-		}
+		heroine.HP = Math.min(heroine.HP + 50*(Notes.keyCount(new IronKey(Dungeon.floor))+1), heroine.HT);
+		GLog.p(Messages.get(this, "lightheal"));
 	}
 
 	@Override

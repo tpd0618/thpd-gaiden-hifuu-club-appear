@@ -25,7 +25,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.blobs.Blob;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.blobs.ToxicGas;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HecatiaRule;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.watabou.noosa.audio.Sample;
@@ -34,7 +33,6 @@ public class PotionOfToxicGas extends Potion {
 
 	{
 		icon = ItemSpriteSheet.Icons.POTION_TOXICGAS;
-		isHarmfulGasPotion = true;
 	}
 
 	@Override
@@ -48,11 +46,9 @@ public class PotionOfToxicGas extends Potion {
 			Sample.INSTANCE.play( Assets.Sounds.GAS );
 		}
 
-		if (curUser.buff(HecatiaRule.class) == null) {
-			GameScene.add(Blob.seed(cell, 1000, ToxicGas.class));
-		}
+		GameScene.add( Blob.seed( cell, 1000, ToxicGas.class ) );
 	}
-	
+
 	@Override
 	public int value() {
 		return isKnown() ? 30 * quantity : super.value();

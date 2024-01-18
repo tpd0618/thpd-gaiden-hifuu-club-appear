@@ -25,7 +25,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.Room;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.connection.ConnectionRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.connection.MazeConnectionRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.secret.SecretRoom;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.CardShopRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.ShopRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.standard.EntranceRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.standard.ExitRoom;
@@ -104,8 +103,6 @@ public abstract class RegularBuilder extends Builder {
 			} else if (r instanceof ExitRoom) {
 				exit = r;
 			} else if (r instanceof ShopRoom && r.maxConnections(Room.ALL) == 1){
-				shop = r;
-			} else if (r instanceof CardShopRoom && r.maxConnections(Room.ALL) == 1){
 				shop = r;
 			} else if (r.maxConnections(Room.ALL) > 1){
 				multiConnections.add(r);

@@ -28,17 +28,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 public class SeiranHammer extends MeleeWeapon {
 
 	{
-		image = ItemSpriteSheet.SEIRANHAMMER;
+		image = ItemSpriteSheet.SEIRAN_HAMMER;
 		hitSound = Assets.Sounds.HIT_SLASH;
 		hitSoundPitch = 1f;
-
-		tier = 5;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  5*(tier+4) +    //45 base, up from 30
-				lvl*(tier+1);   //scaling unchanged
 	}
 
 	@Override
@@ -46,8 +38,5 @@ public class SeiranHammer extends MeleeWeapon {
 		return 1;
 	}
 
-	@Override
-	public int STRReq(int lvl) {
-		return STRReq(tier+1, lvl);
-	}
+	//ability todo
 }

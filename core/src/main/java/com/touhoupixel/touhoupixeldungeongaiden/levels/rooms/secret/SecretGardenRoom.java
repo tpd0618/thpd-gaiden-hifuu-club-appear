@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.secret;
 
 import com.touhoupixel.touhoupixeldungeongaiden.actors.blobs.Foliage;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Patch;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
@@ -49,14 +48,6 @@ public class SecretGardenRoom extends SecretRoom {
 		entrance().set( Door.Type.HIDDEN );
 		
 		level.plant(new Starflower.Seed(), plantPos(level));
-		level.plant(new WandOfRegrowth.Seedpod.Seed(), plantPos( level ));
-		level.plant(new WandOfRegrowth.Dewcatcher.Seed(), plantPos( level ));
-		
-		if (Random.Int(2) == 0){
-			level.plant(new WandOfRegrowth.Seedpod.Seed(), plantPos( level ));
-		} else {
-			level.plant(new WandOfRegrowth.Dewcatcher.Seed(), plantPos( level ));
-		}
 		
 		Foliage light = (Foliage)level.blobs.get( Foliage.class );
 		if (light == null) {

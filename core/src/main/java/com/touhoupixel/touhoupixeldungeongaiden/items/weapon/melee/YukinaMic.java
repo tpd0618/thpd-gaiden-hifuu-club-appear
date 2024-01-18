@@ -38,8 +38,6 @@ public class YukinaMic extends MeleeWeapon {
         image = ItemSpriteSheet.YUKINA_MIC;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

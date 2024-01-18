@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.bags;
 
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -37,7 +36,7 @@ public class MagicalHolster extends Bag {
 	
 	@Override
 	public boolean canHold( Item item ) {
-		if (item instanceof Wand || item instanceof MissileWeapon){
+		if (item instanceof MissileWeapon){
 			return super.canHold(item);
 		} else {
 			return false;
@@ -45,7 +44,7 @@ public class MagicalHolster extends Bag {
 	}
 
 	public int capacity(){
-		return 19;
+		return 24;
 	}
 	
 	@Override
@@ -53,9 +52,7 @@ public class MagicalHolster extends Bag {
 		if (super.collect( container )) {
 			if (owner != null) {
 				for (Item item : items) {
-					if (item instanceof Wand) {
-						((Wand) item).charge(owner, HOLSTER_SCALE_FACTOR);
-					} else if (item instanceof MissileWeapon){
+					if (item instanceof MissileWeapon){
 						((MissileWeapon) item).holster = true;
 					}
 				}
@@ -70,9 +67,7 @@ public class MagicalHolster extends Bag {
 	public void onDetach( ) {
 		super.onDetach();
 		for (Item item : items) {
-			if (item instanceof Wand) {
-				((Wand)item).stopCharging();
-			} else if (item instanceof MissileWeapon){
+			if (item instanceof MissileWeapon){
 				((MissileWeapon) item).holster = false;
 			}
 		}

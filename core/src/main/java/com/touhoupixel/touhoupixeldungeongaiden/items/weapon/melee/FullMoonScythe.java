@@ -34,8 +34,6 @@ public class FullMoonScythe extends MeleeWeapon {
         image = ItemSpriteSheet.FULL_MOON_SCYTHE;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

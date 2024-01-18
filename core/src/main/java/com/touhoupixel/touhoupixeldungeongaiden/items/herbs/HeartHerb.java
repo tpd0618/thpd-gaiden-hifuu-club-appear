@@ -23,24 +23,11 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.herbs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.AlchemyHat;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
 public class HeartHerb extends Herb {
 
 	{
 		image = ItemSpriteSheet.HERB;
-	}
-
-	@Override
-	public void execute(Hero heroine, String action) {
-
-		super.execute(heroine, action);
-
-		if (action.equals( AC_EAT )) {
-			if (Dungeon.heroine.belongings.weapon() instanceof AlchemyHat){
-				heroine.HP = Math.min(heroine.HP + 2, heroine.HT);
-			}
-		}
 	}
 }

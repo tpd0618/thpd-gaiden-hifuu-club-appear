@@ -1,18 +1,12 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Poison;
-import com.touhoupixel.touhoupixeldungeongaiden.items.StrengthCard;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfToxicGas;
-import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.YamameSprite;
-import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Yamame extends Mob {
@@ -20,10 +14,10 @@ public class Yamame extends Mob {
     {
         spriteClass = YamameSprite.class;
 
-        HP = HT = 213;
-        defenseSkill = 32;
-        EXP = 14;
-        maxLvl = 45;
+        HP = HT = 22;
+        defenseSkill = 2;
+        EXP = 2;
+        maxLvl = 10;
 
         properties.add(Property.YOKAI);
 
@@ -33,7 +27,7 @@ public class Yamame extends Mob {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange(24, 30);
+        return Random.NormalIntRange(1, 1);
     }
 
     @Override

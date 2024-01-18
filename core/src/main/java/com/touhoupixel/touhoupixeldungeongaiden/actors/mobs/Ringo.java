@@ -24,8 +24,7 @@ public class Ringo extends Mob {
 
         baseSpeed = 2f;
 
-        loot = Generator.Category.ARMOR_T2;
-        lootChance = 0.15f;
+        //todo
     }
 
     @Override

@@ -23,12 +23,8 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HerbDegrade;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
-import com.touhoupixel.touhoupixeldungeongaiden.items.StrengthCard;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KanakoSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
@@ -69,12 +65,8 @@ public class Kanako extends Mob {
     @Override
     public int attackProc(Char hero, int damage) {
         damage = super.attackProc(enemy, damage);
-        if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && !hero.flying && Random.Int(5) == 0) {
-            Dungeon.heroine.STR--;
-            Dungeon.level.drop(new StrengthCard(), Dungeon.level.randomRespawnCell(null)).sprite.drop();
-            Sample.INSTANCE.play( Assets.Sounds.CURSED );
-            GLog.w(Messages.get(Kanako.class, "str_reduce"));
-        }
+
+        //todo
         return damage;
     }
 }

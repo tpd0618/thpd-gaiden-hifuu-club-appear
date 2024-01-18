@@ -21,7 +21,6 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.items.herbs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CursedBlow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
@@ -41,7 +40,6 @@ public class CleansingHerb extends Herb {
 
 		if (action.equals( AC_EAT )) {
 			PotionOfHealing.cure(heroine);
-			Buff.detach(heroine, Inversion.class);
 			Buff.detach(heroine, CursedBlow.class);
 		}
 	}

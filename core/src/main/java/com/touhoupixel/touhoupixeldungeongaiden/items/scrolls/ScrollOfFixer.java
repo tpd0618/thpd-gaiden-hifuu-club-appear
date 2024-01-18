@@ -44,6 +44,7 @@ public class ScrollOfFixer extends Scroll {
 		GLog.i( Messages.get(this, "fixer") );
 		SpellSprite.show( curUser, SpellSprite.CHARGE );
 		identify();
+		//todo
 
 		readAnimation();
 	}

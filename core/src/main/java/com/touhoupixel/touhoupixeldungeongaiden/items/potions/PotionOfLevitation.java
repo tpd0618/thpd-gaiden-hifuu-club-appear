@@ -58,11 +58,7 @@ public class PotionOfLevitation extends Potion {
 	@Override
 	public void apply( Hero heroine) {
 		identify();
-		if (Statistics.card45) {
-			Buff.affect(heroine, Levitation.class, Levitation.DURATION*4f);
-		} else {
-			Buff.affect(heroine, Levitation.class, Levitation.DURATION / 4f);
-		}
+		Buff.affect(heroine, Levitation.class, Levitation.DURATION);
 		GLog.i( Messages.get(this, "float") );
 	}
 	

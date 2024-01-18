@@ -32,8 +32,6 @@ public class YuyukoFoldingFan extends MeleeWeapon {
         image = ItemSpriteSheet.YUYUKO_FOLDING_FAN;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 4;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class YuyukoFoldingFan extends MeleeWeapon {
 
     @Override
     public int max(int lvl) {
-        return  Math.round((Statistics.foodEaten)*0.3f+3f*(tier+1))+
-                lvl*Math.round(1.33f*(tier+1));
+        return  1;//Math.round((Statistics.foodEaten)*0.3f+3f*(tier+1))+
+               // lvl*Math.round(1.33f*(tier+1)); //todo
     }
 }

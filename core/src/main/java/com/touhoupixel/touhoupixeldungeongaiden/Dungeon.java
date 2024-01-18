@@ -18,8 +18,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TalismanOfForesi
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.Ring;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfWarding;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Notes;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.DeadEndLevel;
@@ -34,7 +32,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.levels.Level16;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level17;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level18;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level19;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.Level1HakureiShrine;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.Level1;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level2;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level20;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level3;
@@ -81,8 +79,7 @@ public class Dungeon {
 		PATCHOULI_CARD,
 
 		//alchemy
-		COOKING_HP,
-		BLAND_FRUIT_SEED;
+		COOKING_HP;
 
 		public int count = 0;
 
@@ -191,7 +188,7 @@ public class Dungeon {
 		floor = 1;
 		branch = 0;
 
-		gold = 5; //to buy an ability card on floor 1
+		gold = 0;
 		energy = 0;
 
 		droppedItems = new SparseArray<>();
@@ -235,7 +232,7 @@ public class Dungeon {
 			case 3:
 			case 4:
 			case 5:
-				level = new Level1HakureiShrine();
+				level = new Level1();
 				break;
 			case 6:
 			case 7:
@@ -376,8 +373,6 @@ public class Dungeon {
 
 		level.create();
 
-		Statistics.qualifiedForNoKilling = !bossLevel();
-
 		return level;
 	}
 
@@ -419,14 +414,6 @@ public class Dungeon {
 	//public static boolean pandemoniumLevel() {
 		//return floor == 50 || floor == 60 || floor == 70 || floor == 80 || floor == 90;
 	//}
-
-	public static boolean bossLevel() {
-		return bossLevel(floor);
-	}
-
-	public static boolean bossLevel( int floor ) {
-		return floor == 5 || floor == 10 || floor == 15 || floor == 20 || floor == 25 || floor == 30 || floor == 35 || floor == 40 || floor == 98;
-	}
 
 	public static int scalingFloor(){
 		return floor;
@@ -495,15 +482,6 @@ public class Dungeon {
 			Dungeon.droppedItems.put( floor, dropped = new ArrayList<>() );
 		}
 		dropped.add( item );
-	}
-
-	public static boolean strengthNeeded() {
-		//2 POS each floor set
-		int posLeftThisSet = 4 - (LimitedDrops.STRENGTH_CARDS.count - (floor / 5) * 4);
-		if (posLeftThisSet <= 0) return false;
-
-		int floorThisSet = (floor % 5);
-		return Random.Int(5 - floorThisSet) < posLeftThisSet;
 	}
 
 	public static boolean upgradeNeeded() {
@@ -799,7 +777,7 @@ public class Dungeon {
 	}
 
 	public static void updateLevelExplored(){
-		if (branch == 0 && level instanceof RegularLevel && !Dungeon.bossLevel()){
+		if (branch == 0 && level instanceof RegularLevel){
 			Statistics.floorsExplored.put(floor, level.isLevelExplored(floor));
 		}
 	}
@@ -887,32 +865,6 @@ public class Dungeon {
 			BArray.or( level.visited, level.heroFOV, a.pos - 1, 3, level.visited );
 			BArray.or( level.visited, level.heroFOV, a.pos - 1 + level.width(), 3, level.visited );
 			GameScene.updateFog(a.pos, 2);
-		}
-
-		for (Char ch : Actor.chars()){
-			if (ch instanceof WandOfWarding.Ward
-					|| ch instanceof WandOfRegrowth.Lotus){
-				x = ch.pos % level.width();
-				y = ch.pos / level.width();
-
-				//left, right, top, bottom
-				dist = ch.viewDistance+1;
-				l = Math.max( 0, x - dist );
-				r = Math.min( x + dist, level.width() - 1 );
-				t = Math.max( 0, y - dist );
-				b = Math.min( y + dist, level.height() - 1 );
-
-				width = r - l + 1;
-				height = b - t + 1;
-
-				pos = l + t * level.width();
-
-				for (int i = t; i <= b; i++) {
-					BArray.or( level.visited, level.heroFOV, pos, width, level.visited );
-					pos+=level.width();
-				}
-				GameScene.updateFog(ch.pos, dist);
-			}
 		}
 
 		GameScene.afterObserve();

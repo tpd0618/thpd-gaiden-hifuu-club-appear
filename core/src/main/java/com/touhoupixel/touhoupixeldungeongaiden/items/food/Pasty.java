@@ -26,7 +26,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Recharging;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRecharging;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -102,13 +101,10 @@ public class Pasty extends Food {
 			case NONE:
 				break; //do nothing extra
 			case HWEEN:
+			case XMAS:
 				//heals for 10% max hp
 				heroine.HP = Math.min(heroine.HP + heroine.HT/10, heroine.HT);
 				heroine.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
-				break;
-			case XMAS:
-				Buff.affect(heroine, Recharging.class, 2f ); //half of a charge
-				ScrollOfRecharging.charge(heroine);
 				break;
 		}
 	}

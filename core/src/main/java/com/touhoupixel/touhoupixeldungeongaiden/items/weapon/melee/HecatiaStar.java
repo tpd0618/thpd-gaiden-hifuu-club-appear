@@ -33,8 +33,6 @@ public class HecatiaStar extends MeleeWeapon {
         image = ItemSpriteSheet.HECATIA_STAR;
         hitSound = Assets.Sounds.HIT_STRONG;
         hitSoundPitch = 1f;
-
-        tier = 3;
     }
 
     @Override

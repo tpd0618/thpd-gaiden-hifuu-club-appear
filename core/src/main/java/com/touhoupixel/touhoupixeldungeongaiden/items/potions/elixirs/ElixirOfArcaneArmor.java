@@ -25,7 +25,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ArcaneArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.HeavenHerb;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfEarthenArmor;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfEarthenArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
 public class ElixirOfArcaneArmor extends Elixir {

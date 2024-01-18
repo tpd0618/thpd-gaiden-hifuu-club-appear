@@ -24,7 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.spells;
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Rinnosuke;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -80,7 +80,7 @@ public class Alchemize extends Spell {
 		@Override
 		public boolean itemSelectable(Item item) {
 			return !(item instanceof Alchemize)
-					&& (Shopkeeper.canSell(item) || item.energyVal() > 0);
+					&& (Rinnosuke.canSell(item) || item.energyVal() > 0);
 		}
 
 		@Override
@@ -109,7 +109,7 @@ public class Alchemize extends Spell {
 
 			float pos = height;
 
-			if (Shopkeeper.canSell(item)) {
+			if (Rinnosuke.canSell(item)) {
 				if (item.quantity() == 1) {
 
 					RedButton btnSell = new RedButton(Messages.get(this, "sell", item.value())) {

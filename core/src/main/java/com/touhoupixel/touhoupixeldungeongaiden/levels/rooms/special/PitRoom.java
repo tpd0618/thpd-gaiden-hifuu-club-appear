@@ -21,7 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
@@ -81,7 +81,7 @@ public class PitRoom extends SpecialRoom {
 							Generator.Category.ARMOR));
 					break;
 			}
-		} while ( mainLoot == null || Challenges.isItemBlocked(mainLoot));
+		} while ( mainLoot == null || HardMode.isItemBlocked(mainLoot));
 		level.drop(mainLoot, remains).setHauntedIfCursed();
 		
 		int n = Random.IntRange( 1, 2 );

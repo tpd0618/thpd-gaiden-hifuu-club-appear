@@ -23,7 +23,6 @@ package com.touhoupixel.touhoupixeldungeongaiden.items;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Barrier;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
@@ -77,13 +76,7 @@ public class Dewdrop extends Item {
 		int effect = Math.min(heroine.HT - heroine.HP, heal);
 		int shield = 0;
 		if (effect > 0 || shield > 0) {
-			if (heroine.buff(Inversion.class) != null) {
-				heroine.damage(heroine.HT / 2, heroine);
-				if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-					Dungeon.fail(Inversion.class);
-					GLog.n( Messages.get(Inversion.class, "ondeath") );
-				}
-			} else heroine.HP += effect;
+			heroine.HP += effect;
 			if (shield > 0) Buff.affect(heroine, Barrier.class).incShield(shield);
 			heroine.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 			if (effect > 0 && shield > 0) {

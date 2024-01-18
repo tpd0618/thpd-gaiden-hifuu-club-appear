@@ -22,11 +22,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HerbDegrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Vertigo;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.BirukoSprite;
@@ -68,7 +65,7 @@ public class Biruko extends Mob {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment) {
             Buff.prolong(this, Vertigo.class, Vertigo.DURATION);
-            Buff.prolong(enemy, HerbDegrade.class, HerbDegrade.DURATION);
+            //todo
         }
         return damage;
     }

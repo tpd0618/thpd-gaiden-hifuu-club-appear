@@ -22,14 +22,11 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bleeding;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Burning;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HinaCurse;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfLightReverse;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfShroudingFog;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ChiyariSprite;
 import com.watabou.utils.Random;
 
@@ -45,7 +42,7 @@ public class Chiyari extends Mob {
 
         properties.add(Property.YOKAI);
 
-        loot = new PotionOfLightReverse();
+        loot = new PotionOfShroudingFog();
         lootChance = 0.05f;
     }
 

@@ -33,8 +33,6 @@ public class YukariUmbrella extends MeleeWeapon {
 		hitSoundPitch = 1f;
 		
 		//check Dart.class for additional properties
-		
-		tier = 4;
 	}
 
 	@Override

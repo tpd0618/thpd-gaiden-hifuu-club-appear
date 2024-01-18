@@ -50,7 +50,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Entanglement;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Flow;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Obfuscation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Potential;
-import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Repulsion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Stone;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Swiftness;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs.Thorns;
@@ -217,42 +216,30 @@ public class Armor extends EquipableItem {
 	}
 
 	public final int DRMax() {
-		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return 0;
-		} else return DRMax(buffedLvl());
+		return DRMax(buffedLvl());
 	}
 
 	public int DRMax(int lvl) {
 		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
-		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return 0;
+		if (lvl > max) {
+			return ((lvl - max) + 1) / 2;
 		} else {
-			if (lvl > max) {
-				return ((lvl - max) + 1) / 2;
-			} else {
-				return max;
-			}
+			return max;
 		}
-	}
+	}//all armors must need this
 
 	public final int DRMin() {
-		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return 0;
-		} else return DRMin(buffedLvl());
+		return DRMin(buffedLvl());
 	}
 
 	public int DRMin(int lvl) {
 		int max = DRMax(lvl);
-		if (Dungeon.heroine.buff(Onigiri.class) != null) {
-			return 0;
+		if (lvl >= max) {
+			return (lvl - max);
 		} else {
-			if (lvl >= max) {
-				return (lvl - max);
-			} else {
-				return lvl;
-			}
+			return lvl;
 		}
-	}
+	}//all armors must need this
 	
 	public float evasionFactor( Char owner, float evasion ){
 		
@@ -260,21 +247,10 @@ public class Armor extends EquipableItem {
 			return 0;
 		}
 		
-		if (owner instanceof Hero){
-			int aEnc = STRReq() - ((Hero) owner).STR();
-			if (aEnc > 0) evasion /= Math.pow(1.5, aEnc);
-		}
-		
 		return evasion + augment.evasionFactor(buffedLvl());
 	}
 	
 	public float speedFactor( Char owner, float speed ){
-		
-		if (owner instanceof Hero) {
-			int aEnc = STRReq() - ((Hero) owner).STR();
-			if (aEnc > 0) speed /= Math.pow(1.2, aEnc);
-		}
-		
 		if (hasGlyph(Swiftness.class, owner)) {
 			boolean enemyNear = false;
 			PathFinder.buildDistanceMap(owner.pos, Dungeon.level.passable, 2);
@@ -377,13 +353,6 @@ public class Armor extends EquipableItem {
 		} else {
 			if (hasCurseGlyph()){
 				if (Random.Int(3) == 0) inscribe(null);
-			} else{
-				if (Statistics.card36) {
-					if (level() >= 25) inscribe(null);
-				}
-				else if (level() >= 4 && Random.Float(10) < Math.pow(2, level() - 4)) {
-					inscribe(null);
-				}
 			}
 		}
 		
@@ -428,19 +397,11 @@ public class Armor extends EquipableItem {
 	@Override
 	public String info() {
 		String info = desc();
-		
-		if (levelKnown) {
-			info += "\n\n" + Messages.get(Armor.class, "curr_absorb", DRMin(), DRMax(), STRReq());
-			
-			if (STRReq() > Dungeon.heroine.STR()) {
-				info += " " + Messages.get(Armor.class, "too_heavy");
-			}
-		} else {
-			info += "\n\n" + Messages.get(Armor.class, "avg_absorb", DRMin(0), DRMax(0), STRReq(0));
 
-			if (STRReq(0) > Dungeon.heroine.STR()) {
-				info += " " + Messages.get(Armor.class, "probably_too_heavy");
-			}
+		if (levelKnown) {
+			info += "\n\n" + Messages.get(Armor.class, "curr_absorb", DRMin(), DRMax());
+		} else {
+			info += "\n\n" + Messages.get(Armor.class, "avg_absorb", DRMin(0), DRMax(0));
 		}
 
 		switch (augment) {
@@ -496,23 +457,6 @@ public class Armor extends EquipableItem {
 		}
 
 		return this;
-	}
-
-	public int STRReq(){
-		int req = STRReq(level());
-		if (masteryPotionBonus){
-			req -= 5;
-		}
-		return req;
-	}
-
-	public int STRReq(int lvl){
-		return STRReq(tier, lvl);
-	}
-
-	protected static int STRReq(int tier, int lvl){
-		lvl = Math.max(0, lvl);
-		return Math.max(1,(6 + Math.round(tier * 4)) - lvl);
 	}
 	
 	@Override
@@ -574,8 +518,7 @@ public class Armor extends EquipableItem {
 				Obfuscation.class, Swiftness.class, Viscosity.class, Potential.class };
 		
 		private static final Class<?>[] uncommon = new Class<?>[]{
-				Brimstone.class, Stone.class, Entanglement.class,
-				Repulsion.class, Camouflage.class, Flow.class };
+				Brimstone.class, Stone.class, Entanglement.class, Camouflage.class, Flow.class };
 		
 		private static final Class<?>[] rare = new Class<?>[]{
 				Affection.class, AntiMagic.class, Thorns.class };

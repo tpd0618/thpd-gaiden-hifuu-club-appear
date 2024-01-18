@@ -27,7 +27,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FlavourBuff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HecatiaRule;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
@@ -45,27 +44,23 @@ public class StoneOfAggression extends Runestone {
 
 	@Override
 	protected void activate(int cell) {
+		Char ch = Actor.findChar(cell);
 
-		Char ch = Actor.findChar( cell );
-
-		if (curUser.buff(HecatiaRule.class) == null) {
-			if (ch != null) {
-				if (ch.alignment == Char.Alignment.ENEMY) {
-					Buff.prolong(ch, Aggression.class, Aggression.DURATION / 4f);
-				} else {
-					Buff.prolong(ch, Aggression.class, Aggression.DURATION);
-				}
-				CellEmitter.center(cell).start(Speck.factory(Speck.SCREAM), 0.3f, 3);
-				Sample.INSTANCE.play(Assets.Sounds.READ);
+		if (ch != null) {
+			if (ch.alignment == Char.Alignment.ENEMY) {
+				Buff.prolong(ch, Aggression.class, Aggression.DURATION / 4f);
 			} else {
-				//Item.onThrow
-				Heap heap = Dungeon.level.drop(this, cell);
-				if (!heap.isEmpty()) {
-					heap.sprite.drop(cell);
-				}
+				Buff.prolong(ch, Aggression.class, Aggression.DURATION);
+			}
+			CellEmitter.center(cell).start(Speck.factory(Speck.SCREAM), 0.3f, 3);
+			Sample.INSTANCE.play(Assets.Sounds.READ);
+		} else {
+			//Item.onThrow
+			Heap heap = Dungeon.level.drop(this, cell);
+			if (!heap.isEmpty()) {
+				heap.sprite.drop(cell);
 			}
 		}
-
 	}
 
 	public static class Aggression extends FlavourBuff {

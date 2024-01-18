@@ -35,8 +35,6 @@ public class ChimataCloak extends MeleeWeapon {
         image = ItemSpriteSheet.CHIMATA_CLOAK;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

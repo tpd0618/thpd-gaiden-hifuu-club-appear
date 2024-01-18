@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HinaCurse;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.SpellcardFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.HijiriSprite;
 import com.watabou.utils.Random;

@@ -23,7 +23,6 @@ package com.touhoupixel.touhoupixeldungeongaiden.levels.features;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bleeding;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cripple;
@@ -32,7 +31,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Tenshi;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.FeatherFall;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.RegularLevel;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -59,38 +58,29 @@ public class Chasm implements Hero.Doom {
 		Game.runOnRenderThread(new Callback() {
 			@Override
 			public void call() {
-				if (Dungeon.heroine.buff(BalanceBreak.class) == null) {
-					GameScene.show(
-							new WndOptions(new Image(Dungeon.level.tilesTex(), 48, 48, 16, 16),
-									Messages.get(Chasm.class, "chasm"),
-									Messages.get(Chasm.class, "jump"),
-									Messages.get(Chasm.class, "yes"),
-									Messages.get(Chasm.class, "no")) {
-								@Override
-								protected void onSelect(int index) {
-									if (index == 0) {
-										if (Dungeon.heroine.pos == heroPos) {
-											if (Dungeon.floor == 1){
-												ScrollOfTeleportation.teleportChar(heroine);
-												GLog.n( Messages.get(Tenshi.class, "floor_one_fall") );
-											} else {
-												jumpConfirmed = true;
-												heroine.resume();
-											}
+
+				GameScene.show(
+						new WndOptions(new Image(Dungeon.level.tilesTex(), 48, 48, 16, 16),
+								Messages.get(Chasm.class, "chasm"),
+								Messages.get(Chasm.class, "jump"),
+								Messages.get(Chasm.class, "yes"),
+								Messages.get(Chasm.class, "no")) {
+							@Override
+							protected void onSelect(int index) {
+								if (index == 0) {
+									if (Dungeon.heroine.pos == heroPos) {
+										if (Dungeon.floor == 1) {
+											ScrollOfTeleportation.teleportChar(heroine);
+											GLog.n(Messages.get(Tenshi.class, "floor_one_fall"));
+										} else {
+											jumpConfirmed = true;
+											heroine.resume();
 										}
 									}
 								}
 							}
-					);
-				} else if (Dungeon.heroine.pos == heroPos) {
-					if (Dungeon.floor == 1){
-						ScrollOfTeleportation.teleportChar(heroine);
-						GLog.n( Messages.get(Tenshi.class, "floor_one_fall") );
-					} else {
-						jumpConfirmed = true;
-						heroine.resume();
-					}
-				}
+						}
+				);
 			}
 		});
 	}

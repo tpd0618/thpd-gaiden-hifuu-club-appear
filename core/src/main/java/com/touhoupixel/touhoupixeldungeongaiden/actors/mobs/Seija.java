@@ -22,11 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Doublerainbow;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.SeijaSprite;
@@ -48,8 +44,7 @@ public class Seija extends Mob {
         properties.add(Property.FUMO);
         //used for fumo lover buff
 
-        loot = Generator.Category.MIS_T5;
-        lootChance = 0.1f;
+        //todo
     }
 
     @Override

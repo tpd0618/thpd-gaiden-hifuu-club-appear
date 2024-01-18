@@ -22,14 +22,10 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Might;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.SpellcardFragment;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.HearnSprite;
 import com.watabou.utils.Random;

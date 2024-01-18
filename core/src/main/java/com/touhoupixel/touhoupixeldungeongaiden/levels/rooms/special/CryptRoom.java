@@ -21,7 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Gold;
@@ -74,9 +74,9 @@ public class CryptRoom extends SpecialRoom {
 	private static Item prize( Level level ) {
 
 		//1 floor set higher than normal
-		Armor prize = Generator.randomArmor( (Dungeon.floor /10) + 1);
+		Armor prize = Generator.randomArmor();
 
-		if (Challenges.isItemBlocked(prize)){
+		if (HardMode.isItemBlocked(prize)){
 			return new Gold().random();
 		}
 

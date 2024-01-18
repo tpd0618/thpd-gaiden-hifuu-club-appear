@@ -26,15 +26,34 @@ import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 public class ReimuArmor extends Armor {
 
 	{
-		image = ItemSpriteSheet.ARMOR_CLOTH;
+		image = ItemSpriteSheet.ARMOR_REIMU;
 
 		bones = false; //Finding them in bones would be semi-frequent and disappointing.
 	}
 
-	//return 0
+	//return resistance factor 0
 	
 	public ReimuArmor() {
 		super( 1 );
 	}
 
+	@Override
+	public int DRMax(int lvl) {
+		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
+		if (lvl > max) {
+			return ((lvl - max) + 1) / 2;
+		} else {
+			return max;
+		}
+	}//all armors must need this
+
+	@Override
+	public int DRMin(int lvl) {
+		int max = DRMax(lvl);
+		if (lvl >= max) {
+			return (lvl - max);
+		} else {
+			return lvl;
+		}
+	}//all armors must need this
 }

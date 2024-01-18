@@ -21,7 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.items.scrolls;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Identification;
@@ -34,16 +34,11 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
 import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.Herb;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.AlchemicalCatalyst;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.Brew;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.Elixir;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.ExoticPotion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.Ring;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ExoticScroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.Runestone;
 import com.touhoupixel.touhoupixeldungeongaiden.items.talismans.Talisman;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MeleeWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.darts.Dart;
@@ -76,10 +71,9 @@ public class ScrollOfTransmutation extends InventoryScroll {
 
 		if (item instanceof MeleeWeapon ||
 				(item instanceof MissileWeapon && (!(item instanceof Dart) || item instanceof TippedDart)) ||
-				(item instanceof Potion && !(item instanceof Elixir || item instanceof Brew || item instanceof AlchemicalCatalyst)) ||
+				(item instanceof Potion && !(item instanceof Elixir || item instanceof AlchemicalCatalyst)) ||
 				item instanceof Scroll ||
 				item instanceof Ring ||
-				item instanceof Wand ||
 				item instanceof Plant.Seed ||
 				item instanceof Runestone ||
 				item instanceof Artifact) {
@@ -125,20 +119,12 @@ public class ScrollOfTransmutation extends InventoryScroll {
 	}
 
 	public static Item changeItem(Item item) {
-		if (item instanceof MarisaStaff) {
-			return changeStaff((MarisaStaff) item);
-		} else if (item instanceof TippedDart) {
+		if (item instanceof TippedDart) {
 			return changeTippeDart((TippedDart) item);
 		} else if (item instanceof MeleeWeapon || item instanceof MissileWeapon) {
 			return changeWeapon((Weapon) item);
-		} else if (item instanceof Scroll) {
-			return changeScroll((Scroll) item);
-		} else if (item instanceof Potion) {
-			return changePotion((Potion) item);
 		} else if (item instanceof Ring) {
 			return changeRing((Ring) item);
-		} else if (item instanceof Wand) {
-			return changeWand((Wand) item);
 		} else if (item instanceof Plant.Seed) {
 			return changeSeed((Plant.Seed) item);
 		} else if (item instanceof Runestone) {
@@ -148,24 +134,6 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		} else {
 			return null;
 		}
-	}
-
-	private static MarisaStaff changeStaff(MarisaStaff staff) {
-		Class<? extends Wand> wandClass = staff.wandClass();
-
-		if (wandClass == null) {
-			return null;
-		} else {
-			Wand n;
-			do {
-				n = (Wand) Generator.random(Generator.Category.WAND);
-			} while (Challenges.isItemBlocked(n) || n.getClass() == wandClass);
-			n.level(0);
-			n.identify();
-			staff.imbueWand(n, null);
-		}
-
-		return staff;
 	}
 
 	private static TippedDart changeTippeDart(TippedDart dart) {
@@ -182,14 +150,14 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		Weapon n;
 		Generator.Category c;
 		if (w instanceof MeleeWeapon) {
-			c = Generator.wepTiers[((MeleeWeapon) w).tier - 1];
+			c = Generator.Category.WEAPON;
 		} else {
-			c = Generator.misTiers[((MissileWeapon) w).tier - 1];
+			c = Generator.Category.MISSILE;
 		}
 
 		do {
 			n = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
-		} while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
+		} while (HardMode.isItemBlocked(n) || n.getClass() == w.getClass());
 
 		int level = w.trueLevel();
 		if (level > 0) {
@@ -214,7 +182,7 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		Ring n;
 		do {
 			n = (Ring) Generator.random(Generator.Category.RING);
-		} while (Challenges.isItemBlocked(n) || n.getClass() == r.getClass());
+		} while (HardMode.isItemBlocked(n) || n.getClass() == r.getClass());
 
 		n.level(0);
 
@@ -235,7 +203,7 @@ public class ScrollOfTransmutation extends InventoryScroll {
 	private static Artifact changeArtifact(Artifact a) {
 		Artifact n = Generator.randomArtifact();
 
-		if (n != null && !Challenges.isItemBlocked(n)) {
+		if (n != null && !HardMode.isItemBlocked(n)) {
 			n.cursedKnown = a.cursedKnown;
 			n.cursed = a.cursed;
 			n.levelKnown = a.levelKnown;
@@ -244,30 +212,6 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		}
 
 		return null;
-	}
-
-	private static Wand changeWand(Wand w) {
-
-		Wand n;
-		do {
-			n = (Wand) Generator.random(Generator.Category.WAND);
-		} while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
-
-		n.level(0);
-		int level = w.trueLevel();
-		n.upgrade(level);
-
-		n.levelKnown = w.levelKnown;
-		n.curChargeKnown = w.curChargeKnown;
-		n.cursedKnown = w.cursedKnown;
-		n.cursed = w.cursed;
-		n.curseInfusionBonus = w.curseInfusionBonus;
-		n.resinBonus = w.resinBonus;
-
-		n.curCharges = w.curCharges;
-		n.updateLevel();
-
-		return n;
 	}
 
 	private static Plant.Seed changeSeed(Plant.Seed s) {
@@ -290,21 +234,5 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		} while (n.getClass() == r.getClass());
 
 		return n;
-	}
-
-	private static Scroll changeScroll(Scroll s) {
-		if (s instanceof ExoticScroll) {
-			return Reflection.newInstance(ExoticScroll.exoToReg.get(s.getClass()));
-		} else {
-			return Reflection.newInstance(ExoticScroll.regToExo.get(s.getClass()));
-		}
-	}
-
-	private static Potion changePotion(Potion p) {
-		if (p instanceof ExoticPotion) {
-			return Reflection.newInstance(ExoticPotion.exoToReg.get(p.getClass()));
-		} else {
-			return Reflection.newInstance(ExoticPotion.regToExo.get(p.getClass()));
-		}
 	}
 }

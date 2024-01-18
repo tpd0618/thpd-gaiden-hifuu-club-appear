@@ -26,7 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
 import com.watabou.utils.Random;

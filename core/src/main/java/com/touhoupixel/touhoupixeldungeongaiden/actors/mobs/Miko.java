@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Weakness;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ZeroDexterity;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.LifeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.MikoSprite;
 import com.watabou.utils.Random;
@@ -49,7 +45,7 @@ public class Miko extends Mob {
     public int attackProc( Char hero, int damage ) {
         damage = super.attackProc( enemy, damage );
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment) {
-            Buff.prolong(enemy, WandZeroDamage.class, WandZeroDamage.DURATION / 2f);
+            //todo
         }
         return damage;
     }

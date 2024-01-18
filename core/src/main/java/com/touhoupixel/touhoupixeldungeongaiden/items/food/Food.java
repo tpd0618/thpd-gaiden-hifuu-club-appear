@@ -22,13 +22,10 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.food;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DistortedAvarice;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeHunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hunger;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WellFed;
@@ -36,7 +33,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MintChocoSword;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
@@ -87,27 +83,9 @@ public class Food extends Item {
 			SpellSprite.show(heroine, SpellSprite.FOOD );
 			Sample.INSTANCE.play( Assets.Sounds.EAT );
 
-			Buff.detach(curUser, ExtremeHunger.class);
-			Buff.detach(curUser, DistortedAvarice.class);
-
 			heroine.spend( eatingTime() );
 
 			Statistics.foodEaten++;
-
-			if (Statistics.card41){
-				Buff.affect(heroine, WellFed.class).set((int)(Hunger.STARVING/4f));
-			}
-
-			if (Dungeon.heroine.belongings.weapon() instanceof MintChocoSword && Dungeon.heroine.belongings.weapon().cursed){
-				Buff.affect(heroine, WellFed.class).reset();
-				curUser.HP = Math.min(curUser.HP + curUser.HT/2, curUser.HT);
-				PotionOfHealing.cure(curUser);
-				Buff.prolong(curUser, DoubleSpeed.class, DoubleSpeed.DURATION);
-			}
-
-			if (Statistics.card67){
-				Statistics.power += 100;
-			}
 		}
 	}
 

@@ -22,13 +22,10 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ZeroDexterity;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Doublerainbow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RemiliaFate;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Gold;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.BenbenSprite;
 import com.watabou.utils.Random;

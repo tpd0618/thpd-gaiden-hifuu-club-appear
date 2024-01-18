@@ -24,10 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeavenSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Silence;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfMagic;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfEarthenArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
@@ -50,7 +47,7 @@ public class Mayumi extends Mob implements Callback {
 
         properties.add(Property.WARP);
 
-        loot = new PotionOfMagic();
+        loot = new PotionOfEarthenArmor();
         lootChance = 0.08f;
     }
 

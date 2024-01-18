@@ -1,11 +1,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HerbDegrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hex;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfDoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.AyaSprite;
 import com.watabou.utils.Random;

@@ -34,8 +34,6 @@ public class RandomStar extends MeleeWeapon {
 		image = ItemSpriteSheet.RANDOM_STAR;
 		hitSound = Assets.Sounds.HIT_MAGIC;
 		hitSoundPitch = 1f;
-
-		tier = 5;
 	}
 
 	@Override
@@ -76,11 +74,5 @@ public class RandomStar extends MeleeWeapon {
 			}
 		}
 		return super.proc(attacker, defender, damage);
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  3*(tier+1) +
-				lvl*(tier+1);
 	}
 }

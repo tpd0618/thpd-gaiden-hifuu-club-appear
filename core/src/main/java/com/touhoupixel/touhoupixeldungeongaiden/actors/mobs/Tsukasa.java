@@ -22,13 +22,9 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.SummoningTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.TsukasaSprite;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;

@@ -23,13 +23,11 @@ package com.touhoupixel.touhoupixeldungeongaiden.ui;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.ShatteredPixelDungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.ArcaneResin;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Homunculus;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.LiquidMetal;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Recipe;
-import com.touhoupixel.touhoupixeldungeongaiden.items.food.Blandfruit;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.Food;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.MeatPie;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.MysteryMeat;
@@ -37,32 +35,21 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.food.Pasty;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.StewedMeat;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.AlchemicalCatalyst;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.BlizzardBrew;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.InfernalBrew;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.ShockingBrew;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfAquaticRejuvenation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfArcaneArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfDragonsBlood;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfHoneyedHealing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfIcyTouch;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfMight;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfBossKiller;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfToxicEssence;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfZen;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.ExoticPotion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ExoticScroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.Alchemize;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.AquaBlast;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.ArcaneCatalyst;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.FeatherFall;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.MagicalInfusion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.PhaseShift;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.ReclaimTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.TelekineticGrab;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.WildEnergy;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.Runestone;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Plant;
@@ -259,121 +246,8 @@ public class QuickRecipe extends Component {
 		ArrayList<QuickRecipe> result = new ArrayList<>();
 		switch (pageIdx){
 			case 0: default:
-				result.add(new QuickRecipe( new Potion.SeedToPotion(), new ArrayList<>(Arrays.asList(new Plant.Seed.PlaceHolder().quantity(3))), new WndBag.Placeholder(ItemSpriteSheet.POTION_HOLDER){
-					@Override
-					public String name() {
-						return Messages.get(Potion.SeedToPotion.class, "name");
-					}
-
-					@Override
-					public String info() {
-						return "";
-					}
-				}));
-				return result;
-			case 1:
-				Recipe r = new Scroll.ScrollToStone();
-				for (Class<?> cls : Generator.Category.SCROLL.classes){
-					Scroll scroll = (Scroll) Reflection.newInstance(cls);
-					if (!scroll.isKnown()) scroll.anonymize();
-					ArrayList<Item> in = new ArrayList<Item>(Arrays.asList(scroll));
-					result.add(new QuickRecipe( r, in, r.sampleOutput(in)));
-				}
-				return result;
-			case 2:
-				result.add(new QuickRecipe( new StewedMeat.oneMeat() ));
-				result.add(new QuickRecipe( new StewedMeat.twoMeat() ));
-				result.add(new QuickRecipe( new StewedMeat.threeMeat() ));
-				result.add(null);
-				result.add(new QuickRecipe( new MeatPie.Recipe(),
-						new ArrayList<Item>(Arrays.asList(new Pasty(), new Food(), new MysteryMeat.PlaceHolder())),
-						new MeatPie()));
-				result.add(null);
-				result.add(new QuickRecipe( new Blandfruit.CookFruit(),
-						new ArrayList<>(Arrays.asList(new Blandfruit(), new Plant.Seed.PlaceHolder())),
-						new Blandfruit(){
-
-							public String name(){
-								return Messages.get(Blandfruit.class, "cooked");
-							}
-							
-							@Override
-							public String info() {
-								return "";
-							}
-						}));
-				return result;
-			case 3:
-				r = new ExoticPotion.PotionToExotic();
-				for (Class<?> cls : Generator.Category.POTION.classes){
-					Potion pot = (Potion) Reflection.newInstance(cls);
-					ArrayList<Item> in = new ArrayList<>(Arrays.asList(pot));
-					result.add(new QuickRecipe( r, in, r.sampleOutput(in)));
-				}
-				return result;
-			case 4:
-				r = new ExoticScroll.ScrollToExotic();
-				for (Class<?> cls : Generator.Category.SCROLL.classes){
-					Scroll scroll = (Scroll) Reflection.newInstance(cls);
-					ArrayList<Item> in = new ArrayList<>(Arrays.asList(scroll));
-					result.add(new QuickRecipe( r, in, r.sampleOutput(in)));
-				}
-				return result;
-			case 5:
 				result.add(new QuickRecipe(new Homunculus.Recipe()));
-				return result;
-			case 6:
-				result.add(new QuickRecipe( new LiquidMetal.Recipe(),
-						new ArrayList<Item>(Arrays.asList(new MissileWeapon.PlaceHolder())),
-						new LiquidMetal()));
-				result.add(new QuickRecipe( new LiquidMetal.Recipe(),
-						new ArrayList<Item>(Arrays.asList(new MissileWeapon.PlaceHolder().quantity(2))),
-						new LiquidMetal()));
-				result.add(new QuickRecipe( new LiquidMetal.Recipe(),
-						new ArrayList<Item>(Arrays.asList(new MissileWeapon.PlaceHolder().quantity(3))),
-						new LiquidMetal()));
-				result.add(null);
-				result.add(null);
-				result.add(new QuickRecipe( new ArcaneResin.Recipe(),
-						new ArrayList<Item>(Arrays.asList(new Wand.PlaceHolder())),
-						new ArcaneResin()));
-				return result;
-			case 7:
-				result.add(new QuickRecipe(new AlchemicalCatalyst.Recipe(), new ArrayList<>(Arrays.asList(new Potion.PlaceHolder(), new Plant.Seed.PlaceHolder())), new AlchemicalCatalyst()));
-				result.add(new QuickRecipe(new AlchemicalCatalyst.Recipe(), new ArrayList<>(Arrays.asList(new Potion.PlaceHolder(), new Runestone.PlaceHolder())), new AlchemicalCatalyst()));
-				result.add(null);
-				result.add(null);
-				result.add(new QuickRecipe(new ArcaneCatalyst.Recipe(), new ArrayList<>(Arrays.asList(new Scroll.PlaceHolder(), new Runestone.PlaceHolder())), new ArcaneCatalyst()));
-				result.add(new QuickRecipe(new ArcaneCatalyst.Recipe(), new ArrayList<>(Arrays.asList(new Scroll.PlaceHolder(), new Plant.Seed.PlaceHolder())), new ArcaneCatalyst()));
-				return result;
-			case 8:
-				result.add(new QuickRecipe(new BlizzardBrew.Recipe()));
-				result.add(new QuickRecipe(new InfernalBrew.Recipe()));
-				result.add(new QuickRecipe(new ShockingBrew.Recipe()));
-				result.add(null);
-				result.add(null);
-				result.add(new QuickRecipe(new ElixirOfHoneyedHealing.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfAquaticRejuvenation.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfMight.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfDragonsBlood.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfIcyTouch.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfToxicEssence.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfArcaneArmor.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfZen.Recipe()));
-				result.add(new QuickRecipe(new ElixirOfBossKiller.Recipe()));
-				return result;
-			case 9:
-				result.add(new QuickRecipe(new TelekineticGrab.Recipe()));
-				result.add(new QuickRecipe(new PhaseShift.Recipe()));
-				result.add(new QuickRecipe(new WildEnergy.Recipe()));
-				result.add(null);
-				result.add(new QuickRecipe(new AquaBlast.Recipe()));
-				result.add(new QuickRecipe(new ReclaimTrap.Recipe()));
-				result.add(new QuickRecipe(new FeatherFall.Recipe()));
-				result.add(null);
-				result.add(new QuickRecipe(new Alchemize.Recipe()));
-				result.add(new QuickRecipe(new MagicalInfusion.Recipe()));
-				return result;
+				return result;//todo
 		}
 	}
 }

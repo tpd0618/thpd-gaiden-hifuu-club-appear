@@ -21,7 +21,7 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.CrystalMimic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mimic;
@@ -90,12 +90,11 @@ public class CrystalVaultRoom extends SpecialRoom {
 		Item prize;
 		do {
 			prize = Generator.random(cat);
-		} while (prize == null || Challenges.isItemBlocked(prize));
+		} while (prize == null || HardMode.isItemBlocked(prize));
 		return prize;
 	}
 	
 	private ArrayList<Generator.Category> prizeClasses = new ArrayList<>(
-			Arrays.asList(Generator.Category.WAND,
-					Generator.Category.RING,
+			Arrays.asList(Generator.Category.RING,
 					Generator.Category.ARTIFACT));
 }

@@ -26,9 +26,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeConfusion;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.LifeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -71,7 +68,7 @@ public class Satono extends Mob {
     @Override
     public int attackProc(Char hero, int damage) {
         damage = super.attackProc(enemy, damage);
-        Buff.prolong(enemy, MagicDrain.class, MagicDrain.DURATION);
+        //todo
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Dungeon.level.map[hero.pos] == Terrain.OPEN_DOOR) {
             Statistics.life = 0;
             Sample.INSTANCE.play(Assets.Sounds.CURSED);

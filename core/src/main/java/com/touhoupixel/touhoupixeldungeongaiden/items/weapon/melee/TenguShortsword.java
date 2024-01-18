@@ -31,8 +31,6 @@ public class TenguShortsword extends MeleeWeapon {
 		image = ItemSpriteSheet.TENGU_SHORTSWORD;
 		hitSound = Assets.Sounds.HIT_SLASH;
 		hitSoundPitch = 1.1f;
-
-		tier = 2;
 	}
 
 	@Override

@@ -22,10 +22,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.weapon;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeConfusion;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HumanHalf;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ReachIncrease;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
@@ -33,7 +31,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.KindOfWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.CrystalKey;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.GoldenKey;
 import com.touhoupixel.touhoupixeldungeongaiden.items.keys.IronKey;
-import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfFuror;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.curses.Annoying;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.curses.Displacing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.curses.Dazzling;
@@ -47,7 +44,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Blocki
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Blooming;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Chilling;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Corrupting;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Elastic;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Grim;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Kinetic;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Lucky;
@@ -173,20 +169,13 @@ abstract public class Weapon extends KindOfWeapon {
 	
 	@Override
 	public float accuracyFactor( Char owner ) {
-		
-		int encumbrance = 0;
-		
-		if( owner instanceof Hero){
-			encumbrance = STRReq() - ((Hero)owner).STR();
-		}
-
 		float ACC = this.ACC;
 
 		if (owner.buff(Wayward.WaywardBuff.class) != null && enchantment instanceof Wayward){
 			ACC /= 5;
 		}
 
-		return encumbrance > 0 ? (float)(ACC / Math.pow( 1.5, encumbrance )) : ACC;
+		return ACC;
 	}
 
 	@Override
@@ -201,23 +190,7 @@ abstract public class Weapon extends KindOfWeapon {
 				case 2:
 					return 2f;
 			}
-		} else return baseDelay(owner) * (1f/speedMultiplier(owner));
-	}
-
-	protected float baseDelay( Char owner ){
-		float delay = augment.delayFactor(this.DLY);
-		if (owner instanceof Hero) {
-			int encumbrance = STRReq() - ((Hero)owner).STR();
-			if (encumbrance > 0){
-				delay *= Math.pow( 1.2, encumbrance );
-			}
-		}
-
-		return delay;
-	}
-
-	protected float speedMultiplier(Char owner ){
-		return RingOfFuror.attackSpeedMultiplier(owner);
+		} else return 1f;
 	}
 
 	@Override
@@ -226,9 +199,6 @@ abstract public class Weapon extends KindOfWeapon {
 
 		if (owner.buff(ReachIncrease.class) != null) {
 			reach++;
-		}
-		if (owner.buff(HumanHalf.class) != null) {
-			reach += HumanHalf.getBonusReach();
 		}
 		if (hasEnchant(Projecting.class, owner)) {
 			reach++;
@@ -244,21 +214,6 @@ abstract public class Weapon extends KindOfWeapon {
 			reach += crystalKeyCount;
 		}
 		return reach;
-	}
-
-	public int STRReq(){
-		int req = STRReq(level());
-		if (masteryPotionBonus){
-			req -= 5;
-		}
-		return req;
-	}
-
-	public abstract int STRReq(int lvl);
-
-	protected static int STRReq(int tier, int lvl){
-		lvl = Math.max(0, lvl);
-		return Math.max(1,(6 + Math.round(tier * 4)) - lvl);
 	}
 
 	@Override
@@ -292,14 +247,6 @@ abstract public class Weapon extends KindOfWeapon {
 		} else {
 			if (hasCurseEnchant()){
 				if (Random.Int(3) == 0) enchant(null);
-			}
-			else{
-				if (Statistics.card36) {
-					if (level() >= 25) enchant(null);
-				}
-				else if (level() >= 4 && Random.Float(10) < Math.pow(2, level() - 4)) {
-					enchant(null);
-				}
 			}
 		}
 		
@@ -373,7 +320,7 @@ abstract public class Weapon extends KindOfWeapon {
 				Blazing.class, Chilling.class, Kinetic.class, Shocking.class};
 		
 		private static final Class<?>[] uncommon = new Class<?>[]{
-				Blocking.class, Blooming.class, Elastic.class,
+				Blocking.class, Blooming.class,
 				Lucky.class, Projecting.class, Unstable.class};
 		
 		private static final Class<?>[] rare = new Class<?>[]{

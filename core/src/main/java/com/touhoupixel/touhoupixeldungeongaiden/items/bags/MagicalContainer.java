@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.bags;
 
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.abilitycards.Abilitycards;
 import com.touhoupixel.touhoupixeldungeongaiden.items.talismans.Talisman;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -34,7 +33,7 @@ public class MagicalContainer extends Bag {
 
 	@Override
 	public boolean canHold( Item item ) {
-		if (item instanceof Abilitycards || item instanceof Talisman){
+		if (item instanceof Talisman){
 			return super.canHold(item);
 		} else {
 			return false;
@@ -42,12 +41,11 @@ public class MagicalContainer extends Bag {
 	}
 
 	public int capacity(){
-		return 19;
+		return 24;
 	}
 
 	@Override
 	public int value() {
 		return 40;
 	}
-
 }

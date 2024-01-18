@@ -22,10 +22,9 @@
 package com.touhoupixel.touhoupixeldungeongaiden.levels;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.GoldenMimic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mimic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
@@ -42,7 +41,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.levels.builders.LoopBuilder;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.painters.Painter;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.Room;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.secret.SecretRoom;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.CardShopRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.PitRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.ShopRoom;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special.SpecialRoom;
@@ -55,6 +53,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.ChillingTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.DisintegrationTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.ExplosiveTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.FrostTrap;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.OnigiriTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.Trap;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Point;
@@ -115,9 +114,6 @@ public abstract class RegularLevel extends Level {
 		if (Dungeon.shopOnLevel())
 			initRooms.add(new ShopRoom());
 
-		if (Dungeon.cardShopOnLevel())
-			initRooms.add(new CardShopRoom());
-
 		//force max special rooms and add one more for large levels
 		int specials = specialRooms(feeling == Feeling.LARGE);
 		if (feeling == Feeling.LARGE){
@@ -170,7 +166,7 @@ public abstract class RegularLevel extends Level {
 	}
 
 	protected Class<?>[] trapClasses(){
-		return new Class<?>[]{Inversion.class};
+		return new Class<?>[]{OnigiriTrap.class};
 	}
 
 	protected float[] trapChances() {
@@ -183,15 +179,6 @@ public abstract class RegularLevel extends Level {
 		if (feeling == Feeling.LARGE){
 			mobs = (int)Math.ceil(mobs * 1.25f);
 		}
-		if (Statistics.card56){
-			mobs = (int)Math.ceil(mobs * 1.25f);
-		}
-		if (Statistics.card5){
-			mobs = (int)Math.ceil(mobs * 0.85f);
-		}
-		//if (Dungeon.pandemoniumLevel()){
-			//mobs = 100;
-		//}
 		return mobs;
 	}
 
@@ -317,15 +304,15 @@ public abstract class RegularLevel extends Level {
 
 	@Override
 	protected void createItems() {
-		int nItems = 8;
+		int nItems = 12;
 		//todo
 
-		if (Statistics.card65) {
-			nItems += 1;
+		if (Dungeon.isChallenged(HardMode.HARD_MODE)) {
+			nItems -= 2;
 		}
 
 		if (Dungeon.floor > 40) {
-			nItems += 1;
+			nItems -= 2;
 		}
 
 		for (int i=0; i < nItems; i++) {
@@ -401,9 +388,6 @@ public abstract class RegularLevel extends Level {
 		Collection<String> allPages = Document.ADVENTURERS_GUIDE.pageNames();
 		ArrayList<String> missingPages = new ArrayList<>();
 		for ( String page : allPages){
-			if (!Document.ADVENTURERS_GUIDE.isPageFound(page)){
-				missingPages.add(page);
-			}
 		}
 
 		//a total of 6 pages drop randomly, the rest are specially dropped or are given at the start

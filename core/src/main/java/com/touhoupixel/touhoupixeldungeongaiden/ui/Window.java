@@ -196,7 +196,8 @@ public class Window extends Group implements Signal.Listener<KeyEvent> {
 	public boolean onSignal( KeyEvent event ) {
 		if (event.pressed) {
 			if (KeyBindings.getActionForKey( event ) == SPDAction.BACK
-				|| KeyBindings.getActionForKey( event ) == SPDAction.WAIT){
+				|| KeyBindings.getActionForKey( event ) == SPDAction.WAIT
+			    || KeyBindings.getActionForKey( event ) == SPDAction.SPELL_CARD){
 				onBackPressed();
 			}
 		}

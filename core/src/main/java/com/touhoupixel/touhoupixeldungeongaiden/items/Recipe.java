@@ -22,37 +22,22 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items;
 
 import com.touhoupixel.touhoupixeldungeongaiden.ShatteredPixelDungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.food.Blandfruit;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.MeatPie;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.StewedMeat;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.AlchemicalCatalyst;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.BlizzardBrew;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.InfernalBrew;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.brews.ShockingBrew;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfAquaticRejuvenation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfArcaneArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfDragonsBlood;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfHoneyedHealing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfIcyTouch;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfMight;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfBossKiller;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfToxicEssence;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs.ElixirOfZen;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.ExoticPotion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ExoticScroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.Alchemize;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.AquaBlast;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.ArcaneCatalyst;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.FeatherFall;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.MagicalInfusion;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.MagicalPorter;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.PhaseShift;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.ReclaimTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.TelekineticGrab;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.WildEnergy;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.watabou.utils.Reflection;
 
@@ -167,44 +152,29 @@ public abstract class Recipe {
 	};
 	
 	private static Recipe[] oneIngredientRecipes = new Recipe[]{
-		new Scroll.ScrollToStone(),
-		new ExoticPotion.PotionToExotic(),
-		new ExoticScroll.ScrollToExotic(),
-		new ArcaneResin.Recipe(),
 		new Alchemize.Recipe(),
 		new StewedMeat.oneMeat()
 	};
 	
 	private static Recipe[] twoIngredientRecipes = new Recipe[]{
-		new Blandfruit.CookFruit(),
 		new AlchemicalCatalyst.Recipe(),
 		new ArcaneCatalyst.Recipe(),
 		new ElixirOfArcaneArmor.Recipe(),
 		new ElixirOfAquaticRejuvenation.Recipe(),
 		new ElixirOfDragonsBlood.Recipe(),
 		new ElixirOfIcyTouch.Recipe(),
-		new ElixirOfMight.Recipe(),
 		new ElixirOfHoneyedHealing.Recipe(),
 		new ElixirOfToxicEssence.Recipe(),
 		new ElixirOfZen.Recipe(),
-		new ElixirOfBossKiller.Recipe(),
-		new BlizzardBrew.Recipe(),
-		new InfernalBrew.Recipe(),
-		new ShockingBrew.Recipe(),
-		new AquaBlast.Recipe(),
 		new FeatherFall.Recipe(),
 		new MagicalInfusion.Recipe(),
-		new MagicalPorter.Recipe(),
-		new PhaseShift.Recipe(),
 		new ReclaimTrap.Recipe(),
-		new WildEnergy.Recipe(),
 		new TelekineticGrab.Recipe(),
 		new Homunculus.Recipe(),
 		new StewedMeat.twoMeat()
 	};
 	
 	private static Recipe[] threeIngredientRecipes = new Recipe[]{
-		new Potion.SeedToPotion(),
 		new StewedMeat.threeMeat(),
 		new MeatPie.Recipe()
 	};
@@ -248,8 +218,6 @@ public abstract class Recipe {
 		if (item instanceof EquipableItem){
 			//only thrown weapons and wands allowed among equipment items
 			return item.isIdentified() && !item.cursed && item instanceof MissileWeapon;
-		} else if (item instanceof Wand) {
-			return item.isIdentified() && !item.cursed;
 		} else {
 			//other items can be unidentified, but not cursed
 			return !item.cursed;

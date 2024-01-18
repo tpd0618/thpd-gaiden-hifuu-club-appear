@@ -43,12 +43,6 @@ public class Yuuma extends Mob {
                     this.sprite.emitter().burst(Speck.factory(Speck.HEALING), 6);
                     Buff.prolong(this, YuumaAbsorb.class, YuumaAbsorb.DURATION);
                     Buff.prolong(this, DoubleSpeed.class, DoubleSpeed.DURATION * 100f);
-                    if (Statistics.difficulty > 2) {
-                        Buff.prolong(this, Might.class, Might.DURATION);
-                    }
-                    if (Statistics.difficulty > 4) {
-                        Buff.prolong(this, Doublerainbow.class, Doublerainbow.DURATION);
-                    }
                     GLog.w(Messages.get(this, "absorb"));
                 }
             }
@@ -59,12 +53,6 @@ public class Yuuma extends Mob {
                     this.sprite.emitter().burst(Speck.factory(Speck.HEALING), 6);
                     Buff.prolong(this, YuumaAbsorb.class, YuumaAbsorb.DURATION);
                     Buff.prolong(this, DoubleSpeed.class, DoubleSpeed.DURATION * 100f);
-                    if (Statistics.difficulty > 2) {
-                        Buff.prolong(this, Might.class, Might.DURATION);
-                    }
-                    if (Statistics.difficulty > 4) {
-                        Buff.prolong(this, Doublerainbow.class, Doublerainbow.DURATION);
-                    }
                     GLog.w(Messages.get(this, "absorb"));
                 }
             }
@@ -79,7 +67,7 @@ public class Yuuma extends Mob {
 
     @Override
     public int attackSkill(Char target) {
-        return 75;
+        return 47;
     }
 
     @Override

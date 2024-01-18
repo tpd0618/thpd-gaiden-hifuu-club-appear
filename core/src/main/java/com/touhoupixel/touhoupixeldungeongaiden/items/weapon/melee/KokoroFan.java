@@ -32,8 +32,6 @@ public class KokoroFan extends MeleeWeapon {
 		image = ItemSpriteSheet.KOKOROFAN;
 		hitSound = Assets.Sounds.HIT_SLASH;
 		hitSoundPitch = 1f;
-
-		tier = 2;
 	}
 
 	@Override

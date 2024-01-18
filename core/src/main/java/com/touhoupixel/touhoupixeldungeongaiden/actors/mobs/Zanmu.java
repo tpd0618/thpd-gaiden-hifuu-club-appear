@@ -182,7 +182,7 @@ public class Zanmu extends Mob {
                     MeleeWeapon meleeweapon = Dungeon.heroine.belongings.getItem(MeleeWeapon.class);
                     Armor armor = Dungeon.heroine.belongings.getItem(Armor.class);
                     if (meleeweapon != null) {
-                        if (meleeweapon.tier > 4) {
+                        if (meleeweapon != null) {//todo
                             meleeweapon.cursed = true;
                             meleeweapon.downgrade();
                             meleeweapon.enchantment = null;

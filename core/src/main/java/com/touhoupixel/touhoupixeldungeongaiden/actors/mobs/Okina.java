@@ -23,14 +23,10 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ExtremeConfusion;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Light;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Homunculus;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfHexCancel;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfPowerUp;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.OkinaSprite;
@@ -50,7 +46,7 @@ public class Okina extends Mob {
 
         properties.add(Property.GOD);
 
-        loot = new PotionOfHexCancel();
+        loot = new PotionOfPowerUp();
         lootChance = 0.1f;
     }
 

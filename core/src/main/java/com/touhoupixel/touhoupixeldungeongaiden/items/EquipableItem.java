@@ -36,8 +36,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
 import com.touhoupixel.touhoupixeldungeongaiden.items.journal.Guidebook;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.JoonFan;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.ShionFan;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Document;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -124,10 +122,6 @@ public abstract class EquipableItem extends Item {
 					heroine.spend(1f);
 
 					Statistics.dismantle_count += 1;
-
-					if (Statistics.card33 && Random.Int(3) == 0) {
-						Buff.prolong(heroine, KeyHeal.class, KeyHeal.DURATION / 3f);
-					}
 
 					Sample.INSTANCE.play(Assets.Sounds.DRINK);
 					curUser.sprite.operate(curUser.pos);

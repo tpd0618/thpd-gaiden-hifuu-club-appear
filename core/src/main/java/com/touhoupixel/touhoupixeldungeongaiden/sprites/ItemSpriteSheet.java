@@ -309,8 +309,8 @@ public class ItemSpriteSheet {
 	public static final int BIG_YING_YANG_ORB = WEP_CATEGORY3 +0;
 	public static final int GOLDEN_EXORCISM_ROD = WEP_CATEGORY3 +1;
 	public static final int TENGUSMARTPHONE = WEP_CATEGORY3 +2;
-	public static final int SEIRANHAMMER = WEP_CATEGORY3 +3;
-	public static final int JUNKOSWORD = WEP_CATEGORY3 +4;
+	public static final int SEIRAN_HAMMER = WEP_CATEGORY3 +3;
+	public static final int JUNKO_SWORD = WEP_CATEGORY3 +4;
 	public static final int AYAFAN = WEP_CATEGORY3 +5;
 	public static final int SWORDOFHISOU    = WEP_CATEGORY3 +6;
 	public static final int IDOL_STICK = WEP_CATEGORY3 +7;
@@ -327,8 +327,8 @@ public class ItemSpriteSheet {
 		assignItemRect(BIG_YING_YANG_ORB,   13, 13);
 		assignItemRect(GOLDEN_EXORCISM_ROD,   13, 13);
 		assignItemRect(TENGUSMARTPHONE,       8, 12);
-		assignItemRect(SEIRANHAMMER,     12, 13);
-		assignItemRect(JUNKOSWORD,  13, 13);
+		assignItemRect(SEIRAN_HAMMER,     12, 13);
+		assignItemRect(JUNKO_SWORD,  13, 13);
 		assignItemRect(AYAFAN,    13, 13);
 		assignItemRect(SWORDOFHISOU, 13, 13);
 		assignItemRect(IDOL_STICK,   13, 13);
@@ -407,7 +407,7 @@ public class ItemSpriteSheet {
 	}
 
 	private static final int ARMOR_CATEGORY1 =                               xy(1, 12);  //16 slots
-	public static final int ARMOR_CLOTH     = ARMOR_CATEGORY1 +0;
+	public static final int ARMOR_REIMU = ARMOR_CATEGORY1 +0;
 	public static final int ARMOR_LEATHER   = ARMOR_CATEGORY1 +1;
 	public static final int ARMOR_MAIL      = ARMOR_CATEGORY1 +2;
 	public static final int ARMOR_SCALE     = ARMOR_CATEGORY1 +3;
@@ -424,7 +424,7 @@ public class ItemSpriteSheet {
 	public static final int ARMOR_MAXWELL    = ARMOR_CATEGORY1 +14;
 	public static final int ARMOR_GOLDENDRAGON    = ARMOR_CATEGORY1 +15;
 	static{
-		assignItemRect(ARMOR_CLOTH,     9, 13);
+		assignItemRect(ARMOR_REIMU,     9, 13);
 		assignItemRect(ARMOR_LEATHER,   9, 13);
 		assignItemRect(ARMOR_MAIL,      9, 13);
 		assignItemRect(ARMOR_SCALE,     9, 13);
@@ -615,26 +615,18 @@ public class ItemSpriteSheet {
 			assignItemRect(i, 10, 15);
 	}
 
-	private static final int EXOTIC_POTIONS =                               xy(1, 18);  //17 slots
-	public static final int EXOTIC_CRIMSON  = EXOTIC_POTIONS+0;
-	public static final int EXOTIC_AMBER    = EXOTIC_POTIONS+1;
-	public static final int EXOTIC_GOLDEN   = EXOTIC_POTIONS+2;
-	public static final int EXOTIC_JADE     = EXOTIC_POTIONS+3;
-	public static final int EXOTIC_TURQUOISE= EXOTIC_POTIONS+4;
-	public static final int EXOTIC_AZURE    = EXOTIC_POTIONS+5;
-	public static final int EXOTIC_INDIGO   = EXOTIC_POTIONS+6;
-	public static final int EXOTIC_MAGENTA  = EXOTIC_POTIONS+7;
-	public static final int EXOTIC_BISTRE   = EXOTIC_POTIONS+8;
-	public static final int EXOTIC_CHARCOAL = EXOTIC_POTIONS+9;
-	public static final int EXOTIC_SILVER   = EXOTIC_POTIONS+10;
-	public static final int EXOTIC_IVORY    = EXOTIC_POTIONS+11;
-	public static final int EXOTIC_PINK     = EXOTIC_POTIONS+12;
-	public static final int EXOTIC_YELLOW   = EXOTIC_POTIONS+13;
-	public static final int EXOTIC_SPECTRAL = EXOTIC_POTIONS+14;
-	public static final int EXOTIC_GREEN    = EXOTIC_POTIONS+15;
+	private static final int POTIONS2        =                               xy(1, 18);  //17 slots
+	public static final int GREENTEA_POTION_CRIMSON  = POTIONS2+0;
+	public static final int GREENTEA_POTION_AMBER    = POTIONS2+1;
+	public static final int GREENTEA_POTION_GOLDEN   = POTIONS2+2;
+	public static final int GREENTEA_POTION_JADE     = POTIONS2+3;
+	public static final int GREENTEA_POTION_TURQUOISE  = POTIONS2+0;
+	public static final int GREENTEA_POTION_AZURE    = POTIONS2+1;
+	public static final int GREENTEA_POTION_INDIGO   = POTIONS2+2;
+	public static final int GREENTEA_POTION_MAGENTA     = POTIONS2+3;
 
 	static {
-		for (int i = EXOTIC_POTIONS; i < EXOTIC_POTIONS+16; i++)
+		for (int i = POTIONS2; i < POTIONS2+16; i++)
 			assignItemRect(i, 10, 15);
 	}
 

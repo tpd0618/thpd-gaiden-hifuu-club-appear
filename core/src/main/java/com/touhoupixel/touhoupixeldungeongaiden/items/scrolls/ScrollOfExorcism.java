@@ -35,7 +35,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.Herb;
 import com.touhoupixel.touhoupixeldungeongaiden.items.talismans.Talisman;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -57,7 +56,7 @@ public class ScrollOfExorcism extends InventoryScroll {
 	public static boolean uncursable( Item item ){
 		if (item.isEquipped(Dungeon.heroine) && Dungeon.heroine.buff(Degrade.class) != null) {
 			return true;
-		} if ((item instanceof EquipableItem || item instanceof Wand) && ((!item.isIdentified() && !item.cursedKnown) || item.cursed)){
+		} if (item instanceof EquipableItem && ((!item.isIdentified() && !item.cursedKnown) || item.cursed)){
 			return true;
 		} else if (item instanceof Weapon){
 			return ((Weapon)item).hasCurseEnchant();
@@ -119,9 +118,6 @@ public class ScrollOfExorcism extends InventoryScroll {
 					a.inscribe(null);
 					procced = true;
 				}
-			}
-			if (item instanceof Wand){
-				((Wand) item).updateLevel();
 			}
 		}
 		

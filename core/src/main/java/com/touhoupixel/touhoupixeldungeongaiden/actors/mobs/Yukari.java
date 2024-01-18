@@ -1,13 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AntiShipBattery;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfAttraction;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfStamina;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.YukariSprite;
 import com.watabou.utils.Random;
 
@@ -28,7 +23,7 @@ public class Yukari extends Mob {
 
         flying = true;
 
-        loot = new PotionOfAttraction();
+        loot = new PotionOfStamina();
         lootChance = 0.1f;
     }
 
@@ -51,7 +46,7 @@ public class Yukari extends Mob {
     public int attackProc(Char hero, int damage) {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0) {
-            Buff.prolong(enemy, AntiShipBattery.class, AntiShipBattery.DURATION);
+            //todo
         }
         return damage;
     }

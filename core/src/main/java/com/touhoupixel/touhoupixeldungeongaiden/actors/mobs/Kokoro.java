@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Weakness;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KokoroSprite;
 import com.watabou.utils.Random;
@@ -26,8 +22,7 @@ public class Kokoro extends Mob {
         properties.add(Property.FUMO);
         //used for fumo lover buff
 
-        loot = Generator.Category.WEP_T2;
-        lootChance = 0.15f;
+        //todo
     }
 
     @Override
@@ -49,7 +44,7 @@ public class Kokoro extends Mob {
     public int attackProc(Char hero, int damage) {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0){
-            Buff.prolong(enemy, BalanceBreak.class, BalanceBreak.DURATION);
+            //todo
         }
         return damage;
     }

@@ -24,7 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.stones;
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Sheep;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.DoremySheep;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -59,11 +59,11 @@ public class StoneOfFlock extends Runestone {
 			if (Dungeon.level.insideMap(i)
 					&& Actor.findChar(i) == null
 					&& !(Dungeon.level.pit[i])) {
-				Sheep sheep = new Sheep();
-				sheep.lifespan = 8;
-				sheep.pos = i;
-				GameScene.add(sheep);
-				Dungeon.level.occupyCell(sheep);
+				DoremySheep doremySheep = new DoremySheep();
+				doremySheep.lifespan = 8;
+				doremySheep.pos = i;
+				GameScene.add(doremySheep);
+				Dungeon.level.occupyCell(doremySheep);
 				CellEmitter.get(i).burst(Speck.factory(Speck.WOOL), 4);
 			}
 		}

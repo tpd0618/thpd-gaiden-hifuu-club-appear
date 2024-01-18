@@ -34,13 +34,6 @@ public class YachieHorn extends MeleeWeapon {
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
 
-        tier = 4;
-    }
-
-    @Override
-    public int max(int lvl) {
-        return  9*(tier+1) +
-                lvl*(tier+1);
     }
 
     @Override

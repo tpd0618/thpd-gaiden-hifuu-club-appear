@@ -3,14 +3,11 @@ package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
-import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.StoneOfFear;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfBlastWave;
-import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KogasaSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
+import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
@@ -52,16 +49,11 @@ public class Kogasa extends Mob {
     public int attackProc(Char hero, int damage) {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0) {
-            Ballistica trajectory = new Ballistica(this.pos, enemy.pos, Ballistica.STOP_TARGET);
-            //trim it to just be the part that goes past them
-            trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size() - 1), Ballistica.PROJECTILE);
-            //knock them back along that ballistica
-            WandOfBlastWave.throwChar(enemy, trajectory, 3, false, true, getClass());
-            Sample.INSTANCE.play(Assets.Sounds.CURSED);
-            CellEmitter.get(pos).burst(ShadowParticle.UP, 5);
-            GLog.w(Messages.get(this, "fear"));
-            return damage;
+            damage *= 3f;
+            Sample.INSTANCE.play( Assets.Sounds.BLAST );
+            GLog.w(Messages.get(this, "punisher"));
+            Camera.main.shake( 20, 1f );
         }
         return damage;
     }
-}
+} //todo

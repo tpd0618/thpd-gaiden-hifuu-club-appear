@@ -162,15 +162,14 @@ public class WndJournal extends WndTabbed {
 			list.addTitle(Document.ADVENTURERS_GUIDE.title());
 
 			for (String page : Document.ADVENTURERS_GUIDE.pageNames()){
-				boolean found = Document.ADVENTURERS_GUIDE.isPageFound(page);
 				ScrollingListPane.ListItem item = new ScrollingListPane.ListItem(
 						Document.ADVENTURERS_GUIDE.pageSprite(page),
 						null,
-						found ? Messages.titleCase(Document.ADVENTURERS_GUIDE.pageTitle(page)) : Messages.titleCase(Messages.get( this, "missing" ))
+						Messages.titleCase(Document.ADVENTURERS_GUIDE.pageTitle(page))
 				){
 					@Override
 					public boolean onClick(float x, float y) {
-						if (inside( x, y ) && found) {
+						if (inside( x, y )) {
 							GameScene.show( new WndStory( Document.ADVENTURERS_GUIDE.pageSprite(page),
 									Document.ADVENTURERS_GUIDE.pageTitle(page),
 									Document.ADVENTURERS_GUIDE.pageBody(page) ));
@@ -181,10 +180,6 @@ public class WndJournal extends WndTabbed {
 						}
 					}
 				};
-				if (!found){
-					item.hardlight(0x999999);
-					item.hardlightIcon(0x999999);
-				}
 				list.addItem(item);
 			}
 
@@ -220,12 +215,8 @@ public class WndJournal extends WndTabbed {
 						updateList();
 					}
 				};
-				if (Document.ALCHEMY_GUIDE.isPageFound(i)) {
-					pageButtons[i].icon(new ItemSprite(ItemSpriteSheet.SOMETHING + spriteIndexes[i], null));
-				} else {
-					pageButtons[i].icon(new ItemSprite(ItemSpriteSheet.SOMETHING, null));
-					pageButtons[i].enable(false);
-				}
+				pageButtons[i].icon(new ItemSprite(ItemSpriteSheet.SOMETHING, null));
+				pageButtons[i].enable(false);
 				add( pageButtons[i] );
 			}
 
@@ -273,10 +264,6 @@ public class WndJournal extends WndTabbed {
 		}
 
 		private void updateList() {
-
-			if (currentPageIdx != -1 && !Document.ALCHEMY_GUIDE.isPageFound(currentPageIdx)){
-				currentPageIdx = -1;
-			}
 
 			for (int i = 0; i < NUM_BUTTONS; i++) {
 				if (i == currentPageIdx) {
@@ -438,7 +425,7 @@ public class WndJournal extends WndTabbed {
 		private static final int POTION_IDX = 5;
 		private static final int SCROLL_IDX = 6;
 
-		private static final int spriteIndexes[] = {1, 2, 4, 5, 11, 9, 11};
+		private static final int spriteIndexes[] = {1, 2, 4, 5, 11, 9, 11};//todo
 
 		private ScrollingListPane list;
 

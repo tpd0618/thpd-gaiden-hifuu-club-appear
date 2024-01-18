@@ -32,8 +32,6 @@ public class MurasaDipper extends MeleeWeapon {
         image = ItemSpriteSheet.MURASA_DIPPER;
         hitSound = Assets.Sounds.HIT_STRONG;
         hitSoundPitch = 1f;
-
-        tier = 4;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class MurasaDipper extends MeleeWeapon {
 
     @Override
     public int max(int lvl) {
-        return  Math.round((Statistics.murasasKilled)*1.5f+4f*(tier+1)) +    //20 base, up from 15
-                lvl*Math.round(1.33f*(tier+1)); //+4 per level, up from +3
+        return  1;//Math.round((Statistics.murasasKilled)*1.5f+4f*(tier+1)) +    //20 base, up from 15
+                //lvl*Math.round(1.33f*(tier+1)); //+4 per level, up from +3 //todo
     }
 }

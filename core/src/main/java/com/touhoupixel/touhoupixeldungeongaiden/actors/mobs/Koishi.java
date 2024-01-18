@@ -1,12 +1,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ZeroDexterity;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeavenSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfReverseYingYang;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfInvisibility;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KoishiSprite;
 import com.watabou.utils.Random;
 
@@ -27,7 +22,7 @@ public class Koishi extends Mob {
         properties.add(Property.FUMO);
         //used for fumo lover buff
 
-        loot = new PotionOfReverseYingYang();
+        loot = new PotionOfInvisibility();
         lootChance = 0.05f;
     }
 

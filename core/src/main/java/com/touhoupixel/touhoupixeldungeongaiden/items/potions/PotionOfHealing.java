@@ -24,7 +24,6 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.potions;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Bleeding;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Blindness;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
@@ -36,12 +35,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Poison;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Slow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Vertigo;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Vulnerable;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Weakness;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
-import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 
@@ -61,30 +57,12 @@ public class PotionOfHealing extends Potion {
 		if (curUser.HP == curUser.HT){
 			curUser.HP += 10;
 			curUser.HT += 10;
-			Statistics.maxHP_down += 10;
-		}
-		if (Statistics.card62){
-			GameScene.flash(0x80FFFFFF);
-			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-				if (mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[mob.pos]) {
-					if (!mob.properties().contains(Char.Property.BOSS) && !mob.properties().contains(Char.Property.MINIBOSS)) {
-						mob.HP = Math.max(3, mob.HP/2);
-					}
-				}
-			}
+			Statistics.maxHP_change += 10;
 		}
 	}
 
 	public static void heal( Char ch ) {
-		if (ch.buff(Inversion.class) != null) {
-			ch.damage(ch.HT / 2, ch);
-			if (ch == Dungeon.heroine && !ch.isAlive()) {
-				Dungeon.fail(Inversion.class);
-				GLog.n( Messages.get(Inversion.class, "ondeath") );
-			}
-		} else {
-			Buff.affect(ch, Healing.class).setHeal((int) (0.8f * ch.HT + 14), 0.25f, 0);
-		}
+		Buff.affect(ch, Healing.class).setHeal((int) (0.8f * ch.HT + 14), 0.25f, 0);
 		if (ch == Dungeon.heroine) {
 			GLog.p(Messages.get(PotionOfHealing.class, "heal"));
 		}
@@ -101,7 +79,6 @@ public class PotionOfHealing extends Potion {
 		Buff.detach( ch, Slow.class );
 		Buff.detach( ch, Vertigo.class);
 		Buff.detach( ch, MeleeNullify.class);
-		Buff.detach( ch, WandZeroDamage.class);
 	}
 
 	@Override

@@ -32,7 +32,6 @@ public class KogasaUmbrella extends MeleeWeapon {
 		hitSound = Assets.Sounds.HIT_SLASH;
 		hitSoundPitch = 1f;
 
-		tier = 2;
 		ACC = 1.32f; //32% boost to accuracy
 	}
 

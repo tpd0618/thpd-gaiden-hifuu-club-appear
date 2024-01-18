@@ -86,9 +86,6 @@ public class LaboratoryRoom extends SpecialRoom {
 		Collection<String> allPages = Document.ALCHEMY_GUIDE.pageNames();
 		ArrayList<String> missingPages = new ArrayList<>();
 		for ( String page : allPages){
-			if (!Document.ALCHEMY_GUIDE.isPageFound(page)){
-				missingPages.add(page);
-			}
 		}
 		
 		//5 pages in sewers, 10 in prison+

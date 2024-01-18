@@ -16,7 +16,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Randomizer;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FiveStarTicket;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.MitamaSakiSprite;
@@ -98,8 +97,7 @@ public class MitamaSaki extends Mob {
 
     @Override
     public void die( Object cause ) {
-        Dungeon.level.drop(new FiveStarTicket(), pos ).sprite.drop();
-        Dungeon.level.drop(new FiveStarTicket(), pos ).sprite.drop();
+        //todo
         super.die( cause );
     }
 

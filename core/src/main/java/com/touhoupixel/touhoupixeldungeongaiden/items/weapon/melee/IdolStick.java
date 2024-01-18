@@ -34,8 +34,6 @@ public class IdolStick extends MeleeWeapon {
         image = ItemSpriteSheet.IDOL_STICK;
         hitSound = Assets.Sounds.HIT_CRUSH;
         hitSoundPitch = 1f;
-
-        tier = 4;
     }
 
     @Override

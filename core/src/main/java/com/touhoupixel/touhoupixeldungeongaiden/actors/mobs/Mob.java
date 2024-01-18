@@ -29,49 +29,33 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Adrenaline;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AllyBuff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Amok;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.AntiShipBattery;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BrainWash;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Charm;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Corruption;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cripple;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Doublerainbow;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Dread;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Empathetic;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.GoldCreation;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeavenSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HighStress;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HinaCurse;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MeleeNullify;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Might;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MindVision;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ReBirth;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ReBirthDone;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Sleep;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Terror;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.YuukaRage;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.YuumaAbsorb;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.DirectableAlly;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Sheep;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.DoremySheep;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Surprise;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
-import com.touhoupixel.touhoupixeldungeongaiden.items.Gold;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.MasterThievesArmband;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.Ring;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfWealth;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.StoneOfAggression;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FiveStarTicket;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FourStarTicket;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.ThreeStarTicket;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfWarding;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.enchantments.Lucky;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.darts.Dart;
@@ -83,7 +67,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.plants.Swiftthistle;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
-import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
@@ -406,12 +389,7 @@ public abstract class Mob extends Char {
 	}
 
 	protected boolean canAttack( Char enemy ) {
-		if (this.buff(BrainWash.class) != null){
-			return false;
-		} else if (Dungeon.level.adjacent( pos, enemy.pos )){
-			return true;
-		}
-		return false;
+		return Dungeon.level.adjacent(pos, enemy.pos);
 	}
 
 	protected boolean getCloser( int target ) {
@@ -627,10 +605,6 @@ public abstract class Mob extends Char {
 			this.damage(damageRoll(), this);
 		}
 
-		if (buff(YuukaRage.class) != null){
-			damage += 50;
-		}
-
 		if (buff(YuumaAbsorb.class) != null) {
 			damage *= 3f;
 		}
@@ -648,11 +622,6 @@ public abstract class Mob extends Char {
 
 	@Override
 	public int defenseProc( Char enemy, int damage ) {
-
-		if (this.buff(HighStress.class) != null){
-			this.HP = 1;
-		}
-
 		if (enemy instanceof Hero
 				&& ((Hero) enemy).belongings.weapon() instanceof MissileWeapon){
 		}
@@ -676,68 +645,11 @@ public abstract class Mob extends Char {
 			target = enemy.pos;
 		}
 
-		if (this.buff(BrainWash.class) != null && enemy instanceof Hero) {
-			switch (Random.Int(4)) {
-				case 0:
-				default:
-					Dungeon.level.drop(new Gold().random(), Dungeon.heroine.pos).sprite.drop();
-					Dungeon.level.drop(new Gold().random(), Dungeon.heroine.pos).sprite.drop();
-					Dungeon.level.drop(new Gold().random(), Dungeon.heroine.pos).sprite.drop();
-					//3x amount
-					GLog.p(Messages.get(this, "bw_gold"));
-					break;
-				case 1:
-					switch (Random.Int(4)) {
-						case 0:
-						default:
-							Dungeon.level.drop(Generator.random(Generator.Category.POTION), Dungeon.heroine.pos).sprite.drop();
-							break;
-						case 1:
-							Dungeon.level.drop(Generator.random(Generator.Category.SCROLL), Dungeon.heroine.pos).sprite.drop();
-							break;
-						case 2:
-							Dungeon.level.drop(Generator.random(Generator.Category.HERB), Dungeon.heroine.pos).sprite.drop();
-							break;
-						case 3:
-							Dungeon.level.drop(Generator.random(Generator.Category.TALISMAN), Dungeon.heroine.pos).sprite.drop();
-							break;
-					}
-					GLog.p(Messages.get(this, "bw_item"));
-					break;
-				case 2:
-					Dungeon.heroine.HP = Math.min(Dungeon.heroine.HP + Dungeon.heroine.HT/4, Dungeon.heroine.HT);
-					Dungeon.heroine.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.2f, 3 );
-					GLog.p(Messages.get(this, "bw_heal"));
-					break;
-				case 3:
-					switch (Random.Int(4)) {
-						case 0:
-						default:
-							Buff.prolong(Dungeon.heroine, Might.class, Might.DURATION);
-							break;
-						case 1:
-							Buff.prolong(Dungeon.heroine, Hisou.class, Hisou.DURATION);
-							break;
-						case 2:
-							Buff.prolong(Dungeon.heroine, DoubleSpeed.class, DoubleSpeed.DURATION);
-							break;
-						case 3:
-							Buff.prolong(Dungeon.heroine, Doublerainbow.class, Doublerainbow.DURATION);
-							break;
-					}
-					GLog.p(Messages.get(this, "bw_buff"));
-					break;
-			}
-		}
-
 		return damage;
 	}
 
 	@Override
 	public float speed() {
-		if (Dungeon.heroine.buff(HeavenSpeed.class) != null){
-			return super.speed()*2f;
-		}
 		return super.speed();
 	}
 
@@ -823,24 +735,8 @@ public abstract class Mob extends Char {
 
 	@Override
 	public void die( Object cause ) {
-		if (!(this instanceof SakuyaDagger) && !(this instanceof WandOfWarding.Ward) && !(this instanceof Sheep)) {
+		if (!(this instanceof DoremySheep)) {
 			Statistics.power += 5;
-			if (Statistics.card44) {
-				Dungeon.gold += 20;
-			}
-		}
-
-		if (Dungeon.heroine.buff(AntiShipBattery.class) != null){
-			Camera.main.shake( 5, 1f );
-			Dungeon.heroine.damage(Dungeon.floor +5, Dungeon.heroine);
-			Buff.prolong(enemy, Cripple.class, Cripple.DURATION);
-			if (enemy == Dungeon.heroine && !Dungeon.heroine.isAlive()) {
-				Dungeon.fail(Aya.class);
-				GLog.n(Messages.get(Aya.class, "ondeath"));
-			}
-		}
-
-		if (!(this instanceof SakuyaDagger) && !(this instanceof WandOfWarding.Ward) && !(this instanceof Sheep)) {
 			Statistics.value += Random.NormalIntRange(10, 20);
 		}
 
@@ -859,26 +755,8 @@ public abstract class Mob extends Char {
 			EXP /= 2;
 		}
 
-		if (Random.Int(400) == 0) {
-			switch (Random.Int(3)) {
-				case 0:
-				default:
-					Dungeon.level.drop(new ThreeStarTicket(), pos).sprite.drop();
-					break;
-				case 1:
-					Dungeon.level.drop(new FourStarTicket(), pos).sprite.drop();
-					break;
-				case 2:
-					Dungeon.level.drop(new FiveStarTicket(), pos).sprite.drop();
-					break;
-			}
-		}
-
 		if (alignment == Alignment.ENEMY){
 			rollToDropLoot();
-			if (Dungeon.heroine.buff(GoldCreation.class) != null){
-				Dungeon.level.drop(new Gold().random(), pos ).sprite.drop();
-			}
 		}
 
 		if (Dungeon.heroine.isAlive() && !Dungeon.level.heroFOV[pos]) {

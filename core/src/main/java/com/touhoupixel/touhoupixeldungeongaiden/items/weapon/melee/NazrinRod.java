@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -32,8 +32,6 @@ public class NazrinRod extends MeleeWeapon {
 		image = ItemSpriteSheet.NAZRIN_ROD;
 		hitSound = Assets.Sounds.HIT_CRUSH;
 		hitSoundPitch = 1f;
-
-		tier = 2;
 	}
 
 	@Override
@@ -43,6 +41,6 @@ public class NazrinRod extends MeleeWeapon {
 
 	@Override
 	public int defenseFactor( Char owner ) {
-		return Challenges.activeChallenges() > 5 ? 3 : 1;
+		return HardMode.activeChallenges() > 5 ? 3 : 1;
 	}
 }

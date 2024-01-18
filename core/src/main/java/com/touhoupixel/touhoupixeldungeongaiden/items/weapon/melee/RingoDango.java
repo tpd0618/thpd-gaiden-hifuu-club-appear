@@ -32,18 +32,10 @@ public class RingoDango extends MeleeWeapon {
         image = ItemSpriteSheet.RINGO_DANGO;
         hitSound = Assets.Sounds.HIT_PARRY;
         hitSoundPitch = 1f;
-
-        tier = 2;
     }
 
     @Override
     public int YokaiFactor( Char owner ) {
         return 1;
-    }
-
-    @Override
-    public int max(int lvl) {
-        return  Math.round((Statistics.foodEaten)*0.2f+3f*(tier+1))+
-                lvl*Math.round(1.33f*(tier+1));
     }
 }

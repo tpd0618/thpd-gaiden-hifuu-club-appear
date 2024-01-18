@@ -24,19 +24,15 @@ package com.touhoupixel.touhoupixeldungeongaiden.windows;
 import static com.touhoupixel.touhoupixeldungeongaiden.Dungeon.heroine;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Rinnosuke;
 import com.touhoupixel.touhoupixeldungeongaiden.items.EquipableItem;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Gold;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.abilitycards.sakuyaexclusive.UndergroundSun;
-import com.touhoupixel.touhoupixeldungeongaiden.items.abilitycards.youmuexclusive.MiracleMallet;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.MasterThievesArmband;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.RustyRoukanken;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -119,7 +115,7 @@ public class WndTradeItem extends WndInfoItem {
 
 		float pos = height;
 
-		final int price = Shopkeeper.sellPrice( item );
+		final int price = Rinnosuke.sellPrice( item );
 
 		RedButton btnBuy = new RedButton( Messages.get(this, "buy", price) ) {
 			@Override
@@ -135,25 +131,8 @@ public class WndTradeItem extends WndInfoItem {
 		/* This insertion is necessary to avoid a bug in which a player can buy these cards (without collecting it, for which he uses additional conditions), then buy another card and collect this one */
 		boolean miracleMalletSpecialCondition = true;
 		boolean undegroundSunSpecialCondition = true;
-		if (item.getClass() == MiracleMallet.class){
-			miracleMalletSpecialCondition = false;
-		}
-		if (item.getClass() == UndergroundSun.class){
-			undegroundSunSpecialCondition = false;
-		}
-		RustyRoukanken sword = heroine.belongings.getItem(RustyRoukanken.class);
-		if (sword != null) {
-			if (!(sword.isEquipped(heroine))){
-				if (!Statistics.card59) {
-					miracleMalletSpecialCondition = true;
-				}
-			}
-		}
 		TimekeepersHourglass tH = heroine.belongings.getItem(TimekeepersHourglass.class);
 		if (tH != null) {
-				if (!Statistics.card64) {
-					undegroundSunSpecialCondition = true;
-				}
 		}
 		btnBuy.enable( price <= Dungeon.gold && miracleMalletSpecialCondition && undegroundSunSpecialCondition);
 		/* ================= */
@@ -179,9 +158,9 @@ public class WndTradeItem extends WndInfoItem {
 						}
 					} else {
 						for (Mob mob : Dungeon.level.mobs) {
-							if (mob instanceof Shopkeeper) {
+							if (mob instanceof Rinnosuke) {
 								mob.yell(Messages.get(mob, "thief"));
-								((Shopkeeper) mob).flee();
+								((Rinnosuke) mob).flee();
 								break;
 							}
 						}
@@ -208,7 +187,7 @@ public class WndTradeItem extends WndInfoItem {
 		if (owner != null) {
 			owner.hide();
 		}
-		if (selling) Shopkeeper.sell();
+		if (selling) Rinnosuke.sell();
 	}
 	
 	public static void sell( Item item ) {
@@ -248,7 +227,7 @@ public class WndTradeItem extends WndInfoItem {
 		Item item = heap.pickUp();
 		if (item == null) return;
 		
-		int price = Shopkeeper.sellPrice( item );
+		int price = Rinnosuke.sellPrice( item );
 		Dungeon.gold -= price;
 
 		if (!item.doPickUp( heroine)) {

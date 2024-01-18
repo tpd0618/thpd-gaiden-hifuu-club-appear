@@ -1,11 +1,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.ZeroDexterity;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeavenSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfMindVision;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.SatoriSprite;
 import com.watabou.utils.Random;

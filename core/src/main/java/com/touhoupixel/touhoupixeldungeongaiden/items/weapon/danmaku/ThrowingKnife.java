@@ -56,7 +56,7 @@ public class ThrowingKnife extends MissileWeapon {
 				int damage = augment.damageFactor(Random.NormalIntRange(
 						min() + Math.round(diff*0.75f),
 						max()));
-				int exStr = heroine.STR() - STRReq();
+				int exStr = heroine.STR();
 				if (exStr > 0) {
 					damage += Random.IntRange(0, exStr);
 				}

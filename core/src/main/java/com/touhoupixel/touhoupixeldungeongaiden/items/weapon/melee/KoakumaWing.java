@@ -34,8 +34,6 @@ public class KoakumaWing extends MeleeWeapon {
 		image = ItemSpriteSheet.KOAKUMA_WING;
 		hitSound = Assets.Sounds.HIT_STAB;
 		hitSoundPitch = 1f;
-
-		tier = 2;
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class KoakumaWing extends MeleeWeapon {
 				int damage = augment.damageFactor(Random.NormalIntRange(
 						min() + Math.round(diff*0.67f),
 						max()));
-				int exStr = heroine.STR() - STRReq();
+				int exStr = heroine.STR();
 				if (exStr > 0) {
 					damage += Random.IntRange(0, exStr);
 				}

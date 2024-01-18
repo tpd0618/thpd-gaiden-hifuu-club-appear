@@ -24,20 +24,11 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.armor.glyphs;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Charm;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hex;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BlurryMagic;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicalSleep;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Vulnerable;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Weakness;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfBlastWave;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfDisintegration;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfFireblast;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfFrost;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfLightning;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfLivingEarth;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfMagicMissile;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfPrismaticLight;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfWarding;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.DisintegrationTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.GrimTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
@@ -55,21 +46,11 @@ public class AntiMagic extends Armor.Glyph {
 		RESISTS.add( Charm.class );
 		RESISTS.add( Weakness.class );
 		RESISTS.add( Vulnerable.class );
-		RESISTS.add( Hex.class );
+		RESISTS.add( BlurryMagic.class );
 		RESISTS.add( Degrade.class );
 		
 		RESISTS.add( DisintegrationTrap.class );
 		RESISTS.add( GrimTrap.class );
-
-		RESISTS.add( WandOfBlastWave.class );
-		RESISTS.add( WandOfDisintegration.class );
-		RESISTS.add( WandOfFireblast.class );
-		RESISTS.add( WandOfFrost.class );
-		RESISTS.add( WandOfLightning.class );
-		RESISTS.add( WandOfLivingEarth.class );
-		RESISTS.add( WandOfMagicMissile.class );
-		RESISTS.add( WandOfPrismaticLight.class );
-		RESISTS.add( WandOfWarding.Ward.class );
 	}
 	
 	@Override

@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
@@ -307,7 +307,7 @@ public class Mimic extends Mob {
 					reward = Generator.random(Generator.Category.RING);
 					break;
 			}
-		} while (reward == null || Challenges.isItemBlocked(reward));
+		} while (reward == null || HardMode.isItemBlocked(reward));
 		items.add(reward);
 	}
 

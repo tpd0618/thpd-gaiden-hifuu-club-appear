@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.ui;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.SPDAction;
 import com.touhoupixel.touhoupixeldungeongaiden.SPDSettings;
@@ -105,16 +105,16 @@ public class MenuPane extends Component {
 		};
 		add(floorButton);
 
-		if (Dungeon.isChallenged(Challenges.HARD_MODE)) {
+		if (Dungeon.isChallenged(HardMode.HARD_MODE)) {
 			sp_icon = Icons.get(Icons.SP_CHALLENGE);
 			add(sp_icon);
 		}
 
-		if (Challenges.activeChallenges() > 0){
+		if (HardMode.activeChallenges() > 0){
 			challengeIcon = Icons.get(Icons.CHAL_COUNT);
 			add(challengeIcon);
 
-			challengeText = new BitmapText( Integer.toString( Challenges.activeChallenges() ), PixelScene.pixelFont);
+			challengeText = new BitmapText( Integer.toString( HardMode.activeChallenges() ), PixelScene.pixelFont);
 			challengeText.hardlight( 0xCACFC2 );
 			challengeText.measure();
 			add( challengeText );

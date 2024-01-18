@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.levels;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.ShatteredPixelDungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
@@ -43,22 +43,19 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Shadows;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Bestiary;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Sheep;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.DoremySheep;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.FlowParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.WindParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.PatchouliCard;
-import com.touhoupixel.touhoupixeldungeongaiden.items.StrengthCard;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Torch;
 import com.touhoupixel.touhoupixeldungeongaiden.items.UpgradeCard;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TalismanOfForesight;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfSuperUnlucky;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.StoneOfEnchantment;
-import com.touhoupixel.touhoupixeldungeongaiden.items.stones.StoneOfIntuition;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfWarding;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.StarDanmaku;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.features.Chasm;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.features.Door;
@@ -177,69 +174,60 @@ public abstract class Level implements Bundlable {
 
 	public void create() {
 
-		Random.pushGenerator( Dungeon.seedCurFloor() );
+		Random.pushGenerator(Dungeon.seedCurFloor());
+		addItemToSpawn(Generator.random(Generator.Category.FOOD));
 
-		if (!(Dungeon.bossLevel())) {
+		if (Dungeon.upgradeNeeded()) {
+			addItemToSpawn(new UpgradeCard());
+			Dungeon.LimitedDrops.UPGRADE_CARDS.count++;
+		}
+		if (Dungeon.patchouliNeeded()) {
+			addItemToSpawn(new PatchouliCard());
+			Dungeon.LimitedDrops.PATCHOULI_CARD.count++;
+		}
 
-			addItemToSpawn(Generator.random(Generator.Category.FOOD));
-			addItemToSpawn(Generator.random(Generator.Category.HERB));
+		if (Dungeon.floor > 40 && Random.Int(400) == 0) {
+			addItemToSpawn(new PotionOfSuperUnlucky());
+		}
+		//todo
 
-			if (Dungeon.strengthNeeded()) {
-				addItemToSpawn( new StrengthCard() );
-				Dungeon.LimitedDrops.STRENGTH_CARDS.count++;
-			}
-			if (Dungeon.upgradeNeeded()) {
-				addItemToSpawn( new UpgradeCard() );
-				Dungeon.LimitedDrops.UPGRADE_CARDS.count++;
-			}
-			if (Dungeon.patchouliNeeded()) {
-				addItemToSpawn( new PatchouliCard() );
-				Dungeon.LimitedDrops.PATCHOULI_CARD.count++;
-			}
+		//one scroll of transmutation is guaranteed to spawn somewhere on chapter 2-4
+		int enchChapter = (int) ((Dungeon.seed / 10) % 3) + 1;
+		if (Dungeon.floor / 5 == enchChapter &&
+				Dungeon.seed % 4 + 1 == Dungeon.floor % 5) {
+			addItemToSpawn(new StoneOfEnchantment());
+		}
 
-			//one scroll of transmutation is guaranteed to spawn somewhere on chapter 2-4
-			int enchChapter = (int)((Dungeon.seed / 10) % 3) + 1;
-			if ( Dungeon.floor / 5 == enchChapter &&
-					Dungeon.seed % 4 + 1 == Dungeon.floor % 5){
-				addItemToSpawn( new StoneOfEnchantment() );
-			}
-
-			if ( Dungeon.floor == ((Dungeon.seed % 3) + 1)){
-				addItemToSpawn( new StoneOfIntuition() );
-			}
-
-			if (Dungeon.floor > 95) {
-				feeling = Feeling.LARGE;
-				addItemToSpawn(Generator.random(Generator.Category.FOOD));
-			} else {
-				//50% chance of getting a level feeling
-				//~7.15% chance for each feeling
-				switch (Random.Int(14)) {
-					case 0:
-						feeling = Feeling.CHASM;
-						break;
-					case 1:
-						feeling = Feeling.WATER;
-						break;
-					case 2:
-						feeling = Feeling.GRASS;
-						break;
-					case 3:
-						feeling = Feeling.DARK;
-						addItemToSpawn(new Torch());
-						viewDistance = Math.round(viewDistance / 2f);
-						break;
-					case 4:
-						feeling = Feeling.LARGE;
-						addItemToSpawn(Generator.random(Generator.Category.FOOD));
-						break;
-					case 5:
-						feeling = Feeling.TRAPS;
-						break;
-					case 6:
-						feeling = Feeling.SECRETS;
-						break;
-				}
+		if (Dungeon.floor > 90) {
+			feeling = Feeling.LARGE;
+		} else {
+			//50% chance of getting a level feeling
+			//~7.15% chance for each feeling
+			switch (Random.Int(14)) {
+				case 0:
+					feeling = Feeling.CHASM;
+					break;
+				case 1:
+					feeling = Feeling.WATER;
+					break;
+				case 2:
+					feeling = Feeling.GRASS;
+					break;
+				case 3:
+					feeling = Feeling.DARK;
+					addItemToSpawn(new Torch());
+					viewDistance = Math.round(viewDistance / 2f);
+					break;
+				case 4:
+					feeling = Feeling.LARGE;
+					addItemToSpawn(Generator.random(Generator.Category.FOOD));
+					break;
+				case 5:
+					feeling = Feeling.TRAPS;
+					break;
+				case 6:
+					feeling = Feeling.SECRETS;
+					break;
 			}
 		}
 
@@ -832,7 +820,7 @@ public abstract class Level implements Bundlable {
 
 	public Heap drop( Item item, int cell ) {
 
-		if (item == null || Challenges.isItemBlocked(item)){
+		if (item == null || HardMode.isItemBlocked(item)){
 
 			//create a dummy heap, give it a dummy sprite, don't add it to the game, and return it.
 			//effectively nullifies whatever the logic calling this wants to do, including dropping items.
@@ -896,15 +884,6 @@ public abstract class Level implements Bundlable {
 		plants.put( pos, plant );
 
 		GameScene.plantSeed( pos );
-
-		for (Char ch : Actor.chars()){
-			if (ch instanceof WandOfRegrowth.Lotus
-					&& ((WandOfRegrowth.Lotus) ch).inRange(pos)
-					&& Actor.findChar(pos) != null){
-				plant.trigger();
-				return null;
-			}
-		}
 
 		return plant;
 	}
@@ -1000,7 +979,7 @@ public abstract class Level implements Bundlable {
 			}
 
 			//characters which are not the hero or a sheep 'soft' press cells
-			pressCell( ch.pos, ch instanceof Hero || ch instanceof Sheep);
+			pressCell( ch.pos, ch instanceof Hero || ch instanceof DoremySheep);
 		} else {
 			if (map[ch.pos] == Terrain.DOOR){
 				Door.enter( ch.pos );
@@ -1206,17 +1185,6 @@ public abstract class Level implements Bundlable {
 			for (TalismanOfForesight.HeapAwareness h : c.buffs(TalismanOfForesight.HeapAwareness.class)){
 				if (Dungeon.floor != h.floor) continue;
 				for (int i : PathFinder.NEIGHBOURS9) heroMindFov[h.pos+i] = true;
-			}
-
-			for (Mob m : mobs){
-				if (m instanceof WandOfWarding.Ward
-						|| m instanceof WandOfRegrowth.Lotus){
-					if (m.fieldOfView == null || m.fieldOfView.length != length()){
-						m.fieldOfView = new boolean[length()];
-						Dungeon.level.updateFieldOfView( m, m.fieldOfView );
-					}
-					BArray.or(heroMindFov, m.fieldOfView, heroMindFov);
-				}
 			}
 
 			for (RevealedArea a : c.buffs(RevealedArea.class)){

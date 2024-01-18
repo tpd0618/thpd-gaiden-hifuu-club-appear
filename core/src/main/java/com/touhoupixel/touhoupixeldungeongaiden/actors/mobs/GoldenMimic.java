@@ -31,7 +31,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.Weapon;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.MissileWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -86,7 +85,7 @@ public class GoldenMimic extends Mimic {
 		super.generatePrize();
 		//all existing prize items are guaranteed uncursed, and have a 50% chance to be +1 if they were +0
 		for (Item i : items){
-			if (i instanceof EquipableItem || i instanceof Wand){
+			if (i instanceof EquipableItem){
 				i.cursed = false;
 				i.cursedKnown = true;
 				if (i instanceof Weapon && ((Weapon) i).hasCurseEnchant()){

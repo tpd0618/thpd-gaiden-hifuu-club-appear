@@ -31,8 +31,6 @@ public class BigYingYangOrb extends MeleeWeapon {
 		image = ItemSpriteSheet.BIG_YING_YANG_ORB;
 		hitSound = Assets.Sounds.HIT_SLASH;
 		hitSoundPitch = 1f;
-
-		tier = 5;
 	}
 
 	@Override

@@ -26,16 +26,14 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfIdentify;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfLullaby;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMirrorImage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRage;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRecharging;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfExorcism;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRetribution;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTerror;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTransmutation;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ExoticScroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.stones.Runestone;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Plant;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -57,7 +55,6 @@ public class ArcaneCatalyst extends Spell {
 		scrollChances.put( ScrollOfExorcism.class,   2f );
 		scrollChances.put( ScrollOfMagicMapping.class,  2f );
 		scrollChances.put( ScrollOfMirrorImage.class,   2f );
-		scrollChances.put( ScrollOfRecharging.class,    2f );
 		scrollChances.put( ScrollOfLullaby.class,       2f );
 		scrollChances.put( ScrollOfRetribution.class,   2f );
 		scrollChances.put( ScrollOfRage.class,          2f );
@@ -92,20 +89,16 @@ public class ArcaneCatalyst extends Spell {
 		
 		@Override
 		public boolean testIngredients(ArrayList<Item> ingredients) {
-			boolean scroll = false;
 			boolean secondary = false;
 			
 			for (Item i : ingredients){
 				if (i instanceof Plant.Seed || i instanceof Runestone){
 					secondary = true;
 					//if it is a regular or exotic potion
-				} else if (ExoticScroll.regToExo.containsKey(i.getClass())
-						|| ExoticScroll.regToExo.containsValue(i.getClass())) {
-					scroll = true;
 				}
 			}
 			
-			return scroll && secondary;
+			return secondary;
 		}
 		
 		@Override

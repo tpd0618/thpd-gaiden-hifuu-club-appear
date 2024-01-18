@@ -22,11 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Blindness;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.SparkParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfParalyticGas;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;

@@ -71,6 +71,6 @@ public class ScrollOfEarth extends InventoryScroll {
 
 	@Override
 	public int value() {
-		return isKnown() ? 30 * quantity : super.value();
+		return isKnown() ? 40 * quantity : super.value();
 	}
 }

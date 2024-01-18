@@ -23,7 +23,6 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.herbs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.KeyHeal;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -42,15 +41,7 @@ public class PurityHerb extends Herb {
 		super.execute(heroine, action);
 
 		if (action.equals( AC_EAT )) {
-			if (heroine.buff(Inversion.class) != null) {
-				heroine.damage(heroine.HT / 2, heroine);
-				if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-					Dungeon.fail(Inversion.class);
-					GLog.n( Messages.get(Inversion.class, "ondeath") );
-				}
-			} else {
-				heroine.HP = Math.min(heroine.HP + 50, heroine.HT);
-			}
+			heroine.HP = Math.min(heroine.HP + 50, heroine.HT);
 			Buff.affect(curUser, KeyHeal.class, KeyHeal.DURATION);
 		}
 	}

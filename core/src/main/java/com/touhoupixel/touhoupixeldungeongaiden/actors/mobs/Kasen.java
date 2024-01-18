@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeavenSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HinaCurse;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
@@ -31,8 +27,7 @@ public class Kasen extends Mob {
         properties.add(Property.FUMO);
         //used for fumo lover buff
 
-        loot = Generator.Category.ARMOR_T5;
-        lootChance = 0.15f;
+        //todo
     }
 
     @Override

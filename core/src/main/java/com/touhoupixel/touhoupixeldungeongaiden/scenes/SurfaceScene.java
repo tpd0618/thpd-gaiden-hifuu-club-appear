@@ -25,9 +25,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Badges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.HeroClass;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfLivingEarth;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfWarding;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MarisaStaff;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.WraithSprite;
@@ -153,18 +150,6 @@ public class SurfaceScene extends PixelScene {
 		//allies. Attempts to pick highest level, but prefers rose > earth > ward.
 		//Rose level is halved because it's easier to upgrade
 		CharSprite allySprite = null;
-
-		int earthLevel = Dungeon.heroine.belongings.getItem(WandOfLivingEarth.class) == null ? 0 : Dungeon.heroine.belongings.getItem(WandOfLivingEarth.class).level();
-		int wardLevel = Dungeon.heroine.belongings.getItem(WandOfWarding.class) == null ? 0 : Dungeon.heroine.belongings.getItem(WandOfWarding.class).level();
-
-		MarisaStaff staff = Dungeon.heroine.belongings.getItem(MarisaStaff.class);
-		if (staff != null){
-			if (staff.wandClass() == WandOfLivingEarth.class){
-				earthLevel = Math.max(earthLevel, staff.level());
-			} else if (staff.wandClass() == WandOfWarding.class){
-				wardLevel = Math.max(wardLevel, staff.level());
-			}
-		}
 
 		if (allySprite != null){
 			allySprite.add(CharSprite.State.PARALYSED);

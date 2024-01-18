@@ -33,8 +33,6 @@ public class AkyuuBrush extends MeleeWeapon {
         image = ItemSpriteSheet.AKYUU_BRUSH;
         hitSound = Assets.Sounds.HIT_STRONG;
         hitSoundPitch = 1f;
-
-        tier = 3;
     }
 
     @Override

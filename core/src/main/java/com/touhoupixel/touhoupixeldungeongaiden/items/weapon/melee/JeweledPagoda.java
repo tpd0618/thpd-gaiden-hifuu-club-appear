@@ -31,8 +31,6 @@ public class JeweledPagoda extends MeleeWeapon {
         image = ItemSpriteSheet.JEWELED_PAGODA;
         hitSound = Assets.Sounds.HIT_STRONG;
         hitSoundPitch = 1f;
-
-        tier = 4;
     }
 
     @Override

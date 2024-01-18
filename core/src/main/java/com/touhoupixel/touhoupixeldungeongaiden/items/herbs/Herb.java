@@ -25,7 +25,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HerbDegrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
@@ -70,10 +69,6 @@ public class Herb extends Item {
 			heroine.busy();
 			SpellSprite.show(heroine, SpellSprite.FOOD);
 			Sample.INSTANCE.play(Assets.Sounds.EAT);
-
-			if (heroine.buff(HerbDegrade.class) != null){
-				Buff.prolong(curUser, Degrade.class, Degrade.DURATION);
-			}
 
 			heroine.spend(eatingTime());
 		}

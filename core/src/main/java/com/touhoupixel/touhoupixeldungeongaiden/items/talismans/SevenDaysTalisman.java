@@ -10,9 +10,9 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Drowsy;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Poison;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Slow;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Vertigo;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfDoubleSpeed;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfLightHealing;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfPhilosopher;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.watabou.noosa.audio.Sample;
@@ -55,10 +55,10 @@ public class SevenDaysTalisman extends Talisman {
                     Sample.INSTANCE.play(Assets.Sounds.BLAST);
                     ch.die(null);
                     if (ch.properties().contains(Char.Property.ELIXIR)) {
-                        Dungeon.level.drop(new PotionOfPhilosopher(), ch.pos).sprite.drop();
+                        Dungeon.level.drop(new PotionOfDoubleSpeed(), ch.pos).sprite.drop();
                     } else {
                         Dungeon.level.drop(new PotionOfLightHealing(), ch.pos).sprite.drop();
-                    }
+                    }//todo
                     break;
             }
         }

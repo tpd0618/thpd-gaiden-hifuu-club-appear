@@ -21,20 +21,11 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DeSlaying;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.DismantlePressure;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
-import com.touhoupixel.touhoupixeldungeongaiden.items.StrengthCard;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.FiveStarTicket;
-import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.YorihimeSprite;
-import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class Yorihime extends Mob {
@@ -53,8 +44,7 @@ public class Yorihime extends Mob {
 
 		properties.add(Property.WARP);
 
-		loot = new FiveStarTicket();
-		lootChance = 0.1f;
+		//todo
 	}
 
 	@Override

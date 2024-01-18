@@ -17,10 +17,10 @@ public class Iku extends Mob {
     {
         spriteClass = IkuSprite.class;
 
-        HP = HT = 244;
-        defenseSkill = 35;
-        EXP = 18;
-        maxLvl = 47;
+        HP = HT = 25;
+        defenseSkill = 10;
+        EXP = 2;
+        maxLvl = 15;
 
         properties.add(Property.YOKAI);
 

@@ -24,7 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.levels.traps;
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Sheep;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.DoremySheep;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -58,10 +58,10 @@ public class FlockTrap extends Trap {
 			if (Dungeon.level.insideMap(i)
 					&& Actor.findChar(i) == null
 					&& !(Dungeon.level.pit[i])) {
-				Sheep sheep = new Sheep();
-				sheep.lifespan = Random.NormalIntRange( 4, 8 );
-				sheep.pos = i;
-				GameScene.add(sheep);
+				DoremySheep doremySheep = new DoremySheep();
+				doremySheep.lifespan = Random.NormalIntRange( 4, 8 );
+				doremySheep.pos = i;
+				GameScene.add(doremySheep);
 				CellEmitter.get(i).burst(Speck.factory(Speck.WOOL), 4);
 				//before the tile is pressed, directly trigger traps to avoid sfx spam
 				if ((t = Dungeon.level.traps.get(i)) != null && t.active){
@@ -69,7 +69,7 @@ public class FlockTrap extends Trap {
 					t.reveal();
 					t.activate();
 				}
-				Dungeon.level.occupyCell(sheep);
+				Dungeon.level.occupyCell(doremySheep);
 				Sample.INSTANCE.play(Assets.Sounds.PUFF);
 				Sample.INSTANCE.play(Assets.Sounds.SHEEP);
 			}

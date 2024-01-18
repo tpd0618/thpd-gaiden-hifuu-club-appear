@@ -1,13 +1,9 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Might;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.SuperHard;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.WandZeroDamage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.YuugiSprite;
 import com.watabou.utils.Random;
@@ -48,7 +44,7 @@ public class Yuugi extends Mob {
         damage = super.attackProc( enemy, damage );
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(4) == 0) {
             Buff.prolong(this, SuperHard.class, SuperHard.DURATION/3f);
-            Buff.prolong(enemy, WandZeroDamage.class, WandZeroDamage.DURATION);
+            //todo
         }
         return damage;
     }

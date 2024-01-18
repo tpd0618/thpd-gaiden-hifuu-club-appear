@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.herbs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Inversion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -41,16 +40,8 @@ public class RejuvenationHerb extends Herb {
 		super.execute(heroine, action);
 
 		if (action.equals( AC_EAT )) {
-			if (heroine.buff(Inversion.class) != null) {
-				heroine.damage(heroine.HT / 2, heroine);
-				if (heroine == Dungeon.heroine && !heroine.isAlive()) {
-					Dungeon.fail(Inversion.class);
-					GLog.n( Messages.get(Inversion.class, "ondeath") );
-				}
-			} else {
-				heroine.HP = Math.min(heroine.HP + 100000, heroine.HT);
-				Dungeon.heroine.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.2f, 3 );
-			}
+			heroine.HP = Math.min(heroine.HP + 100000, heroine.HT);
+			Dungeon.heroine.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.2f, 3);
 		}
 	}
 }

@@ -31,8 +31,6 @@ public class MystiaWing extends MeleeWeapon {
 		image = ItemSpriteSheet.MYSTIA_WING;
 		hitSound = Assets.Sounds.HIT_CRUSH;
 		hitSoundPitch = 1f;
-
-		tier = 2;
 	}
 
 	@Override

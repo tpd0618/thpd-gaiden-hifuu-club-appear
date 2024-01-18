@@ -32,7 +32,6 @@ public class EikiRod extends MeleeWeapon {
 		hitSound = Assets.Sounds.HIT_CRUSH;
 		hitSoundPitch = 1f;
 
-		tier = 3;
 		ACC = 1.28f;
 	}
 

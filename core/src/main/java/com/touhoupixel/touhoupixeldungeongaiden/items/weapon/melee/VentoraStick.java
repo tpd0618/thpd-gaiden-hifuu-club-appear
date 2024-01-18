@@ -31,8 +31,6 @@ public class VentoraStick extends MeleeWeapon {
         image = ItemSpriteSheet.VENTORA_STICK;
         hitSound = Assets.Sounds.HIT_STRONG;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

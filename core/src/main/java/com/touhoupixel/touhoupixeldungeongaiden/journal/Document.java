@@ -21,7 +21,6 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.journal;
 
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfIdentify;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -35,21 +34,19 @@ import java.util.LinkedHashMap;
 
 public enum Document {
 
-	ADVENTURERS_GUIDE(ItemSpriteSheet.GUIDE_PAGE, false),
-	ALCHEMY_GUIDE(ItemSpriteSheet.ALCH_PAGE, false),
+	ADVENTURERS_GUIDE(ItemSpriteSheet.GUIDE_PAGE),
+	ALCHEMY_GUIDE(ItemSpriteSheet.ALCH_PAGE),
 
-	INTROS(Icons.STAIRS, true);
+	INTROS(Icons.STAIRS);
 
-	Document( int sprite, boolean lore ){
+	Document( int sprite){
 		pageIcon = null;
 		pageSprite = sprite;
-		loreDocument = lore;
 	}
 
-	Document( Icons icon, boolean lore ){
+	Document( Icons icon){
 		pageIcon = icon;
 		pageSprite = 0;
-		loreDocument = lore;
 	}
 
 	public static final int NOT_FOUND = 0;
@@ -66,47 +63,8 @@ public enum Document {
 		return false;
 	}
 
-	public boolean findPage( int pageIdx ) {
-		return findPage( pagesStates.keySet().toArray(new String[0])[pageIdx] );
-	}
-
-	public boolean deletePage( String page ){
-		if (pagesStates.containsKey(page) && pagesStates.get(page) != NOT_FOUND){
-			pagesStates.put(page, NOT_FOUND);
-			Journal.saveNeeded = true;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean deletePage( int pageIdx ) {
-		return deletePage( pagesStates.keySet().toArray(new String[0])[pageIdx] );
-	}
-
 	public boolean isPageFound( String page ){
 		return pagesStates.containsKey(page) && pagesStates.get(page) > NOT_FOUND;
-	}
-
-	public boolean isPageFound( int pageIdx ){
-		return isPageFound( pagesStates.keySet().toArray(new String[0])[pageIdx] );
-	}
-
-	public boolean anyPagesFound(){
-		for( Integer val : pagesStates.values()){
-			if (val != NOT_FOUND){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean allPagesFound(){
-		for( Integer val : pagesStates.values()){
-			if (val == NOT_FOUND){
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public boolean readPage( String page ) {
@@ -147,9 +105,6 @@ public enum Document {
 
 	private int pageSprite;
 	private Icons pageIcon;
-	public Image pageSprite(){
-		return pageSprite("");
-	}
 
 	public Image pageSprite(String page){
 		if (page.isEmpty() || !isPageFound(page) || this != ADVENTURERS_GUIDE){
@@ -159,40 +114,16 @@ public enum Document {
 				return new ItemSprite(pageSprite);
 			}
 		} else {
-			//special per-page visuals for guidebook
 			switch (page){
-				case Document.GUIDE_INTRO: default:
-					return new ItemSprite(ItemSpriteSheet.MASTERY);
-				case "Examining":
-				case Document.GUIDE_SEARCHING:
-					return Icons.get(Icons.MAGNIFY);
-				case "Surprise_Attacks":
-					return new ItemSprite(ItemSpriteSheet.KOAKUMA_WING);
-				case "Identifying":
-					return new ItemSprite( new ScrollOfIdentify() );
-				case "Food":
-					return new ItemSprite( ItemSpriteSheet.PASTY );
-				case "Ability_Cards":
-					return new ItemSprite( ItemSpriteSheet.CARDS1 );
-				case "Strength":
-					return new ItemSprite( ItemSpriteSheet.SEIRANHAMMER );
-				case "Upgrades":
+				default:
+				case "1":
 					return new ItemSprite( ItemSpriteSheet.RING_EMERALD );
-				case "Item_Use":
-					return new ItemSprite( ItemSpriteSheet.CRYSTAL_KEY );
-				case "Levelling":
-					return Icons.get(Icons.TALENT);
-				case "Positioning":
-					return new ItemSprite( ItemSpriteSheet.VENTORA_STICK );
-				case "Magic":
-					return new ItemSprite( ItemSpriteSheet.WAND_FIREBOLT );
+				case "2":
+					return new ItemSprite( ItemSpriteSheet.RING_AGATE );
+				case "3":
+					return new ItemSprite( ItemSpriteSheet.RING_DIAMOND );
 			}
 		}
-	}
-
-	private boolean loreDocument;
-	public boolean isLoreDoc(){
-		return loreDocument;
 	}
 
 	public String title(){
@@ -216,53 +147,18 @@ public enum Document {
 	}
 
 	public static final String GUIDE_INTRO          = "Intro";
-	public static final String GUIDE_EXAMINING      = "Examining";
-	public static final String GUIDE_SURPRISE_ATKS  = "Surprise_Attacks";
 	public static final String GUIDE_IDING          = "Identifying";
 	public static final String GUIDE_FOOD           = "Food";
-	public static final String GUIDE_DIEING         = "Dieing";
-
 	public static final String GUIDE_SEARCHING      = "Searching";
 
 	//pages and default states
 	static {
 		boolean debug = DeviceCompat.isDebug();
-		//hero gets these when guidebook is collected
-		ADVENTURERS_GUIDE.pagesStates.put(GUIDE_INTRO, debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put(GUIDE_EXAMINING, debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put(GUIDE_SURPRISE_ATKS, debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put(GUIDE_IDING, debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put(GUIDE_FOOD, debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Ability_Cards", debug ? READ : FOUND);
-		//given in sewers
-		ADVENTURERS_GUIDE.pagesStates.put(GUIDE_SEARCHING, debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Strength", debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Upgrades", debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Item_Use", debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Levelling", debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Positioning", debug ? READ : FOUND);
-		ADVENTURERS_GUIDE.pagesStates.put("Magic", debug ? READ : FOUND);
+		ADVENTURERS_GUIDE.pagesStates.put("1", debug ? READ : FOUND);
+		ADVENTURERS_GUIDE.pagesStates.put("2", debug ? READ : FOUND);
+		ADVENTURERS_GUIDE.pagesStates.put("3", debug ? READ : FOUND);//todo
 
-		//given in sewers
-		ALCHEMY_GUIDE.pagesStates.put("Potions", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Stones", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Energy_Food", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Exotic_Potions", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Exotic_Scrolls", debug ? READ : FOUND);
-		//given in prison
-		ALCHEMY_GUIDE.pagesStates.put("Bombs", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Weapons", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Catalysts", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Brews_Elixirs", debug ? READ : FOUND);
-		ALCHEMY_GUIDE.pagesStates.put("Spells", debug ? READ : FOUND);
-
-		INTROS.pagesStates.put("Dungeon", READ);
-		INTROS.pagesStates.put("Sewers", debug ? READ : FOUND);
-		INTROS.pagesStates.put("Prison", debug ? READ : FOUND);
-		INTROS.pagesStates.put("Caves", debug ? READ : FOUND);
-		INTROS.pagesStates.put("City", debug ? READ : FOUND);
-		INTROS.pagesStates.put("Halls", debug ? READ : FOUND);
-
+		ALCHEMY_GUIDE.pagesStates.put("1", debug ? READ : FOUND);
 	}
 
 	private static final String DOCUMENTS = "documents";
@@ -309,5 +205,4 @@ public enum Document {
 			}
 		}
 	}
-
 }

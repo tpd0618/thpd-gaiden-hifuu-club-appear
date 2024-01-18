@@ -45,7 +45,7 @@ import java.util.ArrayList;
 public class WndHero extends WndTabbed {
 
 	private static final int WIDTH		= 120;
-	private static final int HEIGHT		= 88;
+	private static final int HEIGHT		= 100;
 
 	private StatsTab stats;
 	private BuffsTab buffs;
@@ -127,6 +127,7 @@ public class WndHero extends WndTabbed {
 			if (strBonus > 0)           statSlot( Messages.get(this, "str"), heroine.STR + " + " + strBonus );
 			else if (strBonus < 0)      statSlot( Messages.get(this, "str"), heroine.STR + " - " + -strBonus );
 			else                        statSlot( Messages.get(this, "str"), heroine.STR() );
+			statSlot( Messages.get(this, "max_str"), heroine.MAX_STR);
 			if (heroine.shielding() > 0)   statSlot( Messages.get(this, "health"), heroine.HP + "+" + heroine.shielding() + "/" + heroine.HT );
 			else                        statSlot( Messages.get(this, "health"), (heroine.HP) + "/" + heroine.HT );
 			if (Dungeon.daily){

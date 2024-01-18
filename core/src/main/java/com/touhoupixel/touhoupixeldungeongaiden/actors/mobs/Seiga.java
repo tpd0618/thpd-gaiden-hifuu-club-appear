@@ -22,7 +22,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
@@ -32,14 +31,8 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Degrade;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.PotionFreeze;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Terror;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
-import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ShadowParticle;
-import com.touhoupixel.touhoupixeldungeongaiden.items.food.Food;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.SeigaSprite;
-import com.touhoupixel.touhoupixeldungeongaiden.sprites.YuyukoSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PathFinder;

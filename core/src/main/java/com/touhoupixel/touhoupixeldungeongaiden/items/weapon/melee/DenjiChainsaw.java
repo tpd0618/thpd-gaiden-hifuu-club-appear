@@ -33,8 +33,6 @@ public class DenjiChainsaw extends MeleeWeapon {
         image = ItemSpriteSheet.DENJI_CHAINSAW;
         hitSound = Assets.Sounds.HIT_STAB;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

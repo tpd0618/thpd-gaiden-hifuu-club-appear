@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Badges;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
@@ -48,7 +48,7 @@ public class Amulet extends Item {
 
 	@Override
 	public boolean doPickUp(Hero heroine, int pos) {
-		Badges.validateChampion(Challenges.activeChallenges());
+		Badges.validateChampion(HardMode.activeChallenges());
 		Badges.lifeBind();
 		Badges.bombBind();
 		Badges.torchBind();

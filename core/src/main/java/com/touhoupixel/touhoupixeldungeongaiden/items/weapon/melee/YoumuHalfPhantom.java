@@ -32,14 +32,6 @@ public class YoumuHalfPhantom extends MeleeWeapon {
 		image = ItemSpriteSheet.YOUMU_HALF_PHANTOM;
 		hitSound = Assets.Sounds.HIT;
 		hitSoundPitch = 1f;
-
-		tier = 3;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  Math.round(2.5f*(tier+1)) +     //10 base, down from 20
-				lvl*(tier-1);                   //+2 per level, down from +4
 	}
 
 	@Override

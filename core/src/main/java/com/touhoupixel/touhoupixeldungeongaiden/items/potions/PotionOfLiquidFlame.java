@@ -28,7 +28,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.blobs.Blob;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.blobs.Fire;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HighStress;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
@@ -46,17 +45,6 @@ public class PotionOfLiquidFlame extends Potion {
 
 		if (Dungeon.level.heroFOV[cell]) {
 			identify();
-
-			if (Statistics.card55){
-				GameScene.flash(0x80FFFFFF);
-				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-					if (mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[mob.pos]) {
-						if (!mob.properties().contains(Char.Property.BOSS) && !mob.properties().contains(Char.Property.MINIBOSS)) {
-							Buff.prolong(mob, HighStress.class, HighStress.DURATION);
-						}
-					}
-				}
-			}
 
 			splash( cell );
 			Sample.INSTANCE.play( Assets.Sounds.SHATTER );

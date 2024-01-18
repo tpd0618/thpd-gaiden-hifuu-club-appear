@@ -24,8 +24,8 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.potions.elixirs;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Zen;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfMindVision;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfSnapFreeze;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
 public class ElixirOfZen extends Elixir {
@@ -47,7 +47,7 @@ public class ElixirOfZen extends Elixir {
 	public static class Recipe extends com.touhoupixel.touhoupixeldungeongaiden.items.Recipe.SimpleRecipe {
 		
 		{
-			inputs =  new Class[]{PotionOfSnapFreeze.class, PotionOfMindVision.class};
+			inputs =  new Class[]{PotionOfHealing.class, PotionOfMindVision.class};
 			inQuantity = new int[]{1, 1};
 			
 			cost = 8;

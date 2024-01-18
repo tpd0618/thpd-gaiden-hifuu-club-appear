@@ -25,7 +25,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.blobs.Foliage;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.painters.Painter;
-import com.touhoupixel.touhoupixeldungeongaiden.plants.BlandfruitBush;
 import com.touhoupixel.touhoupixeldungeongaiden.plants.Sungrass;
 import com.watabou.utils.Random;
 
@@ -43,10 +42,8 @@ public class GardenRoom extends SpecialRoom {
 		if (bushes == 0) {
 			level.plant(new Sungrass.Seed(), plantPos( level ));
 		} else if (bushes == 1) {
-			level.plant(new BlandfruitBush.Seed(), plantPos( level ));
 		} else if (Random.Int(5) == 0) {
 			level.plant(new Sungrass.Seed(), plantPos( level ));
-			level.plant(new BlandfruitBush.Seed(), plantPos( level ));
 		}
 		
 		Foliage light = (Foliage)level.blobs.get( Foliage.class );

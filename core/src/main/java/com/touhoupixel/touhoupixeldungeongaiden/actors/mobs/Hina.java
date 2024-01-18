@@ -22,13 +22,10 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BalanceBreak;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HinaCurse;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
-import com.touhoupixel.touhoupixeldungeongaiden.items.spells.PhaseShift;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfExorcism;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.CursingTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.HinaSprite;
 import com.watabou.utils.Random;
@@ -45,7 +42,7 @@ public class Hina extends Mob {
 
         properties.add(Property.GOD);
 
-        loot = new PhaseShift();
+        loot = new ScrollOfExorcism();
         lootChance = 0.1f;
     }
 

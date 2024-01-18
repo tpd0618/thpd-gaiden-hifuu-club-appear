@@ -32,14 +32,6 @@ public class ToramaruSpear extends MeleeWeapon {
 		image = ItemSpriteSheet.TORAMARU_SPEAR;
 		hitSound = Assets.Sounds.HIT_CRUSH;
 		hitSoundPitch = 1f;
-
-		tier = 5;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  3*(tier+1) +
-				lvl*(tier+1);
 	}
 
 	@Override

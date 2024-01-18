@@ -27,7 +27,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FireImbue;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.FlameParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.AlchemicalCatalyst;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfEnlightenment;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfMagicalSight;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.watabou.noosa.audio.Sample;
 
@@ -58,7 +58,7 @@ public class ElixirOfDragonsBlood extends Elixir {
 	public static class Recipe extends com.touhoupixel.touhoupixeldungeongaiden.items.Recipe.SimpleRecipe {
 		
 		{
-			inputs =  new Class[]{PotionOfEnlightenment.class, AlchemicalCatalyst.class};
+			inputs =  new Class[]{PotionOfMagicalSight.class, AlchemicalCatalyst.class};
 			inQuantity = new int[]{1, 1};
 			
 			cost = 6;

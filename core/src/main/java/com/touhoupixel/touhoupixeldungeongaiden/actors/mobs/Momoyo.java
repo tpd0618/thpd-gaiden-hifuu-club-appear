@@ -22,12 +22,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.CursedBlow;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HeavenSpeed;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.RegenBlock;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfLevitation;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.MomoyoSprite;
 import com.watabou.utils.Random;
@@ -67,7 +63,7 @@ public class Momoyo extends Mob {
     public int attackProc(Char hero, int damage) {
         damage = super.attackProc(enemy, damage);
         if (enemy == Dungeon.heroine && enemy.alignment != this.alignment && Random.Int(3) == 0) {
-            Buff.prolong(enemy, HeavenSpeed.class, HeavenSpeed.DURATION);
+            //todo
         }
         return damage;
     }

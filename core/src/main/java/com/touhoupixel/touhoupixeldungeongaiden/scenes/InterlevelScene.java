@@ -272,9 +272,6 @@ public class InterlevelScene extends PixelScene {
 							case CONTINUE:
 								restore();
 								break;
-							case RESURRECT:
-								resurrect();
-								break;
 							case RETURN:
 								returnTo();
 								break;
@@ -455,48 +452,6 @@ public class InterlevelScene extends PixelScene {
 			Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 			Dungeon.switchLevel( level, Dungeon.heroine.pos );
 		}
-	}
-	
-	private void resurrect() {
-		
-		Mob.holdAllies( Dungeon.level );
-
-		Level level;
-		if (Dungeon.level.locked) {
-			ArrayList<Item> preservedItems = Dungeon.level.getItemsToPreserveFromSealedResurrect();
-
-			Dungeon.heroine.resurrect();
-			level = Dungeon.newLevel();
-			Dungeon.heroine.pos = level.randomRespawnCell(Dungeon.heroine);
-
-			for (Item i : preservedItems){
-				level.drop(i, level.randomRespawnCell(null));
-			}
-
-		} else {
-			level = Dungeon.level;
-			BArray.setFalse(level.heroFOV);
-			BArray.setFalse(level.visited);
-			BArray.setFalse(level.mapped);
-			int invPos = Dungeon.heroine.pos;
-			int tries = 0;
-			do {
-				Dungeon.heroine.pos = level.randomRespawnCell(Dungeon.heroine);
-				tries++;
-
-			//prevents spawning on traps or plants, prefers farther locations first
-			} while (level.traps.get(Dungeon.heroine.pos) != null
-					|| (level.plants.get(Dungeon.heroine.pos) != null && tries < 500)
-					|| level.trueDistance(invPos, Dungeon.heroine.pos) <= 30 - (tries/10));
-
-			//directly trample grass
-			if (level.map[Dungeon.heroine.pos] == Terrain.HIGH_GRASS || level.map[Dungeon.heroine.pos] == Terrain.FURROWED_GRASS){
-				level.map[Dungeon.heroine.pos] = Terrain.GRASS;
-			}
-			Dungeon.heroine.resurrect();
-		}
-
-		Dungeon.switchLevel( level, Dungeon.heroine.pos );
 	}
 
 	private void reset() throws IOException {

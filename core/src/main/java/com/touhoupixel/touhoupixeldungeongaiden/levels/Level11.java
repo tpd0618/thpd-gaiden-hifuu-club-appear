@@ -28,12 +28,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.Spellcard;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.painters.Painter;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.painters.TouhouPainter;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.BalanceTrap;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.ChillingTrap;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.ConfusionTrap;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.FlockTrap;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.SlowTrap;
-import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.TeleportationTrap;
+import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.StorywayTrap;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.tiles.DungeonTilemap;
 import com.watabou.noosa.Game;
@@ -88,16 +83,15 @@ public class Level11 extends RegularLevel {
 		itemsToSpawn.add( new Spellcard() );
 		itemsToSpawn.add( Generator.random(Generator.Category.POTION));
 		itemsToSpawn.add( Generator.random(Generator.Category.SCROLL));
-		itemsToSpawn.add( Generator.random(Generator.Category.WAND));
 		itemsToSpawn.add( Generator.random(Generator.Category.TALISMAN));
 		super.create();
 	}
-	
+
 	@Override
 	public String tilesTex() {
 		return Assets.Environment.TILES_1;
 	}
-	
+
 	@Override
 	public String waterTex() {
 		return Assets.Environment.WATER_1;
@@ -106,15 +100,13 @@ public class Level11 extends RegularLevel {
 	@Override
 	protected Class<?>[] trapClasses() {
 		return new Class[]{
-				EnchantEraseTrap.class, ChillingTrap.class, TeleportationTrap.class, FlockTrap.class,
-				SlowTrap.class, BalanceTrap.class, ZeroDexterityTrap.class, ToxicTrap.class, ConfusionTrap.class};
+				StorywayTrap.class};
 	}
 
 	@Override
 	protected float[] trapChances() {
 		return new float[]{
-				3, 3, 3, 3,
-				2, 2, 2, 2, 2};
+				1};
 	}
 	
 	@Override

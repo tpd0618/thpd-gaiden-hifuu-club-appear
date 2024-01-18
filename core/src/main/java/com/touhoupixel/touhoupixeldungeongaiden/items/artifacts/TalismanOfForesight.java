@@ -33,7 +33,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CheckedCell;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.ConeAOE;

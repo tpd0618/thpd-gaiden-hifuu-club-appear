@@ -31,7 +31,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.Ring;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfExorcism;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -249,7 +248,7 @@ public class Belongings implements Iterable<Item> {
 			ring().identify();
 		}
 		for (Item item : backpack) {
-			if (item instanceof EquipableItem || item instanceof Wand) {
+			if (item instanceof EquipableItem) {
 				item.cursedKnown = true;
 			}
 		}
@@ -265,14 +264,7 @@ public class Belongings implements Iterable<Item> {
 	}
 
 	public int charge( float charge ) {
-
 		int count = 0;
-
-		for (Wand.Charger charger : owner.buffs(Wand.Charger.class)){
-			charger.gainCharge(charge);
-			count++;
-		}
-
 		return count;
 	}
 

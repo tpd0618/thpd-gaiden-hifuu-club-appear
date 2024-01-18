@@ -29,7 +29,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.PinCushion;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.abilitycards.sakuyaexclusive.SmeltScale;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.MagicalHolster;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfSharpshooting;
@@ -79,28 +78,22 @@ abstract public class MissileWeapon extends Weapon {
 	private static LinkedList<MissileSprite> spriteProjContainer = new LinkedList<>();
 	@Override
 	public int min() {
-		return Math.max(0, min( buffedLvl() + RingOfSharpshooting.levelDamageBonus(Dungeon.heroine) + SmeltScale.levelDamageBonus()));
+		return Math.max(0, min( buffedLvl() + RingOfSharpshooting.levelDamageBonus(Dungeon.heroine)));
 	}
 
 	@Override
 	public int min(int lvl) {
-		return  3 * tier +                      //base
-				(tier == 1 ? lvl : 2*lvl);      //level scaling
+		return  5 * lvl;
 	}
 
 	@Override
 	public int max() {
-		return Math.max(0, max( buffedLvl() + RingOfSharpshooting.levelDamageBonus(Dungeon.heroine) + SmeltScale.levelDamageBonus()));
+		return Math.max(0, max( buffedLvl() + RingOfSharpshooting.levelDamageBonus(Dungeon.heroine)));
 	}
 
 	@Override
 	public int max(int lvl) {
-		return  (5+Dungeon.heroine.lvl/3) * tier +                      //base
-				(tier == 1 ? 2*lvl : tier*lvl); //level scaling
-	}
-
-	public int STRReq(int lvl){
-		return Math.max(1,(6 + Math.round(tier * 3)) - lvl);
+		return  8 * lvl;
 	}
 
 	@Override
@@ -157,16 +150,11 @@ abstract public class MissileWeapon extends Weapon {
 
 		boolean projecting = hasEnchant(Projecting.class, user);
 
-		if (projecting && !Dungeon.level.solid[dst] && Dungeon.level.distance(user.pos, dst) <= 4){
+		if (projecting && !Dungeon.level.solid[dst] && Dungeon.level.distance(user.pos, dst) <= 4) {
 			return dst;
 		} else {
 			return super.throwPos(user, dst);
 		}
-	}
-	public int throwAtAngle(Hero user, int dst, float angle){
-
-		Ballistica ballistica = new Ballistica(user.pos, dst, Ballistica.PROJECTILE);
-		return ballistica.targetAtAngle(angle).collisionPos;
 	}
 
 	@Override
@@ -180,56 +168,23 @@ abstract public class MissileWeapon extends Weapon {
 		parent = null; //reset parent before throwing, just incase
 		super.doThrow(heroine);
 	}
-	public void cast(final Hero user, final int dst ){
+	public void cast(final Hero user, final int dst ) {
 		super.cast(user, dst);
-	}
-	public static void castAfterTimeFreeze(){
-		final int numOfProj = projectileContainer.size();
-		for (int num = 0; num < numOfProj; num++){
-			int startPos = startPosContainer.get(0);
-			int targetCell = targetContainer.get(0);
-			MissileWeapon mw = projectileContainer.get(0);
-
-				((MissileSprite) Dungeon.heroine.sprite.parent.recycle(MissileSprite.class)).reset(startPos,
-								targetCell,
-								mw,
-								new Callback() {
-									@Override
-									public void call() {
-										if (mw != null) mw.onThrow( targetCell );
-									}
-								});
-			if (spriteProjContainer.size() != 0) {
-				MissileSprite misSpr = spriteProjContainer.get(0);
-				misSpr.killAndErase();
-				spriteProjContainer.removeFirst();
-			}
-			projectileContainer.removeFirst();
-				targetContainer.removeFirst();
-				startPosContainer.removeFirst();
-		}
 	}
 
 	@Override
 	protected void onThrow( int cell ) {
-		Char enemy = Actor.findChar( cell );
+		Char enemy = Actor.findChar(cell);
 		if (enemy == null || enemy == curUser) {
 			parent = null;
-			super.onThrow( cell );
+			super.onThrow(cell);
 		} else {
-			if (!curUser.shoot( enemy, this )) {
-				rangedMiss( cell );
+			if (!curUser.shoot(enemy, this)) {
+				rangedMiss(cell);
 			} else {
-				rangedHit( enemy, cell );
+				rangedHit(enemy, cell);
 			}
 		}
-	}
-	@Override
-	public int proc(Char attacker, Char defender, int damage) {
-		if (Statistics.card34) {
-			Statistics.power -= Random.Int(1,3);
-		} else Statistics.power -= 10;
-		return super.proc(attacker, defender, damage);
 	}
 
 	@Override
@@ -290,9 +245,7 @@ abstract public class MissileWeapon extends Weapon {
 			usages *= MagicalHolster.HOLSTER_DURABILITY_FACTOR;
 		}
 
-		usages *= RingOfSharpshooting.durabilityMultiplier( Dungeon.heroine);
-
-		usages *= SmeltScale.durabilityMultiplier();
+		usages *= RingOfSharpshooting.durabilityMultiplier(Dungeon.heroine);
 
 		//at 100 uses, items just last forever.
 		if (usages >= 100f) return 0;
@@ -332,7 +285,7 @@ abstract public class MissileWeapon extends Weapon {
 		int damage = augment.damageFactor(super.damageRoll( owner ));
 
 		if (owner instanceof Hero) {
-			int exStr = ((Hero)owner).STR() - STRReq();
+			int exStr = ((Hero)owner).STR();
 			if (exStr > 0) {
 				damage += Random.IntRange( 0, exStr );
 			}
@@ -397,14 +350,7 @@ abstract public class MissileWeapon extends Weapon {
 		info += "\n\n" + Messages.get( MissileWeapon.class, "stats",
 				tier,
 				Math.round(augment.damageFactor(min())),
-				Math.round(augment.damageFactor(max())),
-				STRReq());
-
-		if (STRReq() > Dungeon.heroine.STR()) {
-			info += " " + Messages.get(Weapon.class, "too_heavy");
-		} else if (Dungeon.heroine.STR() > STRReq()){
-			info += " " + Messages.get(Weapon.class, "excess_str", Dungeon.heroine.STR() - STRReq());
-		}
+				Math.round(augment.damageFactor(max())));
 
 		if (enchantment != null && (cursedKnown || !enchantment.curse())){
 			info += "\n\n" + Messages.get(Weapon.class, "enchanted", enchantment.name());
@@ -493,22 +439,6 @@ abstract public class MissileWeapon extends Weapon {
 							if (mw != null) mw.onThrow( targetContainer.get(0) );
 						}
 					});*/
-		}
-	}
-	public static class PlaceHolder extends MissileWeapon {
-
-		{
-			image = ItemSpriteSheet.MISSILE_HOLDER;
-		}
-
-		@Override
-		public boolean isSimilar(Item item) {
-			return item instanceof MissileWeapon;
-		}
-
-		@Override
-		public String info() {
-			return "";
 		}
 	}
 }

@@ -19,8 +19,8 @@ public class Rumia extends Mob {
     {
         spriteClass = RumiaSprite.class;
 
-        HP = HT = 315;
-        defenseSkill = 35;
+        HP = HT = 14;
+        defenseSkill = 2;
         EXP = 17;
         maxLvl = 75;
 
@@ -35,7 +35,7 @@ public class Rumia extends Mob {
 
     @Override
     public int damageRoll() {
-        return Random.NormalIntRange(30, 37);
+        return Random.NormalIntRange(1, 1);
     }
 
     @Override

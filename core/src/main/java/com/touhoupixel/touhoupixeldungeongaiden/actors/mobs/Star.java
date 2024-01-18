@@ -1,11 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
+import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hex;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.HinaCurse;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.MagicDrain;
 import com.touhoupixel.touhoupixeldungeongaiden.items.itemstats.LifeFragment;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.StarSprite;
 import com.watabou.utils.Random;
@@ -46,8 +43,8 @@ public class Star extends Mob {
     @Override
     public int attackProc( Char hero, int damage ) {
         damage = super.attackProc( enemy, damage );
-        if (Random.Int(4) == 0) {
-            Buff.prolong(enemy, MagicDrain.class, MagicDrain.DURATION);
+        if (enemy == Dungeon.heroine && enemy.alignment != this.alignment) {
+            //todo
         }
         return damage;
     }

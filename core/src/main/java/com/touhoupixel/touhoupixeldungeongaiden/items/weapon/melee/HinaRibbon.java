@@ -33,8 +33,6 @@ public class HinaRibbon extends MeleeWeapon {
         image = ItemSpriteSheet.HINA_RIBBON;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 3;
     }
 
     @Override

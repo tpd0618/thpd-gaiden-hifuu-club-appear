@@ -1,6 +1,6 @@
 package com.touhoupixel.touhoupixeldungeongaiden.windows;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.SPDSettings;
 import com.touhoupixel.touhoupixeldungeongaiden.ShatteredPixelDungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -30,12 +30,12 @@ public class WndChallenges extends Window {
 		boxes = new ArrayList<>();
 
 		float pos = TTL_HEIGHT;
-		for (int i=0; i < Challenges.NAME_IDS.length; i++) {
+		for (int i = 0; i < HardMode.NAME_IDS.length; i++) {
 
-			final String challenge = Challenges.NAME_IDS[i];
+			final String challenge = HardMode.NAME_IDS[i];
 			
-			CheckBox cb = new CheckBox( Messages.titleCase(Messages.get(Challenges.class, challenge)) );
-			cb.checked( (checked & Challenges.MASKS[i]) != 0 );
+			CheckBox cb = new CheckBox( Messages.titleCase(Messages.get(HardMode.class, challenge)) );
+			cb.checked( (checked & HardMode.MASKS[i]) != 0 );
 			cb.active = editable;
 
 			if (i > 0) {
@@ -51,7 +51,7 @@ public class WndChallenges extends Window {
 				protected void onClick() {
 					super.onClick();
 					ShatteredPixelDungeon.scene().add(
-							new WndMessage(Messages.get(Challenges.class, challenge+"_desc"))
+							new WndMessage(Messages.get(HardMode.class, challenge+"_desc"))
 					);
 				}
 			};
@@ -71,7 +71,7 @@ public class WndChallenges extends Window {
 			int value = 0;
 			for (int i=0; i < boxes.size(); i++) {
 				if (boxes.get( i ).checked()) {
-					value |= Challenges.MASKS[i];
+					value |= HardMode.MASKS[i];
 				}
 			}
 			SPDSettings.challenges( value );

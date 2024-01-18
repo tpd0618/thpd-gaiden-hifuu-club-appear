@@ -26,7 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.HornOfPlenty;
 import com.touhoupixel.touhoupixeldungeongaiden.items.journal.Guidebook;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfChallenge;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfChallenge;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Document;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
@@ -79,8 +79,8 @@ public class Hunger extends Buff implements Hero.Doom {
 
 				partialDamage += STEP * target.HT/1000f;
 
-				if (partialDamage > 1){
-					target.damage( (int)partialDamage, this);
+				if (partialDamage > 1f){
+					target.damage( (int)partialDamage, this );
 					partialDamage -= (int)partialDamage;
 				}
 				

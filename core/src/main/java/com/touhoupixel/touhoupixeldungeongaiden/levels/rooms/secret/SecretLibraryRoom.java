@@ -24,13 +24,12 @@ package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.secret;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfIdentify;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfLullaby;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMirrorImage;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRage;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRecharging;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfExorcism;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRetribution;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTerror;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTransmutation;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
@@ -58,7 +57,6 @@ public class SecretLibraryRoom extends SecretRoom {
 		scrollChances.put( ScrollOfIdentify.class,      1f );
 		scrollChances.put( ScrollOfExorcism.class,   2f );
 		scrollChances.put( ScrollOfMirrorImage.class,   3f );
-		scrollChances.put( ScrollOfRecharging.class,    3f );
 		scrollChances.put( ScrollOfTeleportation.class, 3f );
 		scrollChances.put( ScrollOfLullaby.class,       4f );
 		scrollChances.put( ScrollOfMagicMapping.class,  4f );
@@ -66,6 +64,7 @@ public class SecretLibraryRoom extends SecretRoom {
 		scrollChances.put( ScrollOfRetribution.class,   4f );
 		scrollChances.put( ScrollOfTerror.class,        4f );
 		scrollChances.put( ScrollOfTransmutation.class, 6f );
+		//todo
 	}
 	
 	public void paint( Level level ) {

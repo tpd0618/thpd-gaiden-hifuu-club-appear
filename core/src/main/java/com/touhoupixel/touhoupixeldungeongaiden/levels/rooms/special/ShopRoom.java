@@ -23,26 +23,19 @@ package com.touhoupixel.touhoupixeldungeongaiden.levels.rooms.special;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Rinnosuke;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Heap;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Honeypot;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.PatchouliCard;
 import com.touhoupixel.touhoupixeldungeongaiden.items.SpyGlass;
-import com.touhoupixel.touhoupixeldungeongaiden.items.TenshiCard;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Torch;
-import com.touhoupixel.touhoupixeldungeongaiden.items.armor.Armor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.TimekeepersHourglass;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.SmallRice;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfHealing;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfIdentify;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfExorcism;
 import com.touhoupixel.touhoupixeldungeongaiden.items.spells.Alchemize;
-import com.touhoupixel.touhoupixeldungeongaiden.items.stones.StoneOfAugmentation;
-import com.touhoupixel.touhoupixeldungeongaiden.items.tickets.ThreeStarTicket;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.darts.TippedDart;
-import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MeleeWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.painters.Painter;
@@ -99,7 +92,7 @@ public class ShopRoom extends SpecialRoom {
 
 		int pos = level.pointToCell(center());
 
-		Mob shopkeeper = new Shopkeeper();
+		Mob shopkeeper = new Rinnosuke();
 		shopkeeper.pos = pos;
 		level.mobs.add( shopkeeper );
 
@@ -150,51 +143,8 @@ public class ShopRoom extends SpecialRoom {
 	protected static ArrayList<Item> generateItems() {
 
 		ArrayList<Item> itemsToSpawn = new ArrayList<>();
-
-		MeleeWeapon w;
-		Armor a;
-		switch (Dungeon.floor) {
-		default: case 6:
-			w = (MeleeWeapon) Generator.random(Generator.wepTiers[1]);
-			a = (Armor) Generator.random(Generator.armorTiers[1]);
-			itemsToSpawn.add( Generator.random(Generator.misTiers[1]).quantity(3).identify(false) );
-			itemsToSpawn.add( new ScrollOfIdentify() );
-			break;
-			
-		case 16:
-			w = (MeleeWeapon) Generator.random(Generator.wepTiers[2]);
-			a = (Armor) Generator.random(Generator.armorTiers[2]);
-			itemsToSpawn.add( Generator.random(Generator.misTiers[2]).quantity(3).identify(false) );
-			itemsToSpawn.add( new ScrollOfExorcism() );
-			break;
-			
-		case 26:
-			w = (MeleeWeapon) Generator.random(Generator.wepTiers[3]);
-			a = (Armor) Generator.random(Generator.armorTiers[3]);
-			itemsToSpawn.add( Generator.random(Generator.misTiers[3]).quantity(3).identify(false) );
-			itemsToSpawn.add( new ScrollOfIdentify() );
-			break;
-
-		case 36:
-			w = (MeleeWeapon) Generator.random(Generator.wepTiers[4]);
-			a = (Armor) Generator.random(Generator.armorTiers[4]);
-			itemsToSpawn.add( Generator.random(Generator.misTiers[4]).quantity(3).identify(false) );
-			itemsToSpawn.add( new ScrollOfExorcism() );
-			break;
-		}
-		w.cursed = false;
-		w.level(0);
-		w.identify(false);
-		itemsToSpawn.add(w);
-
-		a.cursed = false;
-		a.level(0);
-		a.identify(false);
-		itemsToSpawn.add(a);
 		
 		itemsToSpawn.add( TippedDart.randomTipped(3) );
-
-		itemsToSpawn.add( new TenshiCard() );
 
 		itemsToSpawn.add( new Torch() );
 		itemsToSpawn.add( new SpyGlass().quantity(Random.IntRange(2, 3)));
@@ -224,12 +174,6 @@ public class ShopRoom extends SpecialRoom {
 
 		itemsToSpawn.add( new Honeypot() );
 
-		itemsToSpawn.add( new ThreeStarTicket() );
-		itemsToSpawn.add( new ThreeStarTicket() );
-
-		itemsToSpawn.add(new StoneOfAugmentation());
-		itemsToSpawn.add(new StoneOfAugmentation());
-
 		TimekeepersHourglass hourglass = Dungeon.heroine.belongings.getItem(TimekeepersHourglass.class);
 		if (hourglass != null && hourglass.isIdentified() && !hourglass.cursed){
 			int bags = 0;
@@ -255,14 +199,10 @@ public class ShopRoom extends SpecialRoom {
 		Item rare;
 		switch (Random.Int(10)){
 			case 0:
-				rare = Generator.random( Generator.Category.WAND );
-				rare.level( 0 );
-				break;
-			case 1:
 				rare = Generator.random(Generator.Category.RING);
 				rare.level( 0 );
 				break;
-			case 2:
+			case 1:
 				rare = Generator.random( Generator.Category.ARTIFACT );
 				break;
 			default:

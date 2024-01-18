@@ -21,8 +21,6 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.items.talismans;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
-import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;

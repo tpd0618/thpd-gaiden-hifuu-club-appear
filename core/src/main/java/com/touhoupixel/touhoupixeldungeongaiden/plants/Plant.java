@@ -29,7 +29,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.LeafParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.WandOfRegrowth;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -71,14 +70,6 @@ public abstract class Plant implements Bundlable {
 		}
 
 		float seedChance = 0f;
-		for (Char c : Actor.chars()){
-			if (c instanceof WandOfRegrowth.Lotus){
-				WandOfRegrowth.Lotus l = (WandOfRegrowth.Lotus) c;
-				if (l.inRange(pos)){
-					seedChance = Math.max(seedChance, l.seedPreservation());
-				}
-			}
-		}
 
 		if (Random.Float() < seedChance){
 			if (seedClass != null && seedClass != Rotberry.Seed.class) {

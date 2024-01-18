@@ -23,14 +23,13 @@ package com.touhoupixel.touhoupixeldungeongaiden.items;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaAra;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaKusi;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaNigi;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.MitamaSaki;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Wraith;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Rinnosuke;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.CellEmitter;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Speck;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.ElmoParticle;
@@ -44,7 +43,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.journal.Guidebook;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.Potion;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfWealth;
 import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.Scroll;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.touhoupixel.touhoupixeldungeongaiden.journal.Document;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSprite;
@@ -59,7 +57,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class Heap implements Bundlable {
-	
+
 	public enum Type {
 		HEAP,
 		FOR_SALE,
@@ -71,62 +69,38 @@ public class Heap implements Bundlable {
 		REMAINS
 	}
 	public Type type = Type.HEAP;
-	
+
 	public int pos = 0;
-	
+
 	public ItemSprite sprite;
 	public boolean seen = false;
 	public boolean haunted = false;
 	public boolean autoExplored = false; //used to determine if this heap should count for exploration bonus
-	
+
 	public LinkedList<Item> items = new LinkedList<>();
-	
+
 	public void open( Hero heroine) {
 		switch (type) {
 		case TOMB:
-			if (Statistics.card54) {
-				if (Random.Int(2) == 0) {
-					Dungeon.level.drop(new SpyGlass().quantity(Random.Int(1, 2)), heroine.pos).sprite.drop();
-					switch (Random.Int(4)) {
-						case 0:
-						default:
-							MitamaAra.spawnAround(heroine.pos);
-							break;
-						case 1:
-							MitamaKusi.spawnAround(heroine.pos);
-							break;
-						case 2:
-							MitamaNigi.spawnAround(heroine.pos);
-							break;
-						case 3:
-							MitamaSaki.spawnAround(heroine.pos);
-							break;
-					}
-				} else {
-					Wraith.spawnAround(heroine.pos);
-					break;
+			if (Random.Int(4) == 0) {
+				switch (Random.Int(4)) {
+					case 0:
+					default:
+						MitamaAra.spawnAround(heroine.pos);
+						break;
+					case 1:
+						MitamaKusi.spawnAround(heroine.pos);
+						break;
+					case 2:
+						MitamaNigi.spawnAround(heroine.pos);
+						break;
+					case 3:
+						MitamaSaki.spawnAround(heroine.pos);
+						break;
 				}
 			} else {
-				if (Random.Int(5) == 0) {
-					switch (Random.Int(4)) {
-						case 0:
-						default:
-							MitamaAra.spawnAround(heroine.pos);
-							break;
-						case 1:
-							MitamaKusi.spawnAround(heroine.pos);
-							break;
-						case 2:
-							MitamaNigi.spawnAround(heroine.pos);
-							break;
-						case 3:
-							MitamaSaki.spawnAround(heroine.pos);
-							break;
-					}
-				} else {
-					Wraith.spawnAround(heroine.pos);
-					break;
-				}
+				Wraith.spawnAround(heroine.pos);
+				break;
 			}
 		case REMAINS:
 		case SKELETON:
@@ -399,7 +373,7 @@ public class Heap implements Bundlable {
 			case FOR_SALE:
 				Item i = peek();
 				if (size() == 1) {
-					return Messages.get(this, "for_sale", Shopkeeper.sellPrice(i), i.toString());
+					return Messages.get(this, "for_sale", Rinnosuke.sellPrice(i), i.toString());
 				} else {
 					return i.toString();
 				}
@@ -429,8 +403,6 @@ public class Heap implements Bundlable {
 			case CRYSTAL_CHEST:
 				if (peek() instanceof Artifact)
 					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "artifact") );
-				else if (peek() instanceof Wand)
-					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "wand") );
 				else
 					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "ring") );
 			case TOMB:
@@ -464,8 +436,7 @@ public class Heap implements Bundlable {
 		//remove any document pages that either don't exist anymore or that the player already has
 		for (Item item : items.toArray(new Item[0])){
 			if (item instanceof DocumentPage
-					&& ( !((DocumentPage) item).document().pageNames().contains(((DocumentPage) item).page())
-					||    ((DocumentPage) item).document().isPageFound(((DocumentPage) item).page()))){
+					&& ( !((DocumentPage) item).document().pageNames().contains(((DocumentPage) item).page()))){
 				items.remove(item);
 			}
 			if (item instanceof Guidebook && Document.ADVENTURERS_GUIDE.isPageRead(0)){

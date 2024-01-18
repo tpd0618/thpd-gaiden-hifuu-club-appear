@@ -27,7 +27,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.EquipableItem;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Gold;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.audio.Sample;
@@ -83,7 +82,7 @@ public class InventorySlot extends ItemSlot {
 				bg.ra = +0.3f;
 				bg.ga = -0.15f;
 			} else if (!item.isIdentified()) {
-				if ((item instanceof EquipableItem || item instanceof Wand) && item.cursedKnown){
+				if (item instanceof EquipableItem && item.cursedKnown){
 					bg.ba = 0.3f;
 				} else {
 					bg.ra = 0.3f;

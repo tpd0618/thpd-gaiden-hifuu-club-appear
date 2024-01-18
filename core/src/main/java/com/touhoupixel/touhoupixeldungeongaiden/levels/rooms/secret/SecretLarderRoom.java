@@ -29,7 +29,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.food.Pasty;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Level;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.Terrain;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.painters.Painter;
-import com.touhoupixel.touhoupixeldungeongaiden.plants.BlandfruitBush;
 import com.watabou.utils.Point;
 
 public class SecretLarderRoom extends SecretRoom {
@@ -53,8 +52,6 @@ public class SecretLarderRoom extends SecretRoom {
 		
 		Painter.fill(level, c.x-1, c.y-1, 3, 3, Terrain.WATER);
 		Painter.set(level, c, Terrain.GRASS);
-		
-		level.plant(new BlandfruitBush.Seed(), level.pointToCell(c));
 		
 		int extraFood = (int)(Hunger.STARVING - Hunger.HUNGRY) * (1 + Dungeon.floor / 5);
 		

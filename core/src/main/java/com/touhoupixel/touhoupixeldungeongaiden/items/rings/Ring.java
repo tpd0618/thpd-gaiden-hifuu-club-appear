@@ -21,11 +21,9 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden.items.rings;
 
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.EnhancedRings;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Generator;
@@ -300,9 +298,6 @@ public class Ring extends KindofMisc {
 	@Override
 	public int buffedLvl() {
 		int lvl = super.buffedLvl();
-		if (Dungeon.heroine.buff(EnhancedRings.class) != null){
-			lvl++;
-		}
 		return lvl;
 	}
 

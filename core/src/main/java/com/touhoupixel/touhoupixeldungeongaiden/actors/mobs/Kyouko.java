@@ -1,12 +1,8 @@
 package com.touhoupixel.touhoupixeldungeongaiden.actors.mobs;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
-import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hisou;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Might;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfExorcismRod;
+import com.touhoupixel.touhoupixeldungeongaiden.items.herbs.DragonHerb;
 import com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee.MeleeWeapon;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.KyoukoSprite;
@@ -25,7 +21,7 @@ public class Kyouko extends Mob {
 
         properties.add(Property.ANIMAL);
 
-        loot = new PotionOfExorcismRod();
+        loot = new DragonHerb();
         lootChance = 0.1f;
     }
 

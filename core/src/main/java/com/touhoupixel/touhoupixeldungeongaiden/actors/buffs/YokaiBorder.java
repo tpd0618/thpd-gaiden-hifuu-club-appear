@@ -36,7 +36,7 @@ public class YokaiBorder extends FlavourBuff {
 	@Override
 	public int icon() {
 		return BuffIndicator.YOKAI_BORDER;
-	}
+	} //todo gimmick
 
 	@Override
 	public float iconFadePercent() {

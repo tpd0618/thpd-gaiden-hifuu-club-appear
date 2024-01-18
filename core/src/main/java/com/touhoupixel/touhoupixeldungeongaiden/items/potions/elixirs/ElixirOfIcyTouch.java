@@ -26,7 +26,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.FrostImbue;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.particles.SnowParticle;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.AlchemicalCatalyst;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfSnapFreeze;
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfFrost;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
 public class ElixirOfIcyTouch extends Elixir {
@@ -55,7 +55,7 @@ public class ElixirOfIcyTouch extends Elixir {
 	public static class Recipe extends com.touhoupixel.touhoupixeldungeongaiden.items.Recipe.SimpleRecipe {
 		
 		{
-			inputs =  new Class[]{PotionOfSnapFreeze.class, AlchemicalCatalyst.class};
+			inputs =  new Class[]{PotionOfFrost.class, AlchemicalCatalyst.class};
 			inQuantity = new int[]{1, 1};
 			
 			cost = 6;

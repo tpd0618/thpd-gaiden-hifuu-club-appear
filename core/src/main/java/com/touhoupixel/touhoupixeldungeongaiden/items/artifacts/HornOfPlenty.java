@@ -32,7 +32,6 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.SpellSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.bags.Bag;
-import com.touhoupixel.touhoupixeldungeongaiden.items.food.Blandfruit;
 import com.touhoupixel.touhoupixeldungeongaiden.items.food.Food;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
@@ -287,18 +286,13 @@ public class HornOfPlenty extends Artifact {
 		@Override
 		public void onSelect( Item item ) {
 			if (item != null && item instanceof Food) {
-				if (item instanceof Blandfruit && ((Blandfruit) item).potionAttrib == null){
-					GLog.w( Messages.get(HornOfPlenty.class, "reject") );
-				} else {
-					Hero heroine = Dungeon.heroine;
-					heroine.sprite.operate( heroine.pos );
-					heroine.busy();
-					heroine.spend( Food.TIME_TO_EAT );
+				Hero heroine = Dungeon.heroine;
+				heroine.sprite.operate(heroine.pos);
+				heroine.busy();
+				heroine.spend(Food.TIME_TO_EAT);
 
-					((HornOfPlenty)curItem).gainFoodValue(((Food)item));
-					item.detach(heroine.belongings.backpack);
-				}
-
+				((HornOfPlenty) curItem).gainFoodValue(((Food) item));
+				item.detach(heroine.belongings.backpack);
 			}
 		}
 	};

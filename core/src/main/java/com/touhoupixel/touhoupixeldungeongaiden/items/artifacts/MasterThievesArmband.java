@@ -22,7 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.artifacts;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
-import com.touhoupixel.touhoupixeldungeongaiden.Challenges;
+import com.touhoupixel.touhoupixeldungeongaiden.HardMode;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Actor;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
@@ -33,7 +33,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Cripple;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Onigiri;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Shopkeeper;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.npcs.Rinnosuke;
 import com.touhoupixel.touhoupixeldungeongaiden.effects.Surprise;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.RingOfEnergy;
@@ -112,7 +112,7 @@ public class MasterThievesArmband extends Artifact {
 				GLog.w( Messages.get(MasterThievesArmband.class, "no_target") );
 			} else {
 				Char ch = Actor.findChar(target);
-				if (ch instanceof Shopkeeper){
+				if (ch instanceof Rinnosuke){
 					GLog.w( Messages.get(MasterThievesArmband.class, "steal_shopkeeper") );
 				} else if (ch.alignment != Char.Alignment.ENEMY){
 					GLog.w( Messages.get(MasterThievesArmband.class, "no_target") );
@@ -147,7 +147,7 @@ public class MasterThievesArmband extends Artifact {
 								GLog.w(Messages.get(MasterThievesArmband.class, "no_steal"));
 							} else if (Random.Float() <= lootChance){
 								Item loot = ((Mob) ch).createLoot();
-								if (Challenges.isItemBlocked(loot)){
+								if (HardMode.isItemBlocked(loot)){
 									GLog.i(Messages.get(MasterThievesArmband.class, "failed_steal"));
 									Buff.affect(ch, StolenTracker.class).setItemStolen(false);
 								} else {

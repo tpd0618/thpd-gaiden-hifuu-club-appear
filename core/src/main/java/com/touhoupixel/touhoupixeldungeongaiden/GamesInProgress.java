@@ -139,7 +139,7 @@ public class GamesInProgress {
 
 		info.level = heroine.lvl;
 		info.str = heroine.STR;
-		info.strBonus = heroine.STR() - heroine.STR;
+		info.max_str = heroine.MAX_STR;
 		info.exp = heroine.exp;
 		info.hp = heroine.HP;
 		info.ht = heroine.HT;
@@ -174,7 +174,7 @@ public class GamesInProgress {
 
 		public int level;
 		public int str;
-		public int strBonus;
+		public int max_str;
 		public int exp;
 		public int hp;
 		public int ht;

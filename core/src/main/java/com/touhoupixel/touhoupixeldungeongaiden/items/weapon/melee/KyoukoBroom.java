@@ -34,8 +34,6 @@ public class KyoukoBroom extends MeleeWeapon {
         image = ItemSpriteSheet.KYOUKO_BROOM;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 2;
     }
 
     @Override

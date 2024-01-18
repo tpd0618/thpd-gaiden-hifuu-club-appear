@@ -120,7 +120,6 @@ public class CrystalChoiceRoom extends SpecialRoom {
 		}
 
 		Item hidden = Generator.random(Random.oneOf(
-				Generator.Category.WAND,
 				Generator.Category.RING,
 				Generator.Category.ARTIFACT
 		));

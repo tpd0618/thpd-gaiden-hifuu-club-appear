@@ -34,8 +34,6 @@ public class KanonDrumstick extends MeleeWeapon {
         image = ItemSpriteSheet.KANON_DRUMSTICK;
         hitSound = Assets.Sounds.HIT_CRUSH;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

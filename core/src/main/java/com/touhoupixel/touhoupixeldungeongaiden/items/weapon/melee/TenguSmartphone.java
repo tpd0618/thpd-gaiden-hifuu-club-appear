@@ -32,7 +32,6 @@ public class TenguSmartphone extends MeleeWeapon {
 		hitSound = Assets.Sounds.HIT_SLASH;
 		hitSoundPitch = 0.8f;
 
-		tier = 5;
 		DLY = 1.5f; //0.67x speed
 		RCH = 2;    //extra reach
 	}
@@ -40,11 +39,5 @@ public class TenguSmartphone extends MeleeWeapon {
 	@Override
 	public int HumanFactor( Char owner ) {
 		return 1;
-	}
-
-	@Override
-	public int max(int lvl) {
-		return  Math.round(6.67f*(tier+1)) +    //40 base, up from 30
-				lvl*Math.round(1.33f*(tier+1)); //+8 per level, up from +6
 	}
 }

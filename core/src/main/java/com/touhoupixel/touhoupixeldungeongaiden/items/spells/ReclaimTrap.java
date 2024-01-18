@@ -24,8 +24,7 @@ package com.touhoupixel.touhoupixeldungeongaiden.items.spells;
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfMagicMapping;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfRecharging;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfMagicMapping;
 import com.touhoupixel.touhoupixeldungeongaiden.items.talismans.EnragingTalisman;
 import com.touhoupixel.touhoupixeldungeongaiden.levels.traps.Trap;
 import com.touhoupixel.touhoupixeldungeongaiden.mechanics.Ballistica;
@@ -67,7 +66,6 @@ public class ReclaimTrap extends TargetedSpell {
 				t.disarm(); //even disarms traps that normally wouldn't be
 				
 				Sample.INSTANCE.play(Assets.Sounds.LIGHTNING);
-				ScrollOfRecharging.charge(heroine);
 				storedTrap = t.getClass();
 				
 			} else {

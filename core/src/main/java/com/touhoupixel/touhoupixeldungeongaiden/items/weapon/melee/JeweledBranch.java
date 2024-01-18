@@ -33,8 +33,6 @@ public class JeweledBranch extends MeleeWeapon {
 		image = ItemSpriteSheet.JEWELEDBRANCH;
 		hitSound = Assets.Sounds.HIT_CRUSH;
 		hitSoundPitch = 1f;
-
-		tier = 3;
 	}
 
 	@Override

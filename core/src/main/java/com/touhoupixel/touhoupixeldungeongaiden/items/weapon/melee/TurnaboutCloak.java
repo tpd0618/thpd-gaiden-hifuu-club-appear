@@ -25,7 +25,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.Assets;
 import com.touhoupixel.touhoupixeldungeongaiden.Statistics;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Buff;
-import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.Hex;
+import com.touhoupixel.touhoupixeldungeongaiden.actors.buffs.BlurryMagic;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.ItemSpriteSheet;
 
 public class TurnaboutCloak extends MeleeWeapon {
@@ -34,8 +34,6 @@ public class TurnaboutCloak extends MeleeWeapon {
         image = ItemSpriteSheet.TURNABOUT_CLOAK;
         hitSound = Assets.Sounds.HIT_CRUSH;
         hitSoundPitch = 1f;
-
-        tier = 4;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class TurnaboutCloak extends MeleeWeapon {
     public int proc(Char attacker, Char defender, int damage) {
         if (Statistics.foodEaten % 2 == 1) {
             damage *= 1.4f;
-            Buff.prolong(defender, Hex.class, Hex.DURATION);
+            Buff.prolong(defender, BlurryMagic.class, BlurryMagic.DURATION);
         }
         return super.proc(attacker, defender, damage);
     }

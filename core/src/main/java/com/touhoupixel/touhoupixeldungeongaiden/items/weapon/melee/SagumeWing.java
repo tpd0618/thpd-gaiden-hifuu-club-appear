@@ -35,8 +35,6 @@ public class SagumeWing extends MeleeWeapon {
         image = ItemSpriteSheet.SAGUME_WING;
         hitSound = Assets.Sounds.HIT_SLASH;
         hitSoundPitch = 1f;
-
-        tier = 5;
     }
 
     @Override

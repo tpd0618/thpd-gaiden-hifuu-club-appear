@@ -22,6 +22,7 @@
 package com.touhoupixel.touhoupixeldungeongaiden.items.weapon.melee;
 
 import com.touhoupixel.touhoupixeldungeongaiden.Assets;
+import com.touhoupixel.touhoupixeldungeongaiden.Dungeon;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.Char;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.hero.Hero;
 import com.touhoupixel.touhoupixeldungeongaiden.actors.mobs.Mob;
@@ -34,8 +35,6 @@ public class KoishiDagger extends MeleeWeapon {
 		image = ItemSpriteSheet.THROWING_KNIFE;
 		hitSound = Assets.Sounds.HIT_STAB;
 		hitSoundPitch = 1.1f;
-
-		tier = 1;
 		
 		bones = false;
 	}
@@ -50,7 +49,7 @@ public class KoishiDagger extends MeleeWeapon {
 				int damage = augment.damageFactor(Random.NormalIntRange(
 						min() + Math.round(diff*0.75f),
 						max()));
-				int exStr = heroine.STR() - STRReq();
+				int exStr = heroine.STR();
 				if (exStr > 0) {
 					damage += Random.IntRange(0, exStr);
 				}
@@ -59,4 +58,14 @@ public class KoishiDagger extends MeleeWeapon {
 		}
 		return super.damageRoll(owner);
 	}
+
+	@Override
+	public int min(int lvl) {
+		return 4+Dungeon.heroine.lvl+Dungeon.heroine.STR;
+	}//all weapons must need this
+
+	@Override
+	public int max(int lvl) {
+		return 5+Dungeon.heroine.lvl*2+Dungeon.heroine.STR*2;
+	}//all weapons must need this
 }

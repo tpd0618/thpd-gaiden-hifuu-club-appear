@@ -21,8 +21,11 @@
 
 package com.touhoupixel.touhoupixeldungeongaiden;
 
+import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfEarthenArmor;
 import com.touhoupixel.touhoupixeldungeongaiden.items.potions.PotionOfMindVision;
-import com.touhoupixel.touhoupixeldungeongaiden.items.potions.exotic.PotionOfAttraction;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfChallenge;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfDread;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfSirensSong;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.GameScene;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.PixelScene;
 import com.touhoupixel.touhoupixeldungeongaiden.scenes.TitleScene;
@@ -61,7 +64,7 @@ public class ShatteredPixelDungeon extends Game {
 
 		//pre-v1.2.0
 		com.watabou.utils.Bundle.addAlias(
-				com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.darts.CleansingDart.class,
+				com.touhoupixel.touhoupixeldungeongaiden.items.weapon.danmaku.darts.ParalyticDart.class,
 				"com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.SleepDart" );
 
 		com.watabou.utils.Bundle.addAlias(
@@ -70,16 +73,16 @@ public class ShatteredPixelDungeon extends Game {
 
 		//pre-v1.1.0
 		com.watabou.utils.Bundle.addAlias(
-				com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfDread.class,
+				ScrollOfDread.class,
 				"com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfPetrification" );
 		com.watabou.utils.Bundle.addAlias(
-				com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfSirensSong.class,
+				ScrollOfSirensSong.class,
 				"com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfAffection" );
 		com.watabou.utils.Bundle.addAlias(
-				com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfChallenge.class,
+				ScrollOfChallenge.class,
 				"com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfConfusion" );
 		com.watabou.utils.Bundle.addAlias(
-				PotionOfAttraction.class,
+				PotionOfEarthenArmor.class,
 				"com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfHolyFuror" );
 		com.watabou.utils.Bundle.addAlias(
 				PotionOfMindVision.class,

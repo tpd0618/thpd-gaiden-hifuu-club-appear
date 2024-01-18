@@ -38,8 +38,7 @@ import com.touhoupixel.touhoupixeldungeongaiden.items.Honeypot;
 import com.touhoupixel.touhoupixeldungeongaiden.items.Item;
 import com.touhoupixel.touhoupixeldungeongaiden.items.artifacts.Artifact;
 import com.touhoupixel.touhoupixeldungeongaiden.items.rings.Ring;
-import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.exotic.ScrollOfTeleportation;
-import com.touhoupixel.touhoupixeldungeongaiden.items.wands.Wand;
+import com.touhoupixel.touhoupixeldungeongaiden.items.scrolls.ScrollOfTeleportation;
 import com.touhoupixel.touhoupixeldungeongaiden.messages.Messages;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.CharSprite;
 import com.touhoupixel.touhoupixeldungeongaiden.sprites.MimicSprite;
@@ -75,11 +74,8 @@ public class CrystalMimic extends Mimic {
 				if (i instanceof Artifact){
 					desc = Messages.get(Heap.class, "crystal_chest_desc", Messages.get(Heap.class, "artifact"));
 					break;
-				} else if (i instanceof Ring){
+				} else if (i instanceof Ring) {
 					desc = Messages.get(Heap.class, "crystal_chest_desc", Messages.get(Heap.class, "ring"));
-					break;
-				} else if (i instanceof Wand){
-					desc = Messages.get(Heap.class, "crystal_chest_desc", Messages.get(Heap.class, "wand"));
 					break;
 				}
 			}
